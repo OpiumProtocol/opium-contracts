@@ -15,6 +15,8 @@ const OracleAggregator = artifacts.require('OracleAggregator')
 const TokenMinter = artifacts.require('TokenMinter')
 const TokenSpender = artifacts.require('TokenSpender')
 
+const Match = artifacts.require('Match')
+
 // Test helpers
 const OptionCallSyntheticIdMock = artifacts.require('OptionCallSyntheticIdMock')
 const TestToken = artifacts.require('TestToken')
@@ -28,8 +30,10 @@ module.exports = async function(deployer, network, accounts) {
     let libPosition
 
     let registry, core, tokenMinter, oracleAggregator, syntheticAggregator, tokenSpender
-    let optionCallSyntheticIdMock
+
+    let match
     
+    let optionCallSyntheticIdMock
     let dai
     let weth
 
@@ -40,6 +44,8 @@ module.exports = async function(deployer, network, accounts) {
             return deployer.link(LibPosition, [
                 Core,
                 TokenMinter,
+
+                Match
             ])
         })
         .then(() => {
@@ -61,11 +67,19 @@ module.exports = async function(deployer, network, accounts) {
         })
         .then(() => {
             return deployer
+                .deploy(Match, registry.address, { from: owner })
+                .then(instance => {
+                    match = instance
+                    console.log('- Match was deployed at', match.address)
+                })
+        })
+        .then(() => {
+            return deployer
                 .deploy(TokenSpender, owner, { from: owner })
                 .then(instance => {
                     tokenSpender = instance
                     console.log('- TokenSpender was deployed at', tokenSpender.address)
-                    return tokenSpender.proposeWhitelist([ core.address /* , match.address */ ], { from: owner })
+                    return tokenSpender.proposeWhitelist([ core.address, match.address ], { from: owner })
                 })
         })
         .then(() => {
