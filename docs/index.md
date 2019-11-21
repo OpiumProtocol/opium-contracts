@@ -43,6 +43,15 @@
 [SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string]: #SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string
 [usingRegistryErrors]: #usingRegistryErrors
 [usingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string]: #usingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string
+[ExecutableByThirdParty]: #ExecutableByThirdParty
+[ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-]: #ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-
+[ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]: #ExecutableByThirdParty-thirdpartyExecutionAllowed-address-
+[ExecutableByThirdParty-allowThirdpartyExecution-bool-]: #ExecutableByThirdParty-allowThirdpartyExecution-bool-
+[HasCommission]: #HasCommission
+[HasCommission-author-address]: #HasCommission-author-address
+[HasCommission-commission-uint256]: #HasCommission-commission-uint256
+[HasCommission-getAuthorAddress--]: #HasCommission-getAuthorAddress--
+[HasCommission-getAuthorCommission--]: #HasCommission-getAuthorCommission--
 [IDerivativeLogic]: #IDerivativeLogic
 [IDerivativeLogic-validateInput-struct-LibDerivative-Derivative-]: #IDerivativeLogic-validateInput-struct-LibDerivative-Derivative-
 [IDerivativeLogic-getMargin-struct-LibDerivative-Derivative-]: #IDerivativeLogic-getMargin-struct-LibDerivative-Derivative-
@@ -64,6 +73,10 @@
 [LibCommission-OPIUM_COMMISSION_PART-uint256]: #LibCommission-OPIUM_COMMISSION_PART-uint256
 [LibDerivative]: #LibDerivative
 [LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]: #LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-
+[LibEIP712]: #LibEIP712
+[LibEIP712-EIP712DOMAIN_TYPEHASH-bytes32]: #LibEIP712-EIP712DOMAIN_TYPEHASH-bytes32
+[LibEIP712-DOMAIN_SEPARATOR-bytes32]: #LibEIP712-DOMAIN_SEPARATOR-bytes32
+[LibEIP712-hashEIP712Message-bytes32-]: #LibEIP712-hashEIP712Message-bytes32-
 [Whitelisted]: #Whitelisted
 [Whitelisted-onlyWhitelisted--]: #Whitelisted-onlyWhitelisted--
 [Whitelisted-whitelist-address--]: #Whitelisted-whitelist-address--
@@ -94,6 +107,62 @@
 [usingRegistry-registry-contract-Registry]: #usingRegistry-registry-contract-Registry
 [usingRegistry-constructor-address-]: #usingRegistry-constructor-address-
 [usingRegistry-RegistrySet-address-]: #usingRegistry-RegistrySet-address-
+[LibOrder]: #LibOrder
+[LibOrder-EIP712_ORDER_TYPEHASH-bytes32]: #LibOrder-EIP712_ORDER_TYPEHASH-bytes32
+[LibOrder-hashOrder-struct-LibOrder-Order-]: #LibOrder-hashOrder-struct-LibOrder-Order-
+[LibOrder-verifySignature-bytes32-bytes-address-]: #LibOrder-verifySignature-bytes32-bytes-address-
+[Match]: #Match
+[Match-constructor-address-]: #Match-constructor-address-
+[MatchCreate]: #MatchCreate
+[MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]: #MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-
+[MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-]: #MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-
+[MatchLogic]: #MatchLogic
+[MatchLogic-PERCENTAGE_BASE-uint256]: #MatchLogic-PERCENTAGE_BASE-uint256
+[MatchLogic-canceled-mapping-bytes32----bool-]: #MatchLogic-canceled-mapping-bytes32----bool-
+[MatchLogic-verified-mapping-bytes32----bool-]: #MatchLogic-verified-mapping-bytes32----bool-
+[MatchLogic-filled-mapping-bytes32----uint256-]: #MatchLogic-filled-mapping-bytes32----uint256-
+[MatchLogic-balances-mapping-address----uint256-]: #MatchLogic-balances-mapping-address----uint256-
+[MatchLogic-feeTaken-mapping-bytes32----bool-]: #MatchLogic-feeTaken-mapping-bytes32----bool-
+[MatchLogic-cancel-struct-LibOrder-Order-]: #MatchLogic-cancel-struct-LibOrder-Order-
+[MatchLogic-withdraw--]: #MatchLogic-withdraw--
+[MatchLogic-validateCanceled-bytes32-]: #MatchLogic-validateCanceled-bytes32-
+[MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]: #MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-
+[MatchLogic-validateExpiration-struct-LibOrder-Order-]: #MatchLogic-validateExpiration-struct-LibOrder-Order-
+[MatchLogic-validateSenderAddress-struct-LibOrder-Order-]: #MatchLogic-validateSenderAddress-struct-LibOrder-Order-
+[MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]: #MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-
+[MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]: #MatchLogic-takeFees-bytes32-struct-LibOrder-Order-
+[MatchLogic-min-uint256-uint256-]: #MatchLogic-min-uint256-uint256-
+[MatchLogic-getDivisionPercentage-uint256-uint256-]: #MatchLogic-getDivisionPercentage-uint256-uint256-
+[MatchLogic-getInitialPercentageValue-uint256-uint256-]: #MatchLogic-getInitialPercentageValue-uint256-uint256-
+[MatchLogic-Canceled-bytes32-]: #MatchLogic-Canceled-bytes32-
+[MatchPool]: #MatchPool
+[MatchPool-constructor-address-]: #MatchPool-constructor-address-
+[MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-]: #MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-
+[MatchSwap]: #MatchSwap
+[MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]: #MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-
+[MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-]: #MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-
+[LibSwaprateOrder]: #LibSwaprateOrder
+[LibSwaprateOrder-EIP712_ORDER_TYPEHASH-bytes32]: #LibSwaprateOrder-EIP712_ORDER_TYPEHASH-bytes32
+[LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]: #LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-
+[LibSwaprateOrder-verifySignature-bytes32-bytes-address-]: #LibSwaprateOrder-verifySignature-bytes32-bytes-address-
+[SwaprateMatch]: #SwaprateMatch
+[SwaprateMatch-filled-mapping-bytes32----uint256-]: #SwaprateMatch-filled-mapping-bytes32----uint256-
+[SwaprateMatch-constructor-address-]: #SwaprateMatch-constructor-address-
+[SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-]: #SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-
+[SwaprateMatchBase]: #SwaprateMatchBase
+[SwaprateMatchBase-canceled-mapping-bytes32----bool-]: #SwaprateMatchBase-canceled-mapping-bytes32----bool-
+[SwaprateMatchBase-verified-mapping-bytes32----bool-]: #SwaprateMatchBase-verified-mapping-bytes32----bool-
+[SwaprateMatchBase-balances-mapping-address----uint256-]: #SwaprateMatchBase-balances-mapping-address----uint256-
+[SwaprateMatchBase-feeTaken-mapping-bytes32----bool-]: #SwaprateMatchBase-feeTaken-mapping-bytes32----bool-
+[SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-
+[SwaprateMatchBase-withdraw--]: #SwaprateMatchBase-withdraw--
+[SwaprateMatchBase-validateCanceled-bytes32-]: #SwaprateMatchBase-validateCanceled-bytes32-
+[SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-
+[SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-
+[SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-
+[SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-
+[SwaprateMatchBase-min-uint256-uint256-]: #SwaprateMatchBase-min-uint256-uint256-
+[SwaprateMatchBase-Canceled-bytes32-]: #SwaprateMatchBase-Canceled-bytes32-
 [Migrations]: #Migrations
 [Migrations-restricted--]: #Migrations-restricted--
 [Migrations-owner-address]: #Migrations-owner-address
@@ -155,6 +224,70 @@
 [TokenSpender-constructor-address-]: #TokenSpender-constructor-address-
 [TokenSpender-claimTokens-contract-IERC20-address-address-uint256-]: #TokenSpender-claimTokens-contract-IERC20-address-address-uint256-
 [TokenSpender-claimPositions-contract-IERC721O-address-address-uint256-uint256-]: #TokenSpender-claimPositions-contract-IERC721O-address-address-uint256-uint256-
+[OptionCallSyntheticIdMock]: #OptionCallSyntheticIdMock
+[OptionCallSyntheticIdMock-BASE_PPT-uint256]: #OptionCallSyntheticIdMock-BASE_PPT-uint256
+[OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-]: #OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-
+[OptionCallSyntheticIdMock-getMargin-struct-LibDerivative-Derivative-]: #OptionCallSyntheticIdMock-getMargin-struct-LibDerivative-Derivative-
+[OptionCallSyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-]: #OptionCallSyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-
+[OptionCallSyntheticIdMock-isPool--]: #OptionCallSyntheticIdMock-isPool--
+[OracleIdMock]: #OracleIdMock
+[OracleIdMock-fetchPrice-uint256]: #OracleIdMock-fetchPrice-uint256
+[OracleIdMock-constructor-uint256-address-]: #OracleIdMock-constructor-uint256-address-
+[OracleIdMock-triggerCallback-uint256-uint256-]: #OracleIdMock-triggerCallback-uint256-uint256-
+[OracleIdMock-fetchData-uint256-]: #OracleIdMock-fetchData-uint256-
+[OracleIdMock-recursivelyFetchData-uint256-uint256-uint256-]: #OracleIdMock-recursivelyFetchData-uint256-uint256-uint256-
+[OracleIdMock-calculateFetchPrice--]: #OracleIdMock-calculateFetchPrice--
+[ERC20Basic]: #ERC20Basic
+[ERC20Basic-totalSupply-uint256]: #ERC20Basic-totalSupply-uint256
+[ERC20Basic-balanceOf-address-]: #ERC20Basic-balanceOf-address-
+[ERC20Basic-transfer-address-uint256-]: #ERC20Basic-transfer-address-uint256-
+[ERC20Basic-Transfer-address-address-uint256-]: #ERC20Basic-Transfer-address-address-uint256-
+[SafeMath]: #SafeMath
+[SafeMath-mul-uint256-uint256-]: #SafeMath-mul-uint256-uint256-
+[SafeMath-div-uint256-uint256-]: #SafeMath-div-uint256-uint256-
+[SafeMath-sub-uint256-uint256-]: #SafeMath-sub-uint256-uint256-
+[SafeMath-add-uint256-uint256-]: #SafeMath-add-uint256-uint256-
+[BasicToken]: #BasicToken
+[BasicToken-balances-mapping-address----uint256-]: #BasicToken-balances-mapping-address----uint256-
+[BasicToken-transfer-address-uint256-]: #BasicToken-transfer-address-uint256-
+[BasicToken-balanceOf-address-]: #BasicToken-balanceOf-address-
+[ERC20]: #ERC20
+[ERC20-allowance-address-address-]: #ERC20-allowance-address-address-
+[ERC20-transferFrom-address-address-uint256-]: #ERC20-transferFrom-address-address-uint256-
+[ERC20-approve-address-uint256-]: #ERC20-approve-address-uint256-
+[ERC20-Approval-address-address-uint256-]: #ERC20-Approval-address-address-uint256-
+[StandardToken]: #StandardToken
+[StandardToken-allowed-mapping-address----mapping-address----uint256--]: #StandardToken-allowed-mapping-address----mapping-address----uint256--
+[StandardToken-transferFrom-address-address-uint256-]: #StandardToken-transferFrom-address-address-uint256-
+[StandardToken-approve-address-uint256-]: #StandardToken-approve-address-uint256-
+[StandardToken-allowance-address-address-]: #StandardToken-allowance-address-address-
+[StandardToken-increaseApproval-address-uint256-]: #StandardToken-increaseApproval-address-uint256-
+[StandardToken-decreaseApproval-address-uint256-]: #StandardToken-decreaseApproval-address-uint256-
+[TestToken]: #TestToken
+[TestToken-name-string]: #TestToken-name-string
+[TestToken-symbol-string]: #TestToken-symbol-string
+[TestToken-decimals-uint8]: #TestToken-decimals-uint8
+[TestToken-totalSupply-uint256]: #TestToken-totalSupply-uint256
+[TestToken-owner-address]: #TestToken-owner-address
+[TestToken-constructor-string-string-uint8-]: #TestToken-constructor-string-string-uint8-
+[TestToken-mint-address-uint256-]: #TestToken-mint-address-uint256-
+[WETH]: #WETH
+[WETH-name-string]: #WETH-name-string
+[WETH-symbol-string]: #WETH-symbol-string
+[WETH-decimals-uint8]: #WETH-decimals-uint8
+[WETH-balanceOf-mapping-address----uint256-]: #WETH-balanceOf-mapping-address----uint256-
+[WETH-allowance-mapping-address----mapping-address----uint256--]: #WETH-allowance-mapping-address----mapping-address----uint256--
+[WETH-fallback--]: #WETH-fallback--
+[WETH-deposit--]: #WETH-deposit--
+[WETH-withdraw-uint256-]: #WETH-withdraw-uint256-
+[WETH-totalSupply--]: #WETH-totalSupply--
+[WETH-approve-address-uint256-]: #WETH-approve-address-uint256-
+[WETH-transfer-address-uint256-]: #WETH-transfer-address-uint256-
+[WETH-transferFrom-address-address-uint256-]: #WETH-transferFrom-address-address-uint256-
+[WETH-Approval-address-address-uint256-]: #WETH-Approval-address-address-uint256-
+[WETH-Transfer-address-address-uint256-]: #WETH-Transfer-address-address-uint256-
+[WETH-Deposit-address-uint256-]: #WETH-Deposit-address-uint256-
+[WETH-Withdrawal-address-uint256-]: #WETH-Withdrawal-address-uint256-
 ## <span id="Core"></span> `Core`
 
 
@@ -305,6 +438,52 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 
 
+## <span id="ExecutableByThirdParty"></span> `ExecutableByThirdParty`
+
+
+
+
+
+- [`thirdpartyExecutionAllowed(address derivativeOwner)`][ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]
+- [`allowThirdpartyExecution(bool allow)`][ExecutableByThirdParty-allowThirdpartyExecution-bool-]
+
+### <span id="ExecutableByThirdParty-thirdpartyExecutionAllowed-address-"></span> `thirdpartyExecutionAllowed(address derivativeOwner) → bool` (public)
+
+
+
+
+
+### <span id="ExecutableByThirdParty-allowThirdpartyExecution-bool-"></span> `allowThirdpartyExecution(bool allow)` (public)
+
+
+
+
+
+
+
+## <span id="HasCommission"></span> `HasCommission`
+
+
+
+
+
+- [`getAuthorAddress()`][HasCommission-getAuthorAddress--]
+- [`getAuthorCommission()`][HasCommission-getAuthorCommission--]
+
+### <span id="HasCommission-getAuthorAddress--"></span> `getAuthorAddress() → address` (public)
+
+
+
+
+
+### <span id="HasCommission-getAuthorCommission--"></span> `getAuthorCommission() → uint256` (public)
+
+
+
+
+
+
+
 ## <span id="IDerivativeLogic"></span> `IDerivativeLogic`
 
 
@@ -446,6 +625,22 @@ Requests and returns price in ETH for one request. This function could be called
 ### <span id="LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-"></span> `getDerivativeHash(struct LibDerivative.Derivative _derivative) → bytes32 derivativeHash` (public)
 
 Calculates hash of provided Derivative
+
+
+
+
+
+
+## <span id="LibEIP712"></span> `LibEIP712`
+
+
+
+
+
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+
+### <span id="LibEIP712-hashEIP712Message-bytes32-"></span> `hashEIP712Message(bytes32 hashStruct) → bytes32 result` (internal)
+
 
 
 
@@ -616,6 +811,438 @@ Defines registry instance and emits appropriate event
 
 
 ### <span id="usingRegistry-RegistrySet-address-"></span> `RegistrySet(address registry)`
+
+
+
+
+
+
+
+## <span id="LibOrder"></span> `LibOrder`
+
+
+
+
+
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+
+### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (internal)
+
+
+
+
+
+### <span id="LibOrder-verifySignature-bytes32-bytes-address-"></span> `verifySignature(bytes32 _hash, bytes _signature, address _address) → bool` (internal)
+
+
+
+
+
+
+
+## <span id="Match"></span> `Match`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`constructor(address _registry)`][Match-constructor-address-]
+- [`swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
+- [`withdraw()`][MatchLogic-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
+- [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
+- [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
+- [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
+- [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Swap(uint256 leftMakerTokenId, uint256 leftMakerTokenAmount, address leftMakerMarginAddress, uint256 leftMakerMarginAmount, uint256 rightMakerTokenId, uint256 rightMakerTokenAmount, address rightMakerMarginAddress, uint256 rightMakerMarginAmount)`][MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-]
+- [`Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled)`][MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-]
+- [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="Match-constructor-address-"></span> `constructor(address _registry)` (public)
+
+
+
+
+
+
+
+## <span id="MatchCreate"></span> `MatchCreate`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
+- [`withdraw()`][MatchLogic-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
+- [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
+- [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
+- [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
+- [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`constructor()`][ReentrancyGuard-constructor--]
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled)`][MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-]
+- [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-"></span> `create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)` (public)
+
+
+
+
+
+### <span id="MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-"></span> `Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled)`
+
+
+
+
+
+
+
+## <span id="MatchLogic"></span> `MatchLogic`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
+- [`withdraw()`][MatchLogic-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
+- [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
+- [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
+- [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
+- [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`constructor()`][ReentrancyGuard-constructor--]
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="MatchLogic-cancel-struct-LibOrder-Order-"></span> `cancel(struct LibOrder.Order _order)` (public)
+
+
+
+
+
+### <span id="MatchLogic-withdraw--"></span> `withdraw()` (public)
+
+
+
+
+
+### <span id="MatchLogic-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-"></span> `validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-validateExpiration-struct-LibOrder-Order-"></span> `validateExpiration(struct LibOrder.Order _order)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-validateSenderAddress-struct-LibOrder-Order-"></span> `validateSenderAddress(struct LibOrder.Order _order)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-"></span> `validateSignature(bytes32 orderHash, struct LibOrder.Order _order)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-takeFees-bytes32-struct-LibOrder-Order-"></span> `takeFees(bytes32 _orderHash, struct LibOrder.Order _order)` (internal)
+
+
+
+
+
+### <span id="MatchLogic-min-uint256-uint256-"></span> `min(uint256 _a, uint256 _b) → uint256` (internal)
+
+
+
+
+
+### <span id="MatchLogic-getDivisionPercentage-uint256-uint256-"></span> `getDivisionPercentage(uint256 _a, uint256 _b) → uint256` (internal)
+
+
+
+
+
+### <span id="MatchLogic-getInitialPercentageValue-uint256-uint256-"></span> `getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b) → uint256` (internal)
+
+
+
+
+
+### <span id="MatchLogic-Canceled-bytes32-"></span> `Canceled(bytes32 orderHash)`
+
+
+
+
+
+
+
+## <span id="MatchPool"></span> `MatchPool`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`constructor(address _registry)`][MatchPool-constructor-address-]
+- [`create(struct LibOrder.Order _buyOrder, struct LibDerivative.Derivative _derivative)`][MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
+- [`withdraw()`][MatchLogic-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
+- [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
+- [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
+- [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
+- [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="MatchPool-constructor-address-"></span> `constructor(address _registry)` (public)
+
+
+
+
+
+### <span id="MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-"></span> `create(struct LibOrder.Order _buyOrder, struct LibDerivative.Derivative _derivative)` (public)
+
+
+
+
+
+
+
+## <span id="MatchSwap"></span> `MatchSwap`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
+- [`withdraw()`][MatchLogic-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
+- [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
+- [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
+- [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
+- [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
+- [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`constructor()`][ReentrancyGuard-constructor--]
+- [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Swap(uint256 leftMakerTokenId, uint256 leftMakerTokenAmount, address leftMakerMarginAddress, uint256 leftMakerMarginAmount, uint256 rightMakerTokenId, uint256 rightMakerTokenAmount, address rightMakerMarginAddress, uint256 rightMakerMarginAmount)`][MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-]
+- [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-"></span> `swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)` (public)
+
+
+
+
+
+### <span id="MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-"></span> `Swap(uint256 leftMakerTokenId, uint256 leftMakerTokenAmount, address leftMakerMarginAddress, uint256 leftMakerMarginAmount, uint256 rightMakerTokenId, uint256 rightMakerTokenAmount, address rightMakerMarginAddress, uint256 rightMakerMarginAmount)`
+
+
+
+
+
+
+
+## <span id="LibSwaprateOrder"></span> `LibSwaprateOrder`
+
+
+
+
+
+- [`hashOrder(struct LibSwaprateOrder.SwaprateOrder _order)`][LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+
+### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (internal)
+
+
+
+
+
+### <span id="LibSwaprateOrder-verifySignature-bytes32-bytes-address-"></span> `verifySignature(bytes32 _hash, bytes _signature, address _address) → bool` (internal)
+
+
+
+
+
+
+
+## <span id="SwaprateMatch"></span> `SwaprateMatch`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`constructor(address _registry)`][SwaprateMatch-constructor-address-]
+- [`create(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder, struct LibDerivative.Derivative _derivative)`][SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`withdraw()`][SwaprateMatchBase-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`min(uint256 _a, uint256 _b)`][SwaprateMatchBase-min-uint256-uint256-]
+- [`hashOrder(struct LibSwaprateOrder.SwaprateOrder _order)`][LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Canceled(bytes32 orderHash)`][SwaprateMatchBase-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="SwaprateMatch-constructor-address-"></span> `constructor(address _registry)` (public)
+
+
+
+
+
+### <span id="SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-"></span> `create(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder, struct LibDerivative.Derivative _derivative)` (public)
+
+
+
+
+
+
+
+## <span id="SwaprateMatchBase"></span> `SwaprateMatchBase`
+
+
+
+
+
+- [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`withdraw()`][SwaprateMatchBase-withdraw--]
+- [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
+- [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`min(uint256 _a, uint256 _b)`][SwaprateMatchBase-min-uint256-uint256-]
+- [`constructor()`][ReentrancyGuard-constructor--]
+- [`hashOrder(struct LibSwaprateOrder.SwaprateOrder _order)`][LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]
+- [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
+- [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
+- [`Canceled(bytes32 orderHash)`][SwaprateMatchBase-Canceled-bytes32-]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+
+### <span id="SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-"></span> `cancel(struct LibSwaprateOrder.SwaprateOrder _order)` (public)
+
+
+
+
+
+### <span id="SwaprateMatchBase-withdraw--"></span> `withdraw()` (public)
+
+
+
+
+
+### <span id="SwaprateMatchBase-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-"></span> `takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-min-uint256-uint256-"></span> `min(uint256 _a, uint256 _b) → uint256` (internal)
+
+
+
+
+
+### <span id="SwaprateMatchBase-Canceled-bytes32-"></span> `Canceled(bytes32 orderHash)`
 
 
 
@@ -1080,6 +1707,417 @@ Using this function whitelisted contracts could call ERC20 transfers
 ### <span id="TokenSpender-claimPositions-contract-IERC721O-address-address-uint256-uint256-"></span> `claimPositions(contract IERC721O token, address from, address to, uint256 tokenId, uint256 amount)` (external)
 
 Using this function whitelisted contracts could call ERC721O transfers
+
+
+
+
+
+
+## <span id="OptionCallSyntheticIdMock"></span> `OptionCallSyntheticIdMock`
+
+
+
+
+
+- [`validateInput(struct LibDerivative.Derivative _derivative)`][OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-]
+- [`getMargin(struct LibDerivative.Derivative _derivative)`][OptionCallSyntheticIdMock-getMargin-struct-LibDerivative-Derivative-]
+- [`getExecutionPayout(struct LibDerivative.Derivative _derivative, uint256 _result)`][OptionCallSyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-]
+- [`isPool()`][OptionCallSyntheticIdMock-isPool--]
+- [`getAuthorAddress()`][HasCommission-getAuthorAddress--]
+- [`getAuthorCommission()`][HasCommission-getAuthorCommission--]
+- [`thirdpartyExecutionAllowed(address derivativeOwner)`][ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]
+- [`allowThirdpartyExecution(bool allow)`][ExecutableByThirdParty-allowThirdpartyExecution-bool-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`MetadataSet(string metadata)`][IDerivativeLogic-MetadataSet-string-]
+
+### <span id="OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-"></span> `validateInput(struct LibDerivative.Derivative _derivative) → bool` (public)
+
+
+
+
+
+### <span id="OptionCallSyntheticIdMock-getMargin-struct-LibDerivative-Derivative-"></span> `getMargin(struct LibDerivative.Derivative _derivative) → uint256 buyerMargin, uint256 sellerMargin` (public)
+
+
+
+
+
+### <span id="OptionCallSyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-"></span> `getExecutionPayout(struct LibDerivative.Derivative _derivative, uint256 _result) → uint256 buyerPayout, uint256 sellerPayout` (public)
+
+
+
+
+
+### <span id="OptionCallSyntheticIdMock-isPool--"></span> `isPool() → bool` (public)
+
+
+
+
+
+
+
+## <span id="OracleIdMock"></span> `OracleIdMock`
+
+
+
+
+
+- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`constructor(uint256 _fetchPrice, address _registry)`][OracleIdMock-constructor-uint256-address-]
+- [`triggerCallback(uint256 timestamp, uint256 returnData)`][OracleIdMock-triggerCallback-uint256-uint256-]
+- [`fetchData(uint256 timestamp)`][OracleIdMock-fetchData-uint256-]
+- [`recursivelyFetchData(uint256 timestamp, uint256 period, uint256 times)`][OracleIdMock-recursivelyFetchData-uint256-uint256-uint256-]
+- [`calculateFetchPrice()`][OracleIdMock-calculateFetchPrice--]
+- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`MetadataSet(string metadata)`][IOracleId-MetadataSet-string-]
+
+### <span id="OracleIdMock-constructor-uint256-address-"></span> `constructor(uint256 _fetchPrice, address _registry)` (public)
+
+
+
+
+
+### <span id="OracleIdMock-triggerCallback-uint256-uint256-"></span> `triggerCallback(uint256 timestamp, uint256 returnData)` (external)
+
+
+
+
+
+### <span id="OracleIdMock-fetchData-uint256-"></span> `fetchData(uint256 timestamp)` (external)
+
+
+
+
+
+### <span id="OracleIdMock-recursivelyFetchData-uint256-uint256-uint256-"></span> `recursivelyFetchData(uint256 timestamp, uint256 period, uint256 times)` (external)
+
+
+
+
+
+### <span id="OracleIdMock-calculateFetchPrice--"></span> `calculateFetchPrice() → uint256` (external)
+
+
+
+
+
+
+
+## <span id="ERC20Basic"></span> `ERC20Basic`
+
+
+
+
+
+- [`balanceOf(address who)`][ERC20Basic-balanceOf-address-]
+- [`transfer(address to, uint256 value)`][ERC20Basic-transfer-address-uint256-]
+- [`Transfer(address from, address to, uint256 value)`][ERC20Basic-Transfer-address-address-uint256-]
+
+### <span id="ERC20Basic-balanceOf-address-"></span> `balanceOf(address who) → uint256` (public)
+
+
+
+
+
+### <span id="ERC20Basic-transfer-address-uint256-"></span> `transfer(address to, uint256 value) → bool` (public)
+
+
+
+
+
+### <span id="ERC20Basic-Transfer-address-address-uint256-"></span> `Transfer(address from, address to, uint256 value)`
+
+
+
+
+
+
+
+## <span id="SafeMath"></span> `SafeMath`
+
+
+
+
+
+- [`mul(uint256 a, uint256 b)`][SafeMath-mul-uint256-uint256-]
+- [`div(uint256 a, uint256 b)`][SafeMath-div-uint256-uint256-]
+- [`sub(uint256 a, uint256 b)`][SafeMath-sub-uint256-uint256-]
+- [`add(uint256 a, uint256 b)`][SafeMath-add-uint256-uint256-]
+
+### <span id="SafeMath-mul-uint256-uint256-"></span> `mul(uint256 a, uint256 b) → uint256` (internal)
+
+
+
+
+
+### <span id="SafeMath-div-uint256-uint256-"></span> `div(uint256 a, uint256 b) → uint256` (internal)
+
+
+
+
+
+### <span id="SafeMath-sub-uint256-uint256-"></span> `sub(uint256 a, uint256 b) → uint256` (internal)
+
+
+
+
+
+### <span id="SafeMath-add-uint256-uint256-"></span> `add(uint256 a, uint256 b) → uint256` (internal)
+
+
+
+
+
+
+
+## <span id="BasicToken"></span> `BasicToken`
+
+
+
+Basic version of StandardToken, with no allowances.
+
+- [`transfer(address _to, uint256 _value)`][BasicToken-transfer-address-uint256-]
+- [`balanceOf(address _owner)`][BasicToken-balanceOf-address-]
+- [`Transfer(address from, address to, uint256 value)`][ERC20Basic-Transfer-address-address-uint256-]
+
+### <span id="BasicToken-transfer-address-uint256-"></span> `transfer(address _to, uint256 _value) → bool` (public)
+
+
+
+transfer token for a specified address
+
+
+### <span id="BasicToken-balanceOf-address-"></span> `balanceOf(address _owner) → uint256 balance` (public)
+
+
+
+Gets the balance of the specified address.
+
+
+
+
+## <span id="ERC20"></span> `ERC20`
+
+
+
+see https://github.com/ethereum/EIPs/issues/20
+
+- [`allowance(address owner, address spender)`][ERC20-allowance-address-address-]
+- [`transferFrom(address from, address to, uint256 value)`][ERC20-transferFrom-address-address-uint256-]
+- [`approve(address spender, uint256 value)`][ERC20-approve-address-uint256-]
+- [`balanceOf(address who)`][ERC20Basic-balanceOf-address-]
+- [`transfer(address to, uint256 value)`][ERC20Basic-transfer-address-uint256-]
+- [`Approval(address owner, address spender, uint256 value)`][ERC20-Approval-address-address-uint256-]
+- [`Transfer(address from, address to, uint256 value)`][ERC20Basic-Transfer-address-address-uint256-]
+
+### <span id="ERC20-allowance-address-address-"></span> `allowance(address owner, address spender) → uint256` (public)
+
+
+
+
+
+### <span id="ERC20-transferFrom-address-address-uint256-"></span> `transferFrom(address from, address to, uint256 value) → bool` (public)
+
+
+
+
+
+### <span id="ERC20-approve-address-uint256-"></span> `approve(address spender, uint256 value) → bool` (public)
+
+
+
+
+
+### <span id="ERC20-Approval-address-address-uint256-"></span> `Approval(address owner, address spender, uint256 value)`
+
+
+
+
+
+
+
+## <span id="StandardToken"></span> `StandardToken`
+
+
+
+Implementation of the basic standard token.
+https://github.com/ethereum/EIPs/issues/20
+Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
+
+- [`transferFrom(address _from, address _to, uint256 _value)`][StandardToken-transferFrom-address-address-uint256-]
+- [`approve(address _spender, uint256 _value)`][StandardToken-approve-address-uint256-]
+- [`allowance(address _owner, address _spender)`][StandardToken-allowance-address-address-]
+- [`increaseApproval(address _spender, uint256 _addedValue)`][StandardToken-increaseApproval-address-uint256-]
+- [`decreaseApproval(address _spender, uint256 _subtractedValue)`][StandardToken-decreaseApproval-address-uint256-]
+- [`transfer(address _to, uint256 _value)`][BasicToken-transfer-address-uint256-]
+- [`balanceOf(address _owner)`][BasicToken-balanceOf-address-]
+- [`Approval(address owner, address spender, uint256 value)`][ERC20-Approval-address-address-uint256-]
+- [`Transfer(address from, address to, uint256 value)`][ERC20Basic-Transfer-address-address-uint256-]
+
+### <span id="StandardToken-transferFrom-address-address-uint256-"></span> `transferFrom(address _from, address _to, uint256 _value) → bool` (public)
+
+
+
+Transfer tokens from one address to another
+
+
+### <span id="StandardToken-approve-address-uint256-"></span> `approve(address _spender, uint256 _value) → bool` (public)
+
+
+
+Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
+
+Beware that changing an allowance with this method brings the risk that someone may use both the old
+and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this
+race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
+https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+
+
+### <span id="StandardToken-allowance-address-address-"></span> `allowance(address _owner, address _spender) → uint256` (public)
+
+
+
+Function to check the amount of tokens that an owner allowed to a spender.
+
+
+### <span id="StandardToken-increaseApproval-address-uint256-"></span> `increaseApproval(address _spender, uint256 _addedValue) → bool` (public)
+
+
+
+Increase the amount of tokens that an owner allowed to a spender.
+
+approve should be called when allowed[_spender] == 0. To increment
+allowed value is better to use this function to avoid 2 calls (and wait until
+the first transaction is mined)
+From MonolithDAO Token.sol
+
+
+### <span id="StandardToken-decreaseApproval-address-uint256-"></span> `decreaseApproval(address _spender, uint256 _subtractedValue) → bool` (public)
+
+
+
+Decrease the amount of tokens that an owner allowed to a spender.
+
+approve should be called when allowed[_spender] == 0. To decrement
+allowed value is better to use this function to avoid 2 calls (and wait until
+the first transaction is mined)
+From MonolithDAO Token.sol
+
+
+
+
+## <span id="TestToken"></span> `TestToken`
+
+
+
+
+
+- [`constructor(string _name, string _symbol, uint8 _decimals)`][TestToken-constructor-string-string-uint8-]
+- [`mint(address _to, uint256 _amount)`][TestToken-mint-address-uint256-]
+- [`transferFrom(address _from, address _to, uint256 _value)`][StandardToken-transferFrom-address-address-uint256-]
+- [`approve(address _spender, uint256 _value)`][StandardToken-approve-address-uint256-]
+- [`allowance(address _owner, address _spender)`][StandardToken-allowance-address-address-]
+- [`increaseApproval(address _spender, uint256 _addedValue)`][StandardToken-increaseApproval-address-uint256-]
+- [`decreaseApproval(address _spender, uint256 _subtractedValue)`][StandardToken-decreaseApproval-address-uint256-]
+- [`transfer(address _to, uint256 _value)`][BasicToken-transfer-address-uint256-]
+- [`balanceOf(address _owner)`][BasicToken-balanceOf-address-]
+- [`Approval(address owner, address spender, uint256 value)`][ERC20-Approval-address-address-uint256-]
+- [`Transfer(address from, address to, uint256 value)`][ERC20Basic-Transfer-address-address-uint256-]
+
+### <span id="TestToken-constructor-string-string-uint8-"></span> `constructor(string _name, string _symbol, uint8 _decimals)` (public)
+
+
+
+
+
+### <span id="TestToken-mint-address-uint256-"></span> `mint(address _to, uint256 _amount)` (public)
+
+
+
+
+
+
+
+## <span id="WETH"></span> `WETH`
+
+
+
+
+
+- [`fallback()`][WETH-fallback--]
+- [`deposit()`][WETH-deposit--]
+- [`withdraw(uint256 wad)`][WETH-withdraw-uint256-]
+- [`totalSupply()`][WETH-totalSupply--]
+- [`approve(address guy, uint256 wad)`][WETH-approve-address-uint256-]
+- [`transfer(address dst, uint256 wad)`][WETH-transfer-address-uint256-]
+- [`transferFrom(address src, address dst, uint256 wad)`][WETH-transferFrom-address-address-uint256-]
+- [`Approval(address src, address guy, uint256 wad)`][WETH-Approval-address-address-uint256-]
+- [`Transfer(address src, address dst, uint256 wad)`][WETH-Transfer-address-address-uint256-]
+- [`Deposit(address dst, uint256 wad)`][WETH-Deposit-address-uint256-]
+- [`Withdrawal(address src, uint256 wad)`][WETH-Withdrawal-address-uint256-]
+
+### <span id="WETH-fallback--"></span> `fallback()` (external)
+
+
+
+
+
+### <span id="WETH-deposit--"></span> `deposit()` (public)
+
+
+
+
+
+### <span id="WETH-withdraw-uint256-"></span> `withdraw(uint256 wad)` (public)
+
+
+
+
+
+### <span id="WETH-totalSupply--"></span> `totalSupply() → uint256` (public)
+
+
+
+
+
+### <span id="WETH-approve-address-uint256-"></span> `approve(address guy, uint256 wad) → bool` (public)
+
+
+
+
+
+### <span id="WETH-transfer-address-uint256-"></span> `transfer(address dst, uint256 wad) → bool` (public)
+
+
+
+
+
+### <span id="WETH-transferFrom-address-address-uint256-"></span> `transferFrom(address src, address dst, uint256 wad) → bool` (public)
+
+
+
+
+
+### <span id="WETH-Approval-address-address-uint256-"></span> `Approval(address src, address guy, uint256 wad)`
+
+
+
+
+
+### <span id="WETH-Transfer-address-address-uint256-"></span> `Transfer(address src, address dst, uint256 wad)`
+
+
+
+
+
+### <span id="WETH-Deposit-address-uint256-"></span> `Deposit(address dst, uint256 wad)`
+
+
+
+
+
+### <span id="WETH-Withdrawal-address-uint256-"></span> `Withdrawal(address src, uint256 wad)`
+
 
 
 
