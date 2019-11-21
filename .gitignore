@@ -1,0 +1,8 @@
+# NodeJS
+node_modules/
+
+# Solidity
+build/
+
+# MacOS
+.DS_Store

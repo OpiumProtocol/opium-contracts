@@ -1,0 +1,27 @@
+{
+  "name": "opium-contracts",
+  "version": "1.3.0",
+  "description": "Opium Protocol solidity smart contracts",
+  "main": "truffle-config.js",
+  "scripts": {
+    "compile": "truffle compile",
+    "docgen": "solidity-docgen --solc-settings  \"{remappings: ['openzeppelin-solidity/contracts=$PWD/node_modules/openzeppelin-solidity/contracts','erc721o/contracts=$PWD/node_modules/erc721o/contracts']}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blockeys/opium-contracts-prep.git"
+  },
+  "author": "opium.team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blockeys/opium-contracts-prep/issues"
+  },
+  "homepage": "https://github.com/Blockeys/opium-contracts-prep#readme",
+  "dependencies": {
+    "erc721o": "git+https://github.com/OpiumProtocol/erc721o.git#921f283",
+    "openzeppelin-solidity": "^2.4.0",
+    "solidity-docgen": "^0.3.13",
+    "truffle": "^5.1.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "extends": "solhint:default",
+  "rules": {
+    "indent": ["error", 4],
+
+    "bracket-align": false,
+    "compiler-fixed": false,
+    "no-simple-event-func-name": false,
+    "two-lines-top-level-separator": false,
+    "max-line-length": 150,
+    "function-max-lines": 100
+  }
+}
