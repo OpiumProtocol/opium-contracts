@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "truffle compile",
     "docgen": "solidity-docgen --solc-settings  \"{remappings: ['openzeppelin-solidity/contracts=$PWD/node_modules/openzeppelin-solidity/contracts','erc721o/contracts=$PWD/node_modules/erc721o/contracts']}\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "truffle test"
   },
   "repository": {
     "type": "git",
