@@ -3,10 +3,11 @@ pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibEIP712.sol";
 
-contract LibOrder is LibEIP712 {
-    struct Order {
-        address makerMarginAddress;
-        address takerMarginAddress;
+contract LibSwaprateOrder is LibEIP712 {
+    struct SwaprateOrder {
+        address syntheticId;
+        address oracleId;
+        address token;
 
         address makerAddress;
         address takerAddress;
@@ -16,18 +17,26 @@ contract LibOrder is LibEIP712 {
         address relayerAddress;
         address affiliateAddress;
 
-        uint256 makerTokenId;
-        uint256 makerTokenAmount;
-        uint256 makerMarginAmount;
-        uint256 takerTokenId;
-        uint256 takerTokenAmount;
-        uint256 takerMarginAmount;
+        uint256 endTime;
+
+        uint256 quantity;
+        uint256 partialFill;
+
+        uint256 param0;
+        uint256 param1;
+        uint256 param2;
+        uint256 param3;
+        uint256 param4;
+        uint256 param5;
+        uint256 param6;
+        uint256 param7;
+        uint256 param8;
+        uint256 param9;
 
         uint256 relayerFee;
         uint256 affiliateFee;
 
         uint256 nonce;
-        uint256 expiresAt;
 
         // Not used in hash
         bytes signature;
@@ -35,8 +44,9 @@ contract LibOrder is LibEIP712 {
 
     bytes32 constant internal EIP712_ORDER_TYPEHASH = keccak256(abi.encodePacked(
         "Order(",
-        "address makerMarginAddress,",
-        "address takerMarginAddress,",
+        "address syntheticId,",
+        "address oracleId,",
+        "address token,",
 
         "address makerAddress,",
         "address takerAddress,",
@@ -46,28 +56,37 @@ contract LibOrder is LibEIP712 {
         "address relayerAddress,",
         "address affiliateAddress,",
 
-        "uint256 makerTokenId,",
-        "uint256 makerTokenAmount,",
-        "uint256 makerMarginAmount,",
-        "uint256 takerTokenId,",
-        "uint256 takerTokenAmount,",
-        "uint256 takerMarginAmount,",
-        
+        "uint256 endTime,",
+
+        "uint256 quantity,",
+        "uint256 partialFill,",
+
+        "uint256 param0,",
+        "uint256 param1,",
+        "uint256 param2,",
+        "uint256 param3,",
+        "uint256 param4,",
+        "uint256 param5,",
+        "uint256 param6,",
+        "uint256 param7,",
+        "uint256 param8,",
+        "uint256 param9,",
+
         "uint256 relayerFee,",
         "uint256 affiliateFee,",
 
-        "uint256 nonce,",
-        "uint256 expiresAt",
+        "uint256 nonce",
         ")"
     ));
 
-    function hashOrder(Order memory _order) internal pure returns (bytes32 hash) {
+    function hashOrder(SwaprateOrder memory _order) internal pure returns (bytes32 hash) {
         hash = keccak256(
             abi.encodePacked(
                 abi.encodePacked(
                     EIP712_ORDER_TYPEHASH,
-                    uint256(_order.makerMarginAddress),
-                    uint256(_order.takerMarginAddress),
+                    uint256(_order.syntheticId),
+                    uint256(_order.oracleId),
+                    uint256(_order.token),
 
                     uint256(_order.makerAddress),
                     uint256(_order.takerAddress),
@@ -78,19 +97,29 @@ contract LibOrder is LibEIP712 {
                     uint256(_order.affiliateAddress)
                 ),
                 abi.encodePacked(
-                    _order.makerTokenId,
-                    _order.makerTokenAmount,
-                    _order.makerMarginAmount,
-                    _order.takerTokenId,
-                    _order.takerTokenAmount,
-                    _order.takerMarginAmount
+                    _order.endTime,
+                    _order.quantity,
+                    _order.partialFill
+                ),
+                abi.encodePacked(
+                    _order.param0,
+                    _order.param1,
+                    _order.param2,
+                    _order.param3,
+                    _order.param4
+                ),
+                abi.encodePacked(
+                    _order.param5,
+                    _order.param6,
+                    _order.param7,
+                    _order.param8,
+                    _order.param9
                 ),
                 abi.encodePacked(
                     _order.relayerFee,
                     _order.affiliateFee,
 
-                    _order.nonce,
-                    _order.expiresAt
+                    _order.nonce
                 )
             )
         );
