@@ -4,7 +4,9 @@
 
 Code is documented in NatSpec format
 
-`solidity-docgen` generated documentation [is here](./docs/index.md)
+`solidity-docgen` generated documentation could be found [here](./docs/index.md)
+
+GitBook documentation could be found here [https://docs.opium.network/general/opium-layers-new](https://docs.opium.network/general/opium-layers-new)
 
 ## Tests
 
