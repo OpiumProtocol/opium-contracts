@@ -32,8 +32,10 @@ contract MatchLogic is LibOrder, usingRegistry, ReentrancyGuard {
     // Keeps orders filling percentage
     mapping (bytes32 => uint256) public filled;
     
-    // Keeps balances of relayers and affiliates to withdraw
-    mapping (address => uint256) public balances;
+    // Vaults for fees
+    // This mapping holds balances of relayers and affiliates fees to withdraw
+    // balances[feeRecipientAddress][tokenAddress] => balances
+    mapping (address => mapping (address => uint256)) public balances;
 
     // Keeps whether fee was already taken
     mapping (bytes32 => bool) public feeTaken;
@@ -47,10 +49,10 @@ contract MatchLogic is LibOrder, usingRegistry, ReentrancyGuard {
         emit Canceled(orderHash);
     }
 
-    function withdraw() public nonReentrant {
-        uint256 balance = balances[msg.sender];
-        balances[msg.sender] = 0;
-        IERC20(registry.getWethAddress()).transfer(msg.sender, balance);
+    function withdraw(IERC20 _token) public nonReentrant {
+        uint256 balance = balances[msg.sender][address(_token)];
+        balances[msg.sender][address(_token)] = 0;
+        _token.transfer(msg.sender, balance);
     }
 
     function validateCanceled(bytes32 _hash) internal view {
@@ -93,32 +95,51 @@ contract MatchLogic is LibOrder, usingRegistry, ReentrancyGuard {
         verified[orderHash] = true;
     }
 
+    /// @notice This function is responsible for taking relayer and affiliate fees, if they were not taken already
+    /// @param _orderHash bytes32 Hash of the order
+    /// @param _order Order Order itself
     function takeFees(bytes32 _orderHash, Order memory _order) internal {
+        // Check if fee was already taken
         if (feeTaken[_orderHash]) {
             return;
         }
 
+        // Check if feeTokenAddress is not set to zero address
+        if (_order.feeTokenAddress == address(0)) {
+            return;
+        }
+
+        // Calculate total amount of fees needs to be transfered
         uint256 fees = _order.relayerFee.add(_order.affiliateFee);
 
+        // If total amount of fees is non-zero
         if (fees == 0) {
             return;
         }
 
-        require(IERC20(registry.getWethAddress()).allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, "MATCH:NOT_ENOUGH_ALLOWED_FEES");
-        TokenSpender(registry.getTokenSpender()).claimTokens(IERC20(registry.getWethAddress()), _order.makerAddress, address(this), fees);
+        // Create instance of fee token
+        IERC20 feeToken = IERC20(_order.feeTokenAddress);
 
+        // Check if user has enough token approval to pay the fees
+        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, "MATCH:NOT_ENOUGH_ALLOWED_FEES");
+        // Transfer fee
+        TokenSpender(registry.getTokenSpender()).claimTokens(feeToken, _order.makerAddress, address(this), fees);
+
+        // Add commission to relayer balance, or to opium balance if relayer is not set
         if (_order.relayerAddress != address(0)) {
-            balances[_order.relayerAddress] = balances[_order.relayerAddress].add(_order.relayerFee);
+            balances[_order.relayerAddress][_order.feeTokenAddress] = balances[_order.relayerAddress][_order.feeTokenAddress].add(_order.relayerFee);
         } else {
-            balances[registry.getOpiumAddress()] = balances[registry.getOpiumAddress()].add(_order.relayerFee);
+            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.relayerFee);
         }
 
+        // Add commission to affiliate balance, or to opium balance if affiliate is not set
         if (_order.affiliateAddress != address(0)) {
-            balances[_order.affiliateAddress] = balances[_order.affiliateAddress].add(_order.affiliateFee);
+            balances[_order.affiliateAddress][_order.feeTokenAddress] = balances[_order.affiliateAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         } else {
-            balances[registry.getOpiumAddress()] = balances[registry.getOpiumAddress()].add(_order.affiliateFee);
+            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.affiliateFee);
         }
 
+        // Mark the fee of token as taken
         feeTaken[_orderHash] = true;
     }
 

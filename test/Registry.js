@@ -3,7 +3,6 @@ const Core = artifacts.require('Core')
 const TokenMinter = artifacts.require('TokenMinter')
 const OracleAggregator = artifacts.require('OracleAggregator')
 const SyntheticAggregator = artifacts.require('SyntheticAggregator')
-const WETH = artifacts.require('WETH')
 
 contract('Registry', accounts => {
 
@@ -11,7 +10,7 @@ contract('Registry', accounts => {
     const opiumAddress = accounts[1]
     const thirdPartyAddress = accounts[2]
 
-    let registry, core, tokenMinter, oracleAggregator, syntheticAggregator, weth
+    let registry, core, tokenMinter, oracleAggregator, syntheticAggregator
 
     before(async () => {
         registry = await Registry.new()
@@ -19,7 +18,6 @@ contract('Registry', accounts => {
         tokenMinter = await TokenMinter.deployed()
         oracleAggregator = await OracleAggregator.deployed()
         syntheticAggregator = await SyntheticAggregator.deployed()
-        weth = await WETH.deployed()
     })
 
     it('should revert for non initializer address', async () => {
@@ -68,11 +66,5 @@ contract('Registry', accounts => {
         await registry.setOpiumAddress(opiumAddress, { from: owner })
         const result = await registry.getOpiumAddress()
         assert.equal(result, opiumAddress, 'Opium address does not match')
-    })
-
-    it('should correctly set WETH address', async () => {
-        await registry.setWethAddress(weth.address, { from: owner })
-        const result = await registry.getWethAddress()
-        assert.equal(result, weth.address, 'WETH address does not match')
     })
 })

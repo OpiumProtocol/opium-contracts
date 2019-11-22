@@ -23,10 +23,6 @@ contract Registry is RegistryErrors {
     // Address of Opium.TokenSpender contract
     address private tokenSpender;
 
-    // TODO: Change within fixing orders commissions logic
-    // Address of WETH contract
-    address private wethAddress;
-
     // Address of Opium contract set deployer
     address public initializer;
 
@@ -85,14 +81,6 @@ contract Registry is RegistryErrors {
         tokenSpender = _tokenSpender;
     }
 
-    // TODO: Change within fixing orders commissions logic
-    /// @notice Sets WETH address and allows to do it only once
-    /// @param _wethAddress address Address of WETH
-    function setWethAddress(address _wethAddress) external onlyInitializer {
-        require(wethAddress == address(0), ERROR_REGISTRY_ALREADY_SET);
-        wethAddress = _wethAddress;
-    }
-
     /// @notice Allows opium commission receiver address to change itself
     /// @param _opiumAddress address New opium commission receiver address
     function changeOpiumAddress(address _opiumAddress) external {
@@ -136,12 +124,5 @@ contract Registry is RegistryErrors {
     /// @param result address Address of Opium.TokenSpender
     function getTokenSpender() external view returns (address result) {
         return tokenSpender;
-    }
-
-    // TODO: Change within fixing orders commissions logic
-    /// @notice Returns address of WETH
-    /// @param result address Address of WETH
-    function getWethAddress() external view returns (address result) {
-        return wethAddress;
     }
 }

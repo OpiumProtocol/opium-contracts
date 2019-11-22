@@ -20,6 +20,8 @@ const formOrderMessage = ({ order, match }) => {
           
                 { name: 'relayerAddress', type: 'address' },
                 { name: 'affiliateAddress', type: 'address' },
+
+                { name: 'feeTokenAddress', type: 'address' },
           
                 { name: 'makerTokenId', type: 'uint256' },
                 { name: 'makerTokenAmount', type: 'uint256' },
@@ -52,6 +54,7 @@ const orderFactory = async ({
     match,
     relayerFee = 0,
     affiliateFee = 0,
+    feeTokenAddress
 }) => {
     const def = {
         makerTokenId: 0,
@@ -72,6 +75,8 @@ const orderFactory = async ({
         relayerAddress: relayer,
         affiliateAddress: relayer,
         senderAddress: relayer,
+
+        feeTokenAddress,
 
         relayerFee,
         affiliateFee

@@ -17,6 +17,8 @@ contract LibSwaprateOrder is LibEIP712 {
         address relayerAddress;
         address affiliateAddress;
 
+        address feeTokenAddress;
+
         uint256 endTime;
 
         uint256 quantity;
@@ -56,6 +58,8 @@ contract LibSwaprateOrder is LibEIP712 {
         "address relayerAddress,",
         "address affiliateAddress,",
 
+        "address feeTokenAddress,",
+
         "uint256 endTime,",
 
         "uint256 quantity,",
@@ -94,7 +98,9 @@ contract LibSwaprateOrder is LibEIP712 {
                     uint256(_order.senderAddress),
 
                     uint256(_order.relayerAddress),
-                    uint256(_order.affiliateAddress)
+                    uint256(_order.affiliateAddress),
+
+                    uint256(_order.feeTokenAddress)
                 ),
                 abi.encodePacked(
                     _order.endTime,

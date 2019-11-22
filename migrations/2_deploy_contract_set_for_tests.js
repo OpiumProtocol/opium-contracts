@@ -134,7 +134,6 @@ module.exports = async function(deployer, network, accounts) {
                 .then(instance => {
                     weth = instance
                     console.log('WETH was deployed at', weth.address)
-                    return registry.setWethAddress(weth.address, { from: owner })
                 })
         })
         .then(() => {

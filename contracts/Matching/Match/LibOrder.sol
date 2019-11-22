@@ -16,6 +16,8 @@ contract LibOrder is LibEIP712 {
         address relayerAddress;
         address affiliateAddress;
 
+        address feeTokenAddress;
+
         uint256 makerTokenId;
         uint256 makerTokenAmount;
         uint256 makerMarginAmount;
@@ -46,6 +48,8 @@ contract LibOrder is LibEIP712 {
         "address relayerAddress,",
         "address affiliateAddress,",
 
+        "address feeTokenAddress,",
+
         "uint256 makerTokenId,",
         "uint256 makerTokenAmount,",
         "uint256 makerMarginAmount,",
@@ -75,7 +79,9 @@ contract LibOrder is LibEIP712 {
                     uint256(_order.senderAddress),
 
                     uint256(_order.relayerAddress),
-                    uint256(_order.affiliateAddress)
+                    uint256(_order.affiliateAddress),
+
+                    uint256(_order.feeTokenAddress)
                 ),
                 abi.encodePacked(
                     _order.makerTokenId,

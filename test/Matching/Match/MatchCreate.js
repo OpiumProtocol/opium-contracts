@@ -63,8 +63,8 @@ contract('Match and MatchCreate', accounts => {
 
         wrongTokenId = web3.utils.soliditySha3(derivativeHash, 'WRONG')
 
-        orderFactory = order => orders.orderFactory({ order, testToken, relayer, match })
-        sharedOrderFactory = order => orders.orderFactory({ order, testToken, relayer: zeroAddress, match })
+        orderFactory = order => orders.orderFactory({ order, testToken, relayer, match, feeTokenAddress: weth.address })
+        sharedOrderFactory = order => orders.orderFactory({ order, testToken, relayer: zeroAddress, match, feeTokenAddress: weth.address })
     })
 
     it('should revert incorrect position creation, right taker token is wrong', async () => {
@@ -913,7 +913,7 @@ contract('Match and MatchCreate', accounts => {
         await testToken.approve(tokenSpender.address, dai(4), { from: buyer })
         await testToken.approve(tokenSpender.address, dai(200), { from: seller })
 
-        const relayerFeeBalanceBefore = await match.balances.call(relayer)
+        const relayerFeeBalanceBefore = await match.balances.call(relayer, weth.address)
 
         const leftOrder = await orderFactory({
             makerMarginAmount: dai(4),
@@ -943,19 +943,19 @@ contract('Match and MatchCreate', accounts => {
 
         await match.create(leftOrder, rightOrder, derivative, false, { from: relayer })
     
-        const relayerFeeBalanceAfter = await match.balances.call(relayer)
+        const relayerFeeBalanceAfter = await match.balances.call(relayer, weth.address)
 
         assert.equal(relayerFeeBalanceBefore, 0, 'Relayer fee balance before is wrong')
         assert.equal(relayerFeeBalanceAfter, dai(0.5), 'Relayer fee balance after is wrong')
     })
 
     it('should successfully withdraw relayer fee', async () => {
-        const relayerFeeBalanceBefore = await match.balances.call(relayer)
+        const relayerFeeBalanceBefore = await match.balances.call(relayer, weth.address)
         const relayerWETHBalanceBefore = await weth.balanceOf(relayer)
 
-        await match.withdraw({ from: relayer })
+        await match.withdraw(weth.address, { from: relayer })
 
-        const relayerFeeBalanceAfter = await match.balances.call(relayer)
+        const relayerFeeBalanceAfter = await match.balances.call(relayer, weth.address)
         const relayerWETHBalanceAfter = await weth.balanceOf(relayer)
 
         assert.equal(relayerFeeBalanceBefore, dai(0.5), 'Relayer fee balance before is wrong')

@@ -121,10 +121,10 @@
 [MatchLogic-canceled-mapping-bytes32----bool-]: #MatchLogic-canceled-mapping-bytes32----bool-
 [MatchLogic-verified-mapping-bytes32----bool-]: #MatchLogic-verified-mapping-bytes32----bool-
 [MatchLogic-filled-mapping-bytes32----uint256-]: #MatchLogic-filled-mapping-bytes32----uint256-
-[MatchLogic-balances-mapping-address----uint256-]: #MatchLogic-balances-mapping-address----uint256-
+[MatchLogic-balances-mapping-address----mapping-address----uint256--]: #MatchLogic-balances-mapping-address----mapping-address----uint256--
 [MatchLogic-feeTaken-mapping-bytes32----bool-]: #MatchLogic-feeTaken-mapping-bytes32----bool-
 [MatchLogic-cancel-struct-LibOrder-Order-]: #MatchLogic-cancel-struct-LibOrder-Order-
-[MatchLogic-withdraw--]: #MatchLogic-withdraw--
+[MatchLogic-withdraw-contract-IERC20-]: #MatchLogic-withdraw-contract-IERC20-
 [MatchLogic-validateCanceled-bytes32-]: #MatchLogic-validateCanceled-bytes32-
 [MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]: #MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-
 [MatchLogic-validateExpiration-struct-LibOrder-Order-]: #MatchLogic-validateExpiration-struct-LibOrder-Order-
@@ -152,10 +152,10 @@
 [SwaprateMatchBase]: #SwaprateMatchBase
 [SwaprateMatchBase-canceled-mapping-bytes32----bool-]: #SwaprateMatchBase-canceled-mapping-bytes32----bool-
 [SwaprateMatchBase-verified-mapping-bytes32----bool-]: #SwaprateMatchBase-verified-mapping-bytes32----bool-
-[SwaprateMatchBase-balances-mapping-address----uint256-]: #SwaprateMatchBase-balances-mapping-address----uint256-
+[SwaprateMatchBase-balances-mapping-address----mapping-address----uint256--]: #SwaprateMatchBase-balances-mapping-address----mapping-address----uint256--
 [SwaprateMatchBase-feeTaken-mapping-bytes32----bool-]: #SwaprateMatchBase-feeTaken-mapping-bytes32----bool-
 [SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-
-[SwaprateMatchBase-withdraw--]: #SwaprateMatchBase-withdraw--
+[SwaprateMatchBase-withdraw-contract-IERC20-]: #SwaprateMatchBase-withdraw-contract-IERC20-
 [SwaprateMatchBase-validateCanceled-bytes32-]: #SwaprateMatchBase-validateCanceled-bytes32-
 [SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-
 [SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-
@@ -190,7 +190,6 @@
 [Registry-setSyntheticAggregator-address-]: #Registry-setSyntheticAggregator-address-
 [Registry-setOpiumAddress-address-]: #Registry-setOpiumAddress-address-
 [Registry-setTokenSpender-address-]: #Registry-setTokenSpender-address-
-[Registry-setWethAddress-address-]: #Registry-setWethAddress-address-
 [Registry-changeOpiumAddress-address-]: #Registry-changeOpiumAddress-address-
 [Registry-getCore--]: #Registry-getCore--
 [Registry-getMinter--]: #Registry-getMinter--
@@ -198,7 +197,6 @@
 [Registry-getSyntheticAggregator--]: #Registry-getSyntheticAggregator--
 [Registry-getOpiumAddress--]: #Registry-getOpiumAddress--
 [Registry-getTokenSpender--]: #Registry-getTokenSpender--
-[Registry-getWethAddress--]: #Registry-getWethAddress--
 [SyntheticAggregator]: #SyntheticAggregator
 [SyntheticAggregator-buyerMarginByHash-mapping-bytes32----uint256-]: #SyntheticAggregator-buyerMarginByHash-mapping-bytes32----uint256-
 [SyntheticAggregator-sellerMarginByHash-mapping-bytes32----uint256-]: #SyntheticAggregator-sellerMarginByHash-mapping-bytes32----uint256-
@@ -855,7 +853,7 @@ Defines registry instance and emits appropriate event
 - [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
-- [`withdraw()`][MatchLogic-withdraw--]
+- [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
@@ -892,7 +890,7 @@ Defines registry instance and emits appropriate event
 - [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
-- [`withdraw()`][MatchLogic-withdraw--]
+- [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
@@ -933,7 +931,7 @@ Defines registry instance and emits appropriate event
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
 - [`onlyCore()`][usingRegistry-onlyCore--]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
-- [`withdraw()`][MatchLogic-withdraw--]
+- [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
@@ -956,7 +954,7 @@ Defines registry instance and emits appropriate event
 
 
 
-### <span id="MatchLogic-withdraw--"></span> `withdraw()` (public)
+### <span id="MatchLogic-withdraw-contract-IERC20-"></span> `withdraw(contract IERC20 _token)` (public)
 
 
 
@@ -994,6 +992,7 @@ Defines registry instance and emits appropriate event
 
 ### <span id="MatchLogic-takeFees-bytes32-struct-LibOrder-Order-"></span> `takeFees(bytes32 _orderHash, struct LibOrder.Order _order)` (internal)
 
+This function is responsible for taking relayer and affiliate fees, if they were not taken already
 
 
 
@@ -1036,7 +1035,7 @@ Defines registry instance and emits appropriate event
 - [`create(struct LibOrder.Order _buyOrder, struct LibDerivative.Derivative _derivative)`][MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
-- [`withdraw()`][MatchLogic-withdraw--]
+- [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
@@ -1076,7 +1075,7 @@ Defines registry instance and emits appropriate event
 - [`onlyCore()`][usingRegistry-onlyCore--]
 - [`swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
-- [`withdraw()`][MatchLogic-withdraw--]
+- [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
@@ -1144,7 +1143,7 @@ Defines registry instance and emits appropriate event
 - [`create(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder, struct LibDerivative.Derivative _derivative)`][SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
-- [`withdraw()`][SwaprateMatchBase-withdraw--]
+- [`withdraw(contract IERC20 _token)`][SwaprateMatchBase-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
@@ -1180,7 +1179,7 @@ Defines registry instance and emits appropriate event
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
 - [`onlyCore()`][usingRegistry-onlyCore--]
 - [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
-- [`withdraw()`][SwaprateMatchBase-withdraw--]
+- [`withdraw(contract IERC20 _token)`][SwaprateMatchBase-withdraw-contract-IERC20-]
 - [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
 - [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
@@ -1200,7 +1199,7 @@ Defines registry instance and emits appropriate event
 
 
 
-### <span id="SwaprateMatchBase-withdraw--"></span> `withdraw()` (public)
+### <span id="SwaprateMatchBase-withdraw-contract-IERC20-"></span> `withdraw(contract IERC20 _token)` (public)
 
 
 
@@ -1232,6 +1231,7 @@ Defines registry instance and emits appropriate event
 
 ### <span id="SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-"></span> `takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
 
+This function is responsible for taking relayer and affiliate fees, if they were not taken already
 
 
 
@@ -1361,7 +1361,6 @@ Getter for dataExist mapping
 - [`setSyntheticAggregator(address _syntheticAggregator)`][Registry-setSyntheticAggregator-address-]
 - [`setOpiumAddress(address _opiumAddress)`][Registry-setOpiumAddress-address-]
 - [`setTokenSpender(address _tokenSpender)`][Registry-setTokenSpender-address-]
-- [`setWethAddress(address _wethAddress)`][Registry-setWethAddress-address-]
 - [`changeOpiumAddress(address _opiumAddress)`][Registry-changeOpiumAddress-address-]
 - [`getCore()`][Registry-getCore--]
 - [`getMinter()`][Registry-getMinter--]
@@ -1369,7 +1368,6 @@ Getter for dataExist mapping
 - [`getSyntheticAggregator()`][Registry-getSyntheticAggregator--]
 - [`getOpiumAddress()`][Registry-getOpiumAddress--]
 - [`getTokenSpender()`][Registry-getTokenSpender--]
-- [`getWethAddress()`][Registry-getWethAddress--]
 
 ### <span id="Registry-onlyInitializer--"></span> `onlyInitializer()`
 
@@ -1425,13 +1423,6 @@ Sets Opium.TokenSpender address and allows to do it only once
 
 
 
-### <span id="Registry-setWethAddress-address-"></span> `setWethAddress(address _wethAddress)` (external)
-
-Sets WETH address and allows to do it only once
-
-
-
-
 ### <span id="Registry-changeOpiumAddress-address-"></span> `changeOpiumAddress(address _opiumAddress)` (external)
 
 Allows opium commission receiver address to change itself
@@ -1477,13 +1468,6 @@ Returns address of Opium commission receiver
 ### <span id="Registry-getTokenSpender--"></span> `getTokenSpender() → address result` (external)
 
 Returns address of Opium.TokenSpender
-
-
-
-
-### <span id="Registry-getWethAddress--"></span> `getWethAddress() → address result` (external)
-
-Returns address of WETH
 
 
 
