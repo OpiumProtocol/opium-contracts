@@ -55,7 +55,7 @@ contract('MatchSwap', accounts => {
         longTokenId = calculateLongTokenId(derivativeHash).toString()
         shortTokenId = calculateShortTokenId(derivativeHash).toString()
         
-        orderFactory = order => orders.orderFactory({ order, testToken, relayer, match })
+        orderFactory = order => orders.orderFactory({ order, testToken, relayer, match, feeTokenAddress: zeroAddress })
     })
 
     it('should revert incorrect swap, right requires more shorts for long', async () => {
