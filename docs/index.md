@@ -50,6 +50,7 @@
 [HasCommission]: #HasCommission
 [HasCommission-author-address]: #HasCommission-author-address
 [HasCommission-commission-uint256]: #HasCommission-commission-uint256
+[HasCommission-constructor--]: #HasCommission-constructor--
 [HasCommission-getAuthorAddress--]: #HasCommission-getAuthorAddress--
 [HasCommission-getAuthorCommission--]: #HasCommission-getAuthorCommission--
 [IDerivativeLogic]: #IDerivativeLogic
@@ -447,12 +448,14 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 ### <span id="ExecutableByThirdParty-thirdpartyExecutionAllowed-address-"></span> `thirdpartyExecutionAllowed(address derivativeOwner) → bool` (public)
 
+Getter for thirdparty execution allowance
 
 
 
 
 ### <span id="ExecutableByThirdParty-allowThirdpartyExecution-bool-"></span> `allowThirdpartyExecution(bool allow)` (public)
 
+Sets third party execution settings for `msg.sender`
 
 
 
@@ -465,17 +468,26 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 
 
+- [`constructor()`][HasCommission-constructor--]
 - [`getAuthorAddress()`][HasCommission-getAuthorAddress--]
 - [`getAuthorCommission()`][HasCommission-getAuthorCommission--]
 
+### <span id="HasCommission-constructor--"></span> `constructor()` (public)
+
+Sets `msg.sender` as syntheticId author
+
+
+
 ### <span id="HasCommission-getAuthorAddress--"></span> `getAuthorAddress() → address` (public)
 
+Getter for syntheticId author address
 
 
 
 
 ### <span id="HasCommission-getAuthorCommission--"></span> `getAuthorCommission() → uint256` (public)
 
+Getter for syntheticId author commission
 
 
 
@@ -639,6 +651,7 @@ Calculates hash of provided Derivative
 
 ### <span id="LibEIP712-hashEIP712Message-bytes32-"></span> `hashEIP712Message(bytes32 hashStruct) → bytes32 result` (internal)
 
+Hashes EIP712Message
 
 
 
@@ -1707,6 +1720,7 @@ Using this function whitelisted contracts could call ERC721O transfers
 - [`getMargin(struct LibDerivative.Derivative _derivative)`][OptionCallSyntheticIdMock-getMargin-struct-LibDerivative-Derivative-]
 - [`getExecutionPayout(struct LibDerivative.Derivative _derivative, uint256 _result)`][OptionCallSyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-]
 - [`isPool()`][OptionCallSyntheticIdMock-isPool--]
+- [`constructor()`][HasCommission-constructor--]
 - [`getAuthorAddress()`][HasCommission-getAuthorAddress--]
 - [`getAuthorCommission()`][HasCommission-getAuthorCommission--]
 - [`thirdpartyExecutionAllowed(address derivativeOwner)`][ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]
