@@ -906,6 +906,7 @@ Verifies order signature
 
 ### <span id="Match-constructor-address-"></span> `constructor(address _registry)` (public)
 
+Calls constructors of super-contracts
 
 
 
@@ -943,6 +944,7 @@ Verifies order signature
 
 ### <span id="MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-"></span> `create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)` (public)
 
+This function receives buy and sell orders, derivative related to is and information whether buy order was first in orderbook (maker)
 
 
 
