@@ -29,6 +29,15 @@
 [CoreErrors-ERROR_CORE_CANT_CANCEL_DUMMY_ORACLE_ID-string]: #CoreErrors-ERROR_CORE_CANT_CANCEL_DUMMY_ORACLE_ID-string
 [CoreErrors-ERROR_CORE_CANCELLATION_IS_NOT_ALLOWED-string]: #CoreErrors-ERROR_CORE_CANCELLATION_IS_NOT_ALLOWED-string
 [CoreErrors-ERROR_CORE_UNKNOWN_POSITION_TYPE-string]: #CoreErrors-ERROR_CORE_UNKNOWN_POSITION_TYPE-string
+[MatchingErrors]: #MatchingErrors
+[MatchingErrors-ERROR_MATCH_CANCELLATION_NOT_ALLOWED-string]: #MatchingErrors-ERROR_MATCH_CANCELLATION_NOT_ALLOWED-string
+[MatchingErrors-ERROR_MATCH_ALREADY_CANCELED-string]: #MatchingErrors-ERROR_MATCH_ALREADY_CANCELED-string
+[MatchingErrors-ERROR_MATCH_ORDER_WAS_CANCELED-string]: #MatchingErrors-ERROR_MATCH_ORDER_WAS_CANCELED-string
+[MatchingErrors-ERROR_MATCH_TAKER_ADDRESS_WRONG-string]: #MatchingErrors-ERROR_MATCH_TAKER_ADDRESS_WRONG-string
+[MatchingErrors-ERROR_MATCH_ORDER_IS_EXPIRED-string]: #MatchingErrors-ERROR_MATCH_ORDER_IS_EXPIRED-string
+[MatchingErrors-ERROR_MATCH_SENDER_ADDRESS_WRONG-string]: #MatchingErrors-ERROR_MATCH_SENDER_ADDRESS_WRONG-string
+[MatchingErrors-ERROR_MATCH_SIGNATURE_NOT_VERIFIED-string]: #MatchingErrors-ERROR_MATCH_SIGNATURE_NOT_VERIFIED-string
+[MatchingErrors-ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES-string]: #MatchingErrors-ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES-string
 [OracleAggregatorErrors]: #OracleAggregatorErrors
 [OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_NOT_ENOUGH_ETHER-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_NOT_ENOUGH_ETHER-string
 [OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_QUERY_WAS_ALREADY_MADE-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_QUERY_WAS_ALREADY_MADE-string
@@ -393,6 +402,15 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 
 ## <span id="CoreErrors"></span> `CoreErrors`
+
+
+
+
+
+
+
+
+## <span id="MatchingErrors"></span> `MatchingErrors`
 
 
 
@@ -841,12 +859,14 @@ Defines registry instance and emits appropriate event
 
 ### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (internal)
 
+Hashes the order
 
 
 
 
 ### <span id="LibOrder-verifySignature-bytes32-bytes-address-"></span> `verifySignature(bytes32 _hash, bytes _signature, address _address) → bool` (internal)
 
+Verifies order signature
 
 
 
@@ -874,8 +894,8 @@ Defines registry instance and emits appropriate event
 - [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
 - [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
-- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
-- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
@@ -911,8 +931,8 @@ Defines registry instance and emits appropriate event
 - [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
 - [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
-- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
-- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
@@ -952,8 +972,8 @@ Defines registry instance and emits appropriate event
 - [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
 - [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
-- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
-- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
@@ -963,42 +983,49 @@ Defines registry instance and emits appropriate event
 
 ### <span id="MatchLogic-cancel-struct-LibOrder-Order-"></span> `cancel(struct LibOrder.Order _order)` (public)
 
+Calling this function maker of the order could cancel it on-chain
 
 
 
 
 ### <span id="MatchLogic-withdraw-contract-IERC20-"></span> `withdraw(contract IERC20 _token)` (public)
 
+Function to withdraw fees from orders for relayer and affiliates
 
 
 
 
 ### <span id="MatchLogic-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
 
+This function checks whether order was canceled
 
 
 
 
 ### <span id="MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-"></span> `validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)` (internal)
 
+This function validates takerAddress of _leftOrder. It should match either with _rightOrder.makerAddress or be set to zero address
 
 
 
 
 ### <span id="MatchLogic-validateExpiration-struct-LibOrder-Order-"></span> `validateExpiration(struct LibOrder.Order _order)` (internal)
 
+This function validates whether order was expired or it's `expiresAt` is set to zero
 
 
 
 
 ### <span id="MatchLogic-validateSenderAddress-struct-LibOrder-Order-"></span> `validateSenderAddress(struct LibOrder.Order _order)` (internal)
 
+This function validates whether sender address equals to `msg.sender` or set to zero address
 
 
 
 
 ### <span id="MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-"></span> `validateSignature(bytes32 orderHash, struct LibOrder.Order _order)` (internal)
 
+This function validates order signature if not validated before
 
 
 
@@ -1012,18 +1039,23 @@ This function is responsible for taking relayer and affiliate fees, if they were
 
 ### <span id="MatchLogic-min-uint256-uint256-"></span> `min(uint256 _a, uint256 _b) → uint256` (internal)
 
+Helper to get minimal of two integers
 
 
 
 
-### <span id="MatchLogic-getDivisionPercentage-uint256-uint256-"></span> `getDivisionPercentage(uint256 _a, uint256 _b) → uint256` (internal)
+### <span id="MatchLogic-getDivisionPercentage-uint256-uint256-"></span> `getDivisionPercentage(uint256 _numerator, uint256 _denominator) → uint256 divisionPercentage` (internal)
+
+Helper to get percentage of division in base of PERCENTAGE_BASE
+devP = numerator / denominator * 100%
 
 
 
 
+### <span id="MatchLogic-getInitialPercentageValue-uint256-uint256-"></span> `getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator) → uint256 numerator` (internal)
 
-### <span id="MatchLogic-getInitialPercentageValue-uint256-uint256-"></span> `getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b) → uint256` (internal)
-
+Helper to recover numerator from percentage of division in base of PERCENTAGE_BASE
+numerator = devP * denominator / 100%
 
 
 
@@ -1056,8 +1088,8 @@ This function is responsible for taking relayer and affiliate fees, if they were
 - [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
 - [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
-- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
-- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
@@ -1096,8 +1128,8 @@ This function is responsible for taking relayer and affiliate fees, if they were
 - [`validateSignature(bytes32 orderHash, struct LibOrder.Order _order)`][MatchLogic-validateSignature-bytes32-struct-LibOrder-Order-]
 - [`takeFees(bytes32 _orderHash, struct LibOrder.Order _order)`][MatchLogic-takeFees-bytes32-struct-LibOrder-Order-]
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
-- [`getDivisionPercentage(uint256 _a, uint256 _b)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
-- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _b)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
+- [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
@@ -1132,12 +1164,14 @@ This function is responsible for taking relayer and affiliate fees, if they were
 
 ### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (internal)
 
+Hashes the order
 
 
 
 
 ### <span id="LibSwaprateOrder-verifySignature-bytes32-bytes-address-"></span> `verifySignature(bytes32 _hash, bytes _signature, address _address) → bool` (internal)
 
+Verifies order signature
 
 
 
@@ -1208,36 +1242,42 @@ This function is responsible for taking relayer and affiliate fees, if they were
 
 ### <span id="SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-"></span> `cancel(struct LibSwaprateOrder.SwaprateOrder _order)` (public)
 
+Calling this function maker of the order could cancel it on-chain
 
 
 
 
 ### <span id="SwaprateMatchBase-withdraw-contract-IERC20-"></span> `withdraw(contract IERC20 _token)` (public)
 
+Function to withdraw fees from orders for relayer and affiliates
 
 
 
 
 ### <span id="SwaprateMatchBase-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
 
+This function checks whether order was canceled
 
 
 
 
 ### <span id="SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)` (internal)
 
+This function validates takerAddress of _leftOrder. It should match either with _rightOrder.makerAddress or be set to zero address
 
 
 
 
 ### <span id="SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
 
+This function validates whether sender address equals to `msg.sender` or set to zero address
 
 
 
 
 ### <span id="SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-"></span> `validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)` (internal)
 
+This function validates order signature if not validated before
 
 
 
@@ -1251,6 +1291,7 @@ This function is responsible for taking relayer and affiliate fees, if they were
 
 ### <span id="SwaprateMatchBase-min-uint256-uint256-"></span> `min(uint256 _a, uint256 _b) → uint256` (internal)
 
+Helper to get minimal of two integers
 
 
 

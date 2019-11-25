@@ -9,22 +9,30 @@ import "erc721o/contracts/Libs/LibPosition.sol";
 
 import "../../Lib/usingRegistry.sol";
 
+import "../../Errors/MatchingErrors.sol";
+
 import "./LibSwaprateOrder.sol";
 
 import "../../Registry.sol";
 import "../../Core.sol";
 import "../../SyntheticAggregator.sol";
 
-contract SwaprateMatchBase is LibSwaprateOrder, usingRegistry, ReentrancyGuard {
+/// @title Opium.Matching.SwaprateMatchBase contract implements logic for order validation and cancelation
+contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
 
+    // Emmitted when order was canceled
     event Canceled(bytes32 orderHash);
 
-    // If order was canceled
+    // Canceled orders
+    // This mapping holds hashes of canceled orders
+    // canceled[orderHash] => canceled
     mapping (bytes32 => bool) canceled;
 
-    // If order was verified
+    // Verified orders
+    // This mapping holds hashes of verified orders to verify only once
+    // verified[orderHash] => verified
     mapping (bytes32 => bool) verified;
     
     // Vaults for fees
@@ -35,41 +43,55 @@ contract SwaprateMatchBase is LibSwaprateOrder, usingRegistry, ReentrancyGuard {
     // Keeps whether fee was already taken
     mapping (bytes32 => bool) feeTaken;
 
+    /// @notice Calling this function maker of the order could cancel it on-chain
+    /// @param _order SwaprateOrder
     function cancel(SwaprateOrder memory _order) public {
-        require(msg.sender == _order.makerAddress, "MATCH:CANCELLATION_NOT_ALLOWED");
+        require(msg.sender == _order.makerAddress, ERROR_MATCH_CANCELLATION_NOT_ALLOWED);
         bytes32 orderHash = hashOrder(_order);
-        require(!canceled[orderHash], "MATCH:ALREADY_CANCELED");
+        require(!canceled[orderHash], ERROR_MATCH_ALREADY_CANCELED);
         canceled[orderHash] = true;
 
         emit Canceled(orderHash);
     }
 
+    /// @notice Function to withdraw fees from orders for relayer and affiliates
+    /// @param _token IERC20 Instance of token to withdraw
     function withdraw(IERC20 _token) public nonReentrant {
         uint256 balance = balances[msg.sender][address(_token)];
         balances[msg.sender][address(_token)] = 0;
         IERC20(address(0)).transfer(msg.sender, balance);
     }
 
+    /// @notice This function checks whether order was canceled
+    /// @param _hash bytes32 Hash of the order
     function validateCanceled(bytes32 _hash) internal view {
-        require(!canceled[_hash], "MATCH:ORDER_WAS_CANCELED");
+        require(!canceled[_hash], ERROR_MATCH_ORDER_WAS_CANCELED);
     }
 
+    /// @notice This function validates takerAddress of _leftOrder. It should match either with _rightOrder.makerAddress or be set to zero address
+    /// @param _leftOrder SwaprateOrder Left order
+    /// @param _rightOrder SwaprateOrder Right order
     function validateTakerAddress(SwaprateOrder memory _leftOrder, SwaprateOrder memory _rightOrder) pure internal {
         require(
             _leftOrder.takerAddress == address(0) ||
             _leftOrder.takerAddress == _rightOrder.makerAddress,
-            "MATCH:TAKER_ADDRESS_WRONG"
+            ERROR_MATCH_TAKER_ADDRESS_WRONG
         );
     }
 
+    /// @notice This function validates whether sender address equals to `msg.sender` or set to zero address
+    /// @param _order SwaprateOrder
     function validateSenderAddress(SwaprateOrder memory _order) internal view {
-        // TODO: If we have Gateway, use tx.origin, see => https://ethereum.stackexchange.com/questions/43195/how-to-avoid-using-tx-origin-when-we-really-need-it
         require(
             _order.senderAddress == address(0) ||
-            _order.senderAddress == msg.sender
-        , "MATCH:SENDER_ADDRESS_WRONG");
+            _order.senderAddress == msg.sender,
+            ERROR_MATCH_SENDER_ADDRESS_WRONG
+        );
     }
 
+    /// @notice This function validates order signature if not validated before
+    /// @param orderHash bytes32 Hash of the order
+    /// @param _order SwaprateOrder
     function validateSignature(bytes32 orderHash, SwaprateOrder memory _order) internal {
         if (verified[orderHash]) {
             return;
@@ -77,7 +99,7 @@ contract SwaprateMatchBase is LibSwaprateOrder, usingRegistry, ReentrancyGuard {
 
         bool result = verifySignature(orderHash, _order.signature, _order.makerAddress);
 
-        require(result, "MATCH:SIGNATURE_NOT_VERIFIED");
+        require(result, ERROR_MATCH_SIGNATURE_NOT_VERIFIED);
         
         verified[orderHash] = true;
     }
@@ -108,7 +130,7 @@ contract SwaprateMatchBase is LibSwaprateOrder, usingRegistry, ReentrancyGuard {
         IERC20 feeToken = IERC20(_order.feeTokenAddress);
 
         // Check if user has enough token approval to pay the fees
-        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, "MATCH:NOT_ENOUGH_ALLOWED_FEES");
+        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
         // Transfer fee
         TokenSpender(registry.getTokenSpender()).claimTokens(feeToken, _order.makerAddress, address(this), fees);
 
@@ -130,6 +152,10 @@ contract SwaprateMatchBase is LibSwaprateOrder, usingRegistry, ReentrancyGuard {
         feeTaken[_orderHash] = true;
     }
 
+    /// @notice Helper to get minimal of two integers
+    /// @param _a uint256 First integer
+    /// @param _b uint256 Second integer
+    /// @return uint256 Minimal integer
     function min(uint256 _a, uint256 _b) internal pure returns (uint256) {
         return _a < _b ? _a : _b;
     }

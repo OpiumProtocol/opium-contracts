@@ -3,7 +3,41 @@ pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibEIP712.sol";
 
+/// @title Opium.Matching.Match.LibOrder contract implements EIP712 signed Order for Opium.Matching.Match
 contract LibOrder is LibEIP712 {
+    /**
+        Structure of order
+        Description should be considered from the order signer (maker) perspective
+
+        makerMarginAddress - address of token that maker is willing to pay with
+        takerMarginAddress - address of token that maker is willing to receive
+
+        makerAddress - address of maker
+        takerAddress - address of counterparty (taker). If zero address, then taker could be anyone
+
+        senderAddress - address which is allowed to settle the order on-chain. If zero address, then anyone could settle
+
+        relayerAddress - address of the relayer fee recipient
+        affiliateAddress - address of the affiliate fee recipient
+
+        feeTokenAddress - address of token which is used for fees
+
+        makerTokenId - tokenId of position, that maker is willing to pay
+        makerTokenAmount - amount of position tokens that maker is willing to pay
+        makerMarginAmount - amount of margin token that maker is willing to pay
+        takerTokenId - tokenId of position, that maker wants to receive. Create new derivative with this tokenId in case of calling Match.create(). Swap to this tokenId in case Match.swap() is called.
+        takerTokenAmount - amount of tokens that maker wants to receive
+        takerMarginAmount - amount of margin that maker wants to receive
+
+        relayerFee - amount of fee in feeToken that should be paid to relayer
+        affiliateFee - amount of fee in feeToken that should be paid to affiliate
+
+        nonce - unique order ID
+        expiresAt - UNIX timestamp of order expiration. Zero for Good-Till-Cancel order
+
+        signature - Signature of EIP712 message. Not used in hash, but then set for order processing purposes
+
+     */
     struct Order {
         address makerMarginAddress;
         address takerMarginAddress;
@@ -35,6 +69,7 @@ contract LibOrder is LibEIP712 {
         bytes signature;
     }
 
+    // Calculate typehash of Order
     bytes32 constant internal EIP712_ORDER_TYPEHASH = keccak256(abi.encodePacked(
         "Order(",
         "address makerMarginAddress,",
@@ -65,6 +100,9 @@ contract LibOrder is LibEIP712 {
         ")"
     ));
 
+    /// @notice Hashes the order
+    /// @param _order Order Order to hash
+    /// @return hash bytes32 Order hash
     function hashOrder(Order memory _order) internal pure returns (bytes32 hash) {
         hash = keccak256(
             abi.encodePacked(
@@ -102,6 +140,11 @@ contract LibOrder is LibEIP712 {
         );
     }
 
+    /// @notice Verifies order signature
+    /// @param _hash bytes32 Hash of the order
+    /// @param _signature bytes Signature of the order
+    /// @param _address address Address of the order signer
+    /// @return bool Returns whether `_signature` is valid and was created by `_address`
     function verifySignature(bytes32 _hash, bytes memory _signature, address _address) internal view returns (bool) {
         require(_signature.length == 65, "ORDER:INVALID_SIGNATURE_LENGTH");
 
@@ -110,6 +153,10 @@ contract LibOrder is LibEIP712 {
         return _address == recovered;
     }
 
+    /// @notice Helping function to recover signer address
+    /// @param _hash bytes32 Hash for signature
+    /// @param _signature bytes Signature
+    /// @return address Returns address of signature creator
     function retrieveAddress(bytes32 _hash, bytes memory _signature) private pure returns (address) {
         bytes32 r;
         bytes32 s;

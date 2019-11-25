@@ -3,7 +3,44 @@ pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibEIP712.sol";
 
+/// @title Opium.Matching.SwaprateMatch.LibSwaprateOrder contract implements EIP712 signed SwaprateOrder for Opium.Matching.SwaprateMatch
 contract LibSwaprateOrder is LibEIP712 {
+    /**
+        Structure of order
+        Description should be considered from the order signer (maker) perspective
+
+        syntheticId - address of derivative syntheticId
+        oracleId - address of derivative oracleId
+        token - address of derivative margin token
+
+        makerMarginAddress - address of token that maker is willing to pay with
+        takerMarginAddress - address of token that maker is willing to receive
+
+        makerAddress - address of maker
+        takerAddress - address of counterparty (taker). If zero address, then taker could be anyone
+
+        senderAddress - address which is allowed to settle the order on-chain. If zero address, then anyone could settle
+
+        relayerAddress - address of the relayer fee recipient
+        affiliateAddress - address of the affiliate fee recipient
+
+        feeTokenAddress - address of token which is used for fees
+
+        endTime - timestamp of derivative maturity
+
+        quantity - quantity of positions maker wants to receive
+        partialFill - whether maker allows partial fill of it's order
+
+        param0...param9 - additional params to pass it to syntheticId
+
+        relayerFee - amount of fee in feeToken that should be paid to relayer
+        affiliateFee - amount of fee in feeToken that should be paid to affiliate
+
+        nonce - unique order ID
+
+        signature - Signature of EIP712 message. Not used in hash, but then set for order processing purposes
+
+     */
     struct SwaprateOrder {
         address syntheticId;
         address oracleId;
@@ -44,6 +81,7 @@ contract LibSwaprateOrder is LibEIP712 {
         bytes signature;
     }
 
+    // Calculate typehash of Order
     bytes32 constant internal EIP712_ORDER_TYPEHASH = keccak256(abi.encodePacked(
         "Order(",
         "address syntheticId,",
@@ -83,6 +121,9 @@ contract LibSwaprateOrder is LibEIP712 {
         ")"
     ));
 
+    /// @notice Hashes the order
+    /// @param _order SwaprateOrder Order to hash
+    /// @return hash bytes32 Order hash
     function hashOrder(SwaprateOrder memory _order) internal pure returns (bytes32 hash) {
         hash = keccak256(
             abi.encodePacked(
@@ -131,6 +172,11 @@ contract LibSwaprateOrder is LibEIP712 {
         );
     }
 
+    /// @notice Verifies order signature
+    /// @param _hash bytes32 Hash of the order
+    /// @param _signature bytes Signature of the order
+    /// @param _address address Address of the order signer
+    /// @return bool Returns whether `_signature` is valid and was created by `_address`
     function verifySignature(bytes32 _hash, bytes memory _signature, address _address) internal view returns (bool) {
         require(_signature.length == 65, "ORDER:INVALID_SIGNATURE_LENGTH");
 
@@ -139,6 +185,10 @@ contract LibSwaprateOrder is LibEIP712 {
         return _address == recovered;
     }
 
+    /// @notice Helping function to recover signer address
+    /// @param _hash bytes32 Hash for signature
+    /// @param _signature bytes Signature
+    /// @return address Returns address of signature creator
     function retrieveAddress(bytes32 _hash, bytes memory _signature) private pure returns (address) {
         bytes32 r;
         bytes32 s;
