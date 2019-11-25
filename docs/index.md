@@ -1142,6 +1142,7 @@ numerator = devP * denominator / 100%
 
 ### <span id="MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-"></span> `swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)` (public)
 
+This function receives left and right orders, and performs swap of Token + Margin to Token + Margin swaps
 
 
 

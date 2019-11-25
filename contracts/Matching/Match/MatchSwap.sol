@@ -5,7 +5,10 @@ import "./MatchLogic.sol";
 
 import "../../TokenMinter.sol";
 
+/// @title Opium.Matching.MatchSwap contract implements swap() function to make TMtm swap
+/// TMtm swap is swaps of Token + Margin to Token + MArgin
 contract MatchSwap is MatchLogic {
+    // Emmited when swap is made
     event Swap(
         uint256 leftMakerTokenId, uint256 leftMakerTokenAmount,
         address leftMakerMarginAddress, uint256 leftMakerMarginAmount,
@@ -13,9 +16,10 @@ contract MatchSwap is MatchLogic {
         address rightMakerMarginAddress, uint256 rightMakerMarginAmount
     );
 
+    /// @notice This function receives left and right orders, and performs swap of Token + Margin to Token + Margin swaps
+    /// @param _leftOrder Order
+    /// @param _rightOrder Order
     function swap(Order memory _leftOrder, Order memory _rightOrder) public nonReentrant {
-        // PROBABLY TODO: Implement suptraction "Relayer" order and subtract before all
-
         // Validate taker if set
         validateTakerAddress(_leftOrder, _rightOrder);
         validateTakerAddress(_rightOrder, _leftOrder);
@@ -43,18 +47,29 @@ contract MatchSwap is MatchLogic {
 
         // Validate if values are correct
         // Fill orders as much as possible
-        (uint256[2] memory leftFill, uint256[2] memory rightFill) = validateOffersAndFillSwap(_leftOrder, orderHashes[0], _rightOrder, orderHashes[1]);
+        // leftFill[0] - Tokens that left sends to right
+        // leftFill[1] - Margin that left sends to right
+        // rightFill[0] - Tokens that right sends to left
+        // rightFill[1] - Margin that right sends to left
+        (uint256[2] memory leftFill, uint256[2] memory rightFill) = _validateOffersAndFillSwap(_leftOrder, orderHashes[0], _rightOrder, orderHashes[1]);
 
         // Take fees
         takeFees(orderHashes[0], _leftOrder);
         takeFees(orderHashes[1], _rightOrder);
 
         // Validate if swap is possible and make it
-        validateAndMakeSwap(_leftOrder, leftFill, _rightOrder, rightFill);
+        _validateAndMakeSwap(_leftOrder, leftFill, _rightOrder, rightFill);
     }
 
-    function validateOffersAndFillSwap(Order memory _leftOrder, bytes32 _leftOrderHash, Order memory _rightOrder, bytes32 _rightOrderHash) private returns (uint256[2] memory leftFill, uint256[2] memory rightFill) {
-        // Keep initial order values
+    /// @notice Validates Orders according to TMtm logic and calculates fillability
+    /// @param _leftOrder Order
+    /// @param _leftOrderHash bytes32
+    /// @param _rightOrder Order
+    /// @param _rightOrderHash bytes32
+    /// @return leftFill uint256[2] Left fillability
+    /// @return rightFill uint256[2] Right fillability
+    function _validateOffersAndFillSwap(Order memory _leftOrder, bytes32 _leftOrderHash, Order memory _rightOrder, bytes32 _rightOrderHash) private returns (uint256[2] memory leftFill, uint256[2] memory rightFill) {
+        // Keep initial order takerTokenAmount and takerMarginAmount values
         uint256[2] memory leftInitial;
         uint256[2] memory rightInitial;
         leftInitial[0] = _leftOrder.takerTokenAmount;
@@ -62,13 +77,14 @@ contract MatchSwap is MatchLogic {
         rightInitial[0] = _rightOrder.takerTokenAmount;
         rightInitial[1] = _rightOrder.takerMarginAmount;
         
-        // Subtract already filled part
+        // Calculates already filled part
         uint256[2] memory leftAlreadyFilled;
         leftAlreadyFilled[0] = getInitialPercentageValue(filled[_leftOrderHash], _leftOrder.takerTokenAmount);
         leftAlreadyFilled[1] = getInitialPercentageValue(filled[_leftOrderHash], _leftOrder.takerMarginAmount);
         _leftOrder.takerTokenAmount = _leftOrder.takerTokenAmount.sub(leftAlreadyFilled[0]);
         _leftOrder.takerMarginAmount = _leftOrder.takerMarginAmount.sub(leftAlreadyFilled[1]);
 
+        // Subtract already filled part
         uint256[2] memory rightAlreadyFilled;
         rightAlreadyFilled[0] = getInitialPercentageValue(filled[_rightOrderHash], _rightOrder.takerTokenAmount);
         rightAlreadyFilled[1] = getInitialPercentageValue(filled[_rightOrderHash], _rightOrder.takerMarginAmount);
@@ -113,6 +129,7 @@ contract MatchSwap is MatchLogic {
             , "MATCH:NO_FILLABLE_POSITIONS");
 
         // Update filled
+        // See Match.create()
         uint256[2] memory leftFilledPercents;
         leftFilledPercents[0] = leftInitial[0] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[0].add(rightFill[0]), leftInitial[0]);
         leftFilledPercents[1] = leftInitial[1] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[1].add(rightFill[1]), leftInitial[1]);
@@ -126,23 +143,29 @@ contract MatchSwap is MatchLogic {
         filled[_rightOrderHash] = min(rightFilledPercents[0], rightFilledPercents[1]).add(1);
     }
 
-    function validateAndMakeSwap(Order memory _leftOrder, uint256[2] memory leftFill, Order memory _rightOrder, uint256[2] memory rightFill) private {
+    /// @notice Validate order properties and distribute tokens and margins
+    /// @param _leftOrder Order
+    /// @param leftFill uint256[2] Left order fillability
+    /// @param _rightOrder Order
+    /// @param rightFill uint256[2] Right order fillability
+    function _validateAndMakeSwap(Order memory _leftOrder, uint256[2] memory leftFill, Order memory _rightOrder, uint256[2] memory rightFill) private {
         TokenMinter tm = TokenMinter(registry.getMinter());
+        TokenSpender tokenSpender = TokenSpender(registry.getTokenSpender());
 
         // Transfer positions left -> right if needed
         if (leftFill[0] != 0) {
             require(_leftOrder.makerTokenId == _rightOrder.takerTokenId, "MATCH:NOT_VALID_SWAP");
 
-            require(tm.isApprovedOrOwner(registry.getTokenSpender(), _leftOrder.makerAddress, _leftOrder.makerTokenId), "MATCH:NOT_ALLOWED_POSITION");
-            TokenSpender(registry.getTokenSpender()).claimPositions(tm, _leftOrder.makerAddress, _rightOrder.makerAddress, _leftOrder.makerTokenId, leftFill[0]);
+            require(tm.isApprovedOrOwner(address(tokenSpender), _leftOrder.makerAddress, _leftOrder.makerTokenId), "MATCH:NOT_ALLOWED_POSITION");
+            tokenSpender.claimPositions(tm, _leftOrder.makerAddress, _rightOrder.makerAddress, _leftOrder.makerTokenId, leftFill[0]);
         }
         
         // Transfer positions right -> left if needed
         if (rightFill[0] != 0) {
             require(_leftOrder.takerTokenId == _rightOrder.makerTokenId, "MATCH:NOT_VALID_SWAP");
 
-            require(tm.isApprovedOrOwner(registry.getTokenSpender(), _rightOrder.makerAddress, _rightOrder.makerTokenId), "MATCH:NOT_ALLOWED_POSITION");
-            TokenSpender(registry.getTokenSpender()).claimPositions(tm, _rightOrder.makerAddress, _leftOrder.makerAddress, _rightOrder.makerTokenId, rightFill[0]);
+            require(tm.isApprovedOrOwner(address(tokenSpender), _rightOrder.makerAddress, _rightOrder.makerTokenId), "MATCH:NOT_ALLOWED_POSITION");
+            tokenSpender.claimPositions(tm, _rightOrder.makerAddress, _leftOrder.makerAddress, _rightOrder.makerTokenId, rightFill[0]);
         }
 
         // Transfer margin left -> right if needed
@@ -150,8 +173,8 @@ contract MatchSwap is MatchLogic {
             require(_leftOrder.makerMarginAddress == _rightOrder.takerMarginAddress, "MATCH:NOT_VALID_SWAP");
 
             IERC20 makerMarginToken = IERC20(_leftOrder.makerMarginAddress);
-            require(makerMarginToken.allowance(_leftOrder.makerAddress, registry.getTokenSpender()) >= leftFill[1], "MATCH:NOT_ENOUGH_ALLOWED_MARGIN");
-            TokenSpender(registry.getTokenSpender()).claimTokens(makerMarginToken, _leftOrder.makerAddress, _rightOrder.makerAddress, leftFill[1]);
+            require(makerMarginToken.allowance(_leftOrder.makerAddress, address(tokenSpender)) >= leftFill[1], "MATCH:NOT_ENOUGH_ALLOWED_MARGIN");
+            tokenSpender.claimTokens(makerMarginToken, _leftOrder.makerAddress, _rightOrder.makerAddress, leftFill[1]);
         }
 
         // Transfer margin right -> left if needed
@@ -159,8 +182,8 @@ contract MatchSwap is MatchLogic {
             require(_leftOrder.takerMarginAddress == _rightOrder.makerMarginAddress, "MATCH:NOT_VALID_SWAP");
 
             IERC20 takerMarginToken = IERC20(_leftOrder.takerMarginAddress);
-            require(takerMarginToken.allowance(_rightOrder.makerAddress, registry.getTokenSpender()) >= rightFill[1], "MATCH:NOT_ENOUGH_ALLOWED_MARGIN");
-            TokenSpender(registry.getTokenSpender()).claimTokens(takerMarginToken, _rightOrder.makerAddress, _leftOrder.makerAddress, rightFill[1]);
+            require(takerMarginToken.allowance(_rightOrder.makerAddress, address(tokenSpender)) >= rightFill[1], "MATCH:NOT_ENOUGH_ALLOWED_MARGIN");
+            tokenSpender.claimTokens(takerMarginToken, _rightOrder.makerAddress, _leftOrder.makerAddress, rightFill[1]);
         }
 
         emit Swap(
