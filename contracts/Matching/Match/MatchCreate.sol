@@ -13,7 +13,7 @@ contract MatchCreate is MatchLogic, LibDerivative {
     // Emmitted when new order pair was successfully settled
     event Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled);
 
-    /// @notice This function receives buy and sell orders, derivative related to is and information whether buy order was first in orderbook (maker)
+    /// @notice This function receives buy and sell orders, derivative related to it and information whether buy order was first in orderbook (maker)
     /// @param _buyOrder Order Order of derivative buyer
     /// @param _sellOrder Order Order of derivative seller
     /// @param _derivative Derivative Data of derivative for validation and calculation purposes
