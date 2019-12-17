@@ -53,6 +53,15 @@ contract('OracleAggregator', accounts => {
         assert.equal(result, data, 'Oracle didn\'t provided correct information')
     })
 
+    it('should reject attempt to push data twice', async () => {
+        try {
+            await oracleAggregator.__callback(timestamp, data, { from: oracle })
+            throw null
+        } catch (e) {
+            assert.ok(e.message.match(/ORACLE_AGGREGATOR:DATA_ALREADY_EXIST/), 'ORACLE_AGGREGATOR:DATA_ALREADY_EXIST')
+        }
+    })
+
     it('should correctly return fetchPrice from oracle', async () => {
         const result = await oracleAggregator.calculateFetchPrice.call(oracleIdMock.address)
         assert.equal(result, fetchPrice, 'Fetch price is not correct')

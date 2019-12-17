@@ -69,6 +69,9 @@ contract OracleAggregator is OracleAggregatorErrors, ReentrancyGuard {
     /// @param timestamp uint256 Timestamp of data
     /// @param data uint256 Data itself
     function __callback(uint256 timestamp, uint256 data) public {
+        // Don't allow to push data twice
+        require(!dataExist[msg.sender][timestamp], ERROR_ORACLE_AGGREGATOR_DATA_ALREADY_EXIST);
+
         // Saving data
         dataCache[msg.sender][timestamp] = data;
 
