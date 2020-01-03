@@ -59,7 +59,7 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     function withdraw(IERC20 _token) public nonReentrant {
         uint256 balance = balances[msg.sender][address(_token)];
         balances[msg.sender][address(_token)] = 0;
-        IERC20(address(0)).transfer(msg.sender, balance);
+        _token.transfer(msg.sender, balance);
     }
 
     /// @notice This function checks whether order was canceled

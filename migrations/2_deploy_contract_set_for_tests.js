@@ -16,9 +16,11 @@ const TokenMinter = artifacts.require('TokenMinter')
 const TokenSpender = artifacts.require('TokenSpender')
 
 const Match = artifacts.require('Match')
+const SwaprateMatch = artifacts.require('SwaprateMatch')
 
 // Test helpers
 const OptionCallSyntheticIdMock = artifacts.require('OptionCallSyntheticIdMock')
+const DummySyntheticIdMock = artifacts.require('DummySyntheticIdMock')
 const TestToken = artifacts.require('TestToken')
 const WETH = artifacts.require('WETH')
 
@@ -31,9 +33,9 @@ module.exports = async function(deployer, network, accounts) {
 
     let registry, core, tokenMinter, oracleAggregator, syntheticAggregator, tokenSpender
 
-    let match
+    let match, swaprateMatch
     
-    let optionCallSyntheticIdMock
+    let optionCallSyntheticIdMock, dummySyntheticIdMock
     let dai
     let weth
 
@@ -45,7 +47,8 @@ module.exports = async function(deployer, network, accounts) {
                 Core,
                 TokenMinter,
 
-                Match
+                Match,
+                SwaprateMatch
             ])
         })
         .then(() => {
@@ -75,11 +78,19 @@ module.exports = async function(deployer, network, accounts) {
         })
         .then(() => {
             return deployer
+                .deploy(SwaprateMatch, registry.address, { from: owner })
+                .then(instance => {
+                    swaprateMatch = instance
+                    console.log('- SwaprateMatch was deployed at', swaprateMatch.address)
+                })
+        })
+        .then(() => {
+            return deployer
                 .deploy(TokenSpender, owner, { from: owner })
                 .then(instance => {
                     tokenSpender = instance
                     console.log('- TokenSpender was deployed at', tokenSpender.address)
-                    return tokenSpender.proposeWhitelist([ core.address, match.address ], { from: owner })
+                    return tokenSpender.proposeWhitelist([ core.address, match.address, swaprateMatch.address ], { from: owner })
                 })
         })
         .then(() => {
@@ -118,6 +129,14 @@ module.exports = async function(deployer, network, accounts) {
                 .then(instance => {
                     optionCallSyntheticIdMock = instance
                     console.log('OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMock.address)
+                })
+        })
+        .then(() => {
+            return deployer
+                .deploy(DummySyntheticIdMock, { from: owner })
+                .then(instance => {
+                    dummySyntheticIdMock = instance
+                    console.log('DummySyntheticIdMock was deployed at', dummySyntheticIdMock.address)
                 })
         })
         .then(() => {
