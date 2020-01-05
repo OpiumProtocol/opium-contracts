@@ -516,9 +516,12 @@ contract Core is LibDerivative, LibCommission, usingRegistry, CoreErrors, Reentr
         // authorFee = fee - opiumFee
         uint256 authorFee = fee.sub(opiumFee);
 
+        // Get opium address
+        address opiumAddress = registry.getOpiumAddress();
+
         // Update feeVault for Opium team
         // feesVault[opium][token] += opiumFee
-        feesVaults[registry.getOpiumAddress()][_derivative.token] = feesVaults[registry.getOpiumAddress()][_derivative.token].add(opiumFee);
+        feesVaults[opiumAddress][_derivative.token] = feesVaults[opiumAddress][_derivative.token].add(opiumFee);
 
         // Update feeVault for `syntheticId` author
         // feeVault[author][token] += authorFee

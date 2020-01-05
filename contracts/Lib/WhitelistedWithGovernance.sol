@@ -50,13 +50,13 @@ contract WhitelistedWithGovernance is Whitelisted {
         if (!initialized) {
             initialized = true;
             whitelist = _whitelist;
-            emit Committed(whitelist);
+            emit Committed(_whitelist);
 
         // Otherwise save current time as timestamp of proposal, save proposed whitelist and emit event
         } else {
             proposalTime = now;
             proposedWhitelist = _whitelist;
-            emit Proposed(proposedWhitelist);
+            emit Proposed(_whitelist);
         }
     }
 

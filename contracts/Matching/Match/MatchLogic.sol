@@ -147,23 +147,29 @@ contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard 
         // Create instance of fee token
         IERC20 feeToken = IERC20(_order.feeTokenAddress);
 
+        // Create instance of TokenSpender
+        TokenSpender tokenSpender = TokenSpender(registry.getTokenSpender());
+
         // Check if user has enough token approval to pay the fees
-        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
+        require(feeToken.allowance(_order.makerAddress, address(tokenSpender)) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
         // Transfer fee
-        TokenSpender(registry.getTokenSpender()).claimTokens(feeToken, _order.makerAddress, address(this), fees);
+        tokenSpender.claimTokens(feeToken, _order.makerAddress, address(this), fees);
+
+        // Get opium address
+        address opiumAddress = registry.getOpiumAddress();
 
         // Add commission to relayer balance, or to opium balance if relayer is not set
         if (_order.relayerAddress != address(0)) {
             balances[_order.relayerAddress][_order.feeTokenAddress] = balances[_order.relayerAddress][_order.feeTokenAddress].add(_order.relayerFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.relayerFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.relayerFee);
         }
 
         // Add commission to affiliate balance, or to opium balance if affiliate is not set
         if (_order.affiliateAddress != address(0)) {
             balances[_order.affiliateAddress][_order.feeTokenAddress] = balances[_order.affiliateAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.affiliateFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         }
 
         // Mark the fee of token as taken
