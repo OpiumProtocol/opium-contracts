@@ -76,6 +76,7 @@ contract WhitelistedWithGovernance is Whitelisted {
     /// @notice This function allows governor to transfer governance to a new governor and emits event
     /// @param _governor address Address of new governor
     function setGovernor(address _governor) public onlyGovernor {
+        require(_governor != address(0), "Can't set zero address");
         governor = _governor;
         emit GovernorSet(governor);
     }

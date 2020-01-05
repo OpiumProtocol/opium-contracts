@@ -85,6 +85,7 @@ contract Registry is RegistryErrors {
     /// @param _opiumAddress address New opium commission receiver address
     function changeOpiumAddress(address _opiumAddress) external {
         require(opiumAddress == msg.sender, ERROR_REGISTRY_ONLY_OPIUM_ADDRESS_ALLOWED);
+        require(_opiumAddress != address(0), "Can't set zero address");
         opiumAddress = _opiumAddress;
     }
 
