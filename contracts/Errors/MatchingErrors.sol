@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.7;
 
 contract MatchingErrors {
     string constant internal ERROR_MATCH_CANCELLATION_NOT_ALLOWED = "MATCH:CANCELLATION_NOT_ALLOWED";

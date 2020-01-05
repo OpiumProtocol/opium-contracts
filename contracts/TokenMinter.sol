@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.7;
 
 import "erc721o/contracts/ERC721OBackwardCompatible.sol";
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.7;
 
 /// @title Opium.Lib.LibEIP712 contract implements the domain of EIP712 for meta transactions
 contract LibEIP712 {

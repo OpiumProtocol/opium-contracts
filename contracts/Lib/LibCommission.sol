@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.7;
 
 /// @title Opium.Lib.LibCommission contract defines constants for Opium commissions
 contract LibCommission {
