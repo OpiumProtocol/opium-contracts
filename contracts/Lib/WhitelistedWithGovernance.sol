@@ -18,9 +18,6 @@ contract WhitelistedWithGovernance is Whitelisted {
     // Governor address
     address public governor;
 
-    // Contract initialization flag
-    bool public initialized = false;
-
     // Timestamp of last proposal
     uint256 public proposalTime = 0;
     // Proposed whitelist
@@ -46,9 +43,9 @@ contract WhitelistedWithGovernance is Whitelisted {
         // Restrict empty proposals
         require(_whitelist.length != 0, "Can't be empty");
 
+        // Consider empty whitelist as not initialized, as proposing of empty whitelists is not allowed
         // If whitelist has never been initialized, we set whitelist right away without proposal
-        if (!initialized) {
-            initialized = true;
+        if (whitelist.length == 0) {
             whitelist = _whitelist;
             emit Committed(_whitelist);
 
