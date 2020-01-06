@@ -10,9 +10,9 @@ contract WhitelistedWithGovernanceAndChangableTimelock is WhitelistedWithGoverna
     event Committed(uint256 timelock);
 
     // Timestamp of last timelock proposal
-    uint256 timelockProposalTime;
+    uint256 public timelockProposalTime;
     // Proposed timelock
-    uint256 proposedTimelock;
+    uint256 public proposedTimelock;
 
     /// @notice Calling this function governor could propose new timelock
     /// @param _timelock uint256 New timelock value

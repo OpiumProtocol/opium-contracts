@@ -28,12 +28,12 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     // Canceled orders
     // This mapping holds hashes of canceled orders
     // canceled[orderHash] => canceled
-    mapping (bytes32 => bool) canceled;
+    mapping (bytes32 => bool) public canceled;
 
     // Verified orders
     // This mapping holds hashes of verified orders to verify only once
     // verified[orderHash] => verified
-    mapping (bytes32 => bool) verified;
+    mapping (bytes32 => bool) public verified;
     
     // Vaults for fees
     // This mapping holds balances of relayers and affiliates fees to withdraw
@@ -41,7 +41,7 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     mapping (address => mapping (address => uint256)) public balances;
 
     // Keeps whether fee was already taken
-    mapping (bytes32 => bool) feeTaken;
+    mapping (bytes32 => bool) public feeTaken;
 
     /// @notice Calling this function maker of the order could cancel it on-chain
     /// @param _order SwaprateOrder

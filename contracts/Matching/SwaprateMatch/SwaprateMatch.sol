@@ -14,7 +14,7 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
     // Orders filled quantity
     // This mapping holds orders filled quantity
     // filled[orderHash] => filled
-    mapping (bytes32 => uint256) filled;
+    mapping (bytes32 => uint256) public filled;
 
     /// @notice Calls constructors of super-contracts
     /// @param _registry address Address of Opium.registry
