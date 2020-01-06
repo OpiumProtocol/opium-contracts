@@ -19,7 +19,8 @@ contract WhitelistedWithGovernance is Whitelisted {
     address public governor;
 
     // Timestamp of last proposal
-    uint256 public proposalTime = 0;
+    uint256 public proposalTime;
+
     // Proposed whitelist
     address[] public proposedWhitelist;
 
