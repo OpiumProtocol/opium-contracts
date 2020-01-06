@@ -32,7 +32,7 @@ contract MatchPool is MatchLogic, LibDerivative {
         // Validate if was canceled
         bytes32 orderHash;
         orderHash = hashOrder(_buyOrder);
-        validateCanceled(orderHash);
+        validateNotCanceled(orderHash);
         validateSignature(orderHash, _buyOrder);
 
         uint256 margin = calculatePool(_buyOrder, _derivative);

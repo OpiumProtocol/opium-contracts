@@ -47,11 +47,11 @@ contract MatchCreate is MatchLogic, LibDerivative {
         // orderHashes[1] - sellOrderHash
         bytes32[2] memory orderHashes;
         orderHashes[0] = hashOrder(_buyOrder);
-        validateCanceled(orderHashes[0]);
+        validateNotCanceled(orderHashes[0]);
         validateSignature(orderHashes[0], _buyOrder);
 
         orderHashes[1] = hashOrder(_sellOrder);
-        validateCanceled(orderHashes[1]);
+        validateNotCanceled(orderHashes[1]);
         validateSignature(orderHashes[1], _sellOrder);
 
         // Validates counterparty tokens and margin

@@ -64,7 +64,7 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
 
     /// @notice This function checks whether order was canceled
     /// @param _hash bytes32 Hash of the order
-    function validateCanceled(bytes32 _hash) internal view {
+    function validateNotCanceled(bytes32 _hash) internal view {
         require(!canceled[_hash], ERROR_MATCH_ORDER_WAS_CANCELED);
     }
 
