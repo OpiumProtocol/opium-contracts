@@ -2,14 +2,14 @@ pragma solidity 0.5.7;
 
 import "erc721o/contracts/ERC721OBackwardCompatible.sol";
 
-import "./Lib/usingRegistry.sol";
+import "./Lib/UsingRegistry.sol";
 
 /// @title Opium.TokenMinter contract implements ERC721O token standard for minting, burning and transferring position tokens
-contract TokenMinter is ERC721OBackwardCompatible, usingRegistry {
+contract TokenMinter is ERC721OBackwardCompatible, UsingRegistry {
     /// @notice Calls constructors of super-contracts
     /// @param _baseTokenURI string URI for token explorers
     /// @param _registry address Address of Opium.registry
-    constructor(string memory _baseTokenURI, address _registry) public ERC721OBackwardCompatible(_baseTokenURI) usingRegistry(_registry) {}
+    constructor(string memory _baseTokenURI, address _registry) public ERC721OBackwardCompatible(_baseTokenURI) UsingRegistry(_registry) {}
 
     /// @notice Mints LONG and SHORT position tokens
     /// @param _buyer address Address of LONG position receiver

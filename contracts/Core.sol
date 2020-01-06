@@ -12,7 +12,7 @@ import "./Interface/IDerivativeLogic.sol";
 
 import "./Errors/CoreErrors.sol";
 
-import "./Lib/usingRegistry.sol";
+import "./Lib/UsingRegistry.sol";
 import "./Lib/LibDerivative.sol";
 import "./Lib/LibCommission.sol";
 
@@ -23,7 +23,7 @@ import "./SyntheticAggregator.sol";
 import "./TokenSpender.sol";
 
 /// @title Opium.Core contract creates positions, holds and distributes margin at the maturity
-contract Core is LibDerivative, LibCommission, usingRegistry, CoreErrors, ReentrancyGuard {
+contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
     using SafeERC20 for IERC20;
@@ -51,8 +51,8 @@ contract Core is LibDerivative, LibCommission, usingRegistry, CoreErrors, Reentr
     // Hashes of cancelled tickers
     mapping (bytes32 => bool) public cancelled;
 
-    /// @notice Calls Core.Lib.usingRegistry constructor
-    constructor(address _registry) public usingRegistry(_registry) {}
+    /// @notice Calls Core.Lib.UsingRegistry constructor
+    constructor(address _registry) public UsingRegistry(_registry) {}
 
     // PUBLIC FUNCTIONS
 

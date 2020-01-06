@@ -8,7 +8,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import "erc721o/contracts/Libs/LibPosition.sol";
 
-import "../../Lib/usingRegistry.sol";
+import "../../Lib/UsingRegistry.sol";
 
 import "../../Errors/MatchingErrors.sol";
 
@@ -19,7 +19,7 @@ import "../../Core.sol";
 import "../../SyntheticAggregator.sol";
 
 /// @title Opium.Matching.MatchLogic contract implements logic for order validation and cancelation
-contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard {
+contract MatchLogic is MatchingErrors, LibOrder, UsingRegistry, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
     using SafeERC20 for IERC20;

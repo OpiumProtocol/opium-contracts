@@ -13,7 +13,7 @@ contract WhitelistedWithGovernance is Whitelisted {
     event Committed(address[] whitelist);
 
     // Proposal life timelock interval
-    uint256 public TIME_LOCK_INTERVAL;
+    uint256 public timeLockInterval;
 
     // Governor address
     address public governor;
@@ -34,7 +34,7 @@ contract WhitelistedWithGovernance is Whitelisted {
     /// @param _timeLockInterval uint256 Initial value for timelock interval
     /// @param _governor address Initial value for governor
     constructor(uint256 _timeLockInterval, address _governor) public {
-        TIME_LOCK_INTERVAL = _timeLockInterval;
+        timeLockInterval = _timeLockInterval;
         governor = _governor;
         emit GovernorSet(governor);
     }
@@ -64,7 +64,7 @@ contract WhitelistedWithGovernance is Whitelisted {
         require(proposalTime != 0, "Didn't proposed yet");
 
         // Check if timelock interval was passed
-        require((proposalTime + TIME_LOCK_INTERVAL) < now, "Can't commit yet");
+        require((proposalTime + timeLockInterval) < now, "Can't commit yet");
         
         // Set new whitelist and emit event
         whitelist = proposedWhitelist;

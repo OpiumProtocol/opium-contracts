@@ -9,7 +9,7 @@ import "../../SyntheticAggregator.sol";
 import "./MatchLogic.sol";
 
 contract MatchPool is MatchLogic, LibDerivative {
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
     
     function create(Order memory _buyOrder, Derivative memory _derivative) public nonReentrant {
         // PROBABLY TODO: Implement subtraction "Relayer" order and subtract before all

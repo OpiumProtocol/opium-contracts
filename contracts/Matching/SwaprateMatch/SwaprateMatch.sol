@@ -18,7 +18,7 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
 
     /// @notice Calls constructors of super-contracts
     /// @param _registry address Address of Opium.registry
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
     
     /// @notice This function receives left and right orders, derivative related to it
     /// @param _leftOrder Order

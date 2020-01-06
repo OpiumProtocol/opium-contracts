@@ -9,5 +9,5 @@ contract Match is MatchCreate, MatchSwap {
 
     /// @notice Calls constructors of super-contracts
     /// @param _registry address Address of Opium.registry
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
 }
