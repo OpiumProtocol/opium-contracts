@@ -23,4 +23,10 @@ contract usingRegistry is usingRegistryErrors {
         registry = Registry(_registry);
         emit RegistrySet(_registry);
     }
+
+    /// @notice Getter for registry variable
+    /// @return address Address of registry set in current contract
+    function getRegistry() external view returns (address) {
+        return address(registry);
+    }
 }
