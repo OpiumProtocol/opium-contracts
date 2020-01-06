@@ -2,6 +2,7 @@ pragma solidity 0.5.7;
 pragma experimental ABIEncoderV2;
 
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -21,6 +22,7 @@ import "../../SyntheticAggregator.sol";
 contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
+    using SafeERC20 for IERC20;
 
     // Emmitted when order was canceled
     event Canceled(bytes32 orderHash);
@@ -67,7 +69,7 @@ contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard 
     function withdraw(IERC20 _token) public nonReentrant {
         uint256 balance = balances[msg.sender][address(_token)];
         balances[msg.sender][address(_token)] = 0;
-        _token.transfer(msg.sender, balance);
+        _token.safeTransfer(msg.sender, balance);
     }
 
     /// @notice This function checks whether order was canceled

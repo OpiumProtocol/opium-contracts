@@ -61,7 +61,7 @@ contract Core is LibDerivative, LibCommission, usingRegistry, CoreErrors, Reentr
     function withdrawFee(address _tokenAddress) public nonReentrant {
         uint256 balance = feesVaults[msg.sender][_tokenAddress];
         feesVaults[msg.sender][_tokenAddress] = 0;
-        IERC20(_tokenAddress).transfer(msg.sender, balance);
+        IERC20(_tokenAddress).safeTransfer(msg.sender, balance);
     }
 
     /// @notice Creates derivative contracts (positions)
