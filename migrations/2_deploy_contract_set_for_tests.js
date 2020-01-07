@@ -16,6 +16,7 @@ const TokenMinter = artifacts.require('TokenMinter')
 const TokenSpender = artifacts.require('TokenSpender')
 
 const Match = artifacts.require('Match')
+const MatchPool = artifacts.require('MatchPool')
 const SwaprateMatch = artifacts.require('SwaprateMatch')
 
 // Test helpers
@@ -26,136 +27,146 @@ const WETH = artifacts.require('WETH')
 
 const baseTokenURI = 'https://explorer.opium.network/erc721o/'
 
-module.exports = async function(deployer, network, accounts) {
-    const owner = accounts[0]
+// Deployment functions
+const deployAndLinkLibPosition = async ({ deployer, opiumDeployerAddress }) => {
+    const libPositionInstance = await deployer.deploy(LibPosition, { from: opiumDeployerAddress })
 
-    let libPosition
+    console.log('LibPosition was deployed at', libPositionInstance.address)
 
-    let registry, core, tokenMinter, oracleAggregator, syntheticAggregator, tokenSpender
+    await deployer.link(LibPosition, [
+        Core,
+        TokenMinter,
 
-    let match, swaprateMatch
+        Match,
+        MatchPool,
+        SwaprateMatch
+    ])
+
+    console.log('LibPosition was linked to Core, TokenMinter, Match, MatchPool and SwaprateMatch')
+
+    return libPositionInstance
+}
+
+const deployRegistry = async ({ deployer, opiumDeployerAddress }) => {
+    const registryInstance = await deployer.deploy(Registry, { from: opiumDeployerAddress })
+    console.log('Registry was deployed at', registryInstance.address)
+
+    await registryInstance.setOpiumAddress(opiumDeployerAddress, { from: opiumDeployerAddress })
+    console.log('Opium deployer address was set in registry')
+
+    return registryInstance
+}
+
+const deployCore = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const coreInstance = await deployer.deploy(Core, registryInstance.address, { from: opiumDeployerAddress })
+    console.log('- Core was deployed at', coreInstance.address)
     
-    let optionCallSyntheticIdMock, dummySyntheticIdMock
-    let dai
-    let weth
+    await registryInstance.setCore(coreInstance.address, { from: opiumDeployerAddress })
+    console.log('Core address was set in registry')
 
-    deployer.deploy(LibPosition, { from: owner })
-        .then(instance => {
-            libPosition = instance
-            console.log('LibPosition was deployed at', libPosition.address)
-            return deployer.link(LibPosition, [
-                Core,
-                TokenMinter,
+    return coreInstance
+}
 
-                Match,
-                SwaprateMatch
-            ])
-        })
-        .then(() => {
-            return deployer
-                .deploy(Registry, { from: owner })
-                .then(instance => {
-                    registry = instance
-                    console.log('Registry was deployed at', registry.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(Core, registry.address, { from: owner })
-                .then(instance => {
-                    core = instance
-                    console.log('- Core was deployed at', core.address)
-                    return registry.setCore(core.address, { from: owner })
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(Match, registry.address, { from: owner })
-                .then(instance => {
-                    match = instance
-                    console.log('- Match was deployed at', match.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(SwaprateMatch, registry.address, { from: owner })
-                .then(instance => {
-                    swaprateMatch = instance
-                    console.log('- SwaprateMatch was deployed at', swaprateMatch.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(TokenSpender, owner, { from: owner })
-                .then(instance => {
-                    tokenSpender = instance
-                    console.log('- TokenSpender was deployed at', tokenSpender.address)
-                    return tokenSpender.proposeWhitelist([ core.address, match.address, swaprateMatch.address ], { from: owner })
-                })
-        })
-        .then(() => {
-            return registry.setTokenSpender(tokenSpender.address, { from: owner })
-        })
-        .then(() => {
-            return deployer
-                .deploy(TokenMinter, baseTokenURI, registry.address, { from: owner })
-                .then(instance => {
-                    tokenMinter = instance
-                    console.log('- TokenMinter was deployed at', tokenMinter.address)
-                    return registry.setMinter(tokenMinter.address, { from: owner })
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(OracleAggregator, { from: owner })
-                .then(instance => {
-                    oracleAggregator = instance
-                    console.log('- OracleAggregator was deployed at', oracleAggregator.address)
-                    return registry.setOracleAggregator(oracleAggregator.address, { from: owner })
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(SyntheticAggregator, { from: owner })
-                .then(instance => {
-                    syntheticAggregator = instance
-                    console.log('- SyntheticAggregator was deployed at', syntheticAggregator.address)
-                    return registry.setSyntheticAggregator(syntheticAggregator.address, { from: owner })
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(OptionCallSyntheticIdMock, { from: owner })
-                .then(instance => {
-                    optionCallSyntheticIdMock = instance
-                    console.log('OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMock.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(DummySyntheticIdMock, { from: owner })
-                .then(instance => {
-                    dummySyntheticIdMock = instance
-                    console.log('DummySyntheticIdMock was deployed at', dummySyntheticIdMock.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(TestToken, 'Opium DAI Token', 'DAI', 18, { from: owner })
-                .then(instance => {
-                    dai = instance
-                    console.log('DAI was deployed at', dai.address)
-                })
-        })
-        .then(() => {
-            return deployer
-                .deploy(WETH, { from: owner })
-                .then(instance => {
-                    weth = instance
-                    console.log('WETH was deployed at', weth.address)
-                })
-        })
-        .then(() => {
-            return registry.setOpiumAddress(owner, { from: owner })
-        })
+const deployMatch = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const matchInstance = await deployer.deploy(Match, registryInstance.address, { from: opiumDeployerAddress })
+    console.log('- Match was deployed at', matchInstance.address)
+
+    return matchInstance
+}
+
+const deployMatchPool = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const matchPoolInstance = await deployer.deploy(MatchPool, registryInstance.address, { from: opiumDeployerAddress })
+    console.log('- MatchPool was deployed at', matchPoolInstance.address)
+
+    return matchPoolInstance
+}
+
+const deploySwaprateMatch = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const swaprateMatchInstance = await deployer.deploy(SwaprateMatch, registryInstance.address, { from: opiumDeployerAddress })
+    console.log('- SwaprateMatch was deployed at', swaprateMatchInstance.address)
+
+    return swaprateMatchInstance
+}
+
+const deployTokenSpender = async ({ deployer, opiumDeployerAddress, governor, whitelist, registryInstance }) => {
+    const tokenSpenderInstance = await deployer.deploy(TokenSpender, governor, { from: opiumDeployerAddress })
+    console.log('- TokenSpender was deployed at', tokenSpenderInstance.address)
+
+    await tokenSpenderInstance.proposeWhitelist(whitelist, { from: governor })
+    console.log('TokenSpender whitelist was set')
+
+    await registryInstance.setTokenSpender(tokenSpenderInstance.address, { from: opiumDeployerAddress })
+    console.log('TokenSpender address was set in registry')
+
+    return tokenSpenderInstance
+}
+
+const deployTokenMinter = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const tokenMinterInstance = await deployer.deploy(TokenMinter, baseTokenURI, registryInstance.address, { from: opiumDeployerAddress })
+    console.log('- TokenMinter was deployed at', tokenMinterInstance.address)
+
+    await registryInstance.setMinter(tokenMinterInstance.address, { from: opiumDeployerAddress })
+    console.log('TokenMinter address was set in registry')
+
+    return tokenMinterInstance
+}
+
+const deployOracleAggregator = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const oracleAggregatorInstance = await deployer.deploy(OracleAggregator, { from: opiumDeployerAddress })
+    console.log('- OracleAggregator was deployed at', oracleAggregatorInstance.address)
+    
+    await registryInstance.setOracleAggregator(oracleAggregatorInstance.address, { from: opiumDeployerAddress })
+    console.log('OracleAggregator address was set in registry')
+
+    return oracleAggregatorInstance
+}
+
+const deploySyntheticAggregator = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+    const syntheticAggregatorInstance = await deployer.deploy(SyntheticAggregator, { from: opiumDeployerAddress })
+    console.log('- SyntheticAggregator was deployed at', syntheticAggregatorInstance.address)
+
+    await registryInstance.setSyntheticAggregator(syntheticAggregatorInstance.address, { from: opiumDeployerAddress })
+    console.log('SyntheticAggregator address was set in registry')
+
+    return syntheticAggregatorInstance
+}
+
+const deployMocks = async ({ deployer, opiumDeployerAddress }) => {
+    const optionCallSyntheticIdMockInstance = await deployer.deploy(OptionCallSyntheticIdMock, { from: opiumDeployerAddress })
+    console.log('**** OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMockInstance.address)
+    
+    const dummySyntheticIdMockInstance = await deployer.deploy(DummySyntheticIdMock, { from: opiumDeployerAddress })
+    console.log('**** DummySyntheticIdMock was deployed at', dummySyntheticIdMockInstance.address)
+    
+    const daiInstance = await deployer.deploy(TestToken, 'Opium DAI Token', 'DAI', 18, { from: opiumDeployerAddress })
+    console.log('**** DAI was deployed at', daiInstance.address)
+
+    const wethInstance = await deployer.deploy(WETH, { from: opiumDeployerAddress })
+    console.log('**** WETH was deployed at', wethInstance.address)
+}
+
+module.exports = async function(deployer, network, accounts) {
+    const opiumDeployerAddress = accounts[0]
+
+    deployer.then(async () => {
+        await deployAndLinkLibPosition({ deployer, opiumDeployerAddress })
+
+        const registryInstance = await deployRegistry({ deployer, opiumDeployerAddress })
+
+        const coreInstance = await deployCore({ deployer, opiumDeployerAddress, registryInstance })
+        const matchInstance = await deployMatch({ deployer, opiumDeployerAddress, registryInstance })
+        const matchPoolInstance = await deployMatchPool({ deployer, opiumDeployerAddress, registryInstance })
+        const swaprateMatchInstance = await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance })
+
+        const governor = opiumDeployerAddress
+        const whitelist = [ coreInstance.address, matchInstance.address, matchPoolInstance.address, swaprateMatchInstance.address ]
+        await deployTokenSpender({ deployer, opiumDeployerAddress, governor, whitelist, registryInstance })
+
+        await deployTokenMinter({ deployer, opiumDeployerAddress, registryInstance })
+        await deployOracleAggregator({ deployer, opiumDeployerAddress, registryInstance })
+        await deploySyntheticAggregator({ deployer, opiumDeployerAddress, registryInstance })
+        
+        // Contracts for testing purpose
+        await deployMocks({ deployer, opiumDeployerAddress })
+    })
 }
