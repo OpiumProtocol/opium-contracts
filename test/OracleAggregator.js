@@ -9,6 +9,7 @@ contract('OracleAggregator', accounts => {
     const core = accounts[1]
     const author = accounts[2]
     const oracle = accounts[3]
+    const randomAddress = accounts[4]
 
     let registry, oracleAggregator, oracleIdMock
     let timestamp, timestampPlusOne, timestampMinusOne, timestampPlusTwo, timestampPlusThree
@@ -19,8 +20,15 @@ contract('OracleAggregator', accounts => {
         registry = await Registry.new({ from: owner })
         oracleAggregator = await OracleAggregator.new(registry.address, { from: owner })
 
-        await registry.setOracleAggregator(oracleAggregator.address, { from: owner })
-        await registry.setCore(core, { from: owner })
+        await registry.init(
+            randomAddress,
+            core,
+            oracleAggregator.address,
+            randomAddress,
+            randomAddress,
+            randomAddress,
+            { from: owner }
+        )
 
         // Money related
         fetchPrice = web3.utils.toWei('0.1', 'ether')

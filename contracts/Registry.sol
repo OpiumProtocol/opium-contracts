@@ -17,11 +17,11 @@ contract Registry is RegistryErrors {
     // Address of Opium.SyntheticAggregator contract
     address private syntheticAggregator;
 
-    // Address of Opium commission receiver
-    address private opiumAddress;
-
     // Address of Opium.TokenSpender contract
     address private tokenSpender;
+
+    // Address of Opium commission receiver
+    address private opiumAddress;
 
     // Address of Opium contract set deployer
     address public initializer;
@@ -39,68 +39,69 @@ contract Registry is RegistryErrors {
 
     // SETTERS
 
-    /// @notice Sets Opium.TokenMinter address and allows to do it only once
+    /// @notice Sets Opium.TokenMinter, Opium.Core, Opium.OracleAggregator, Opium.SyntheticAggregator, Opium.TokenSpender, Opium commission receiver addresses and allows to do it only once
     /// @param _minter address Address of Opium.TokenMinter
-    function setMinter(address _minter) external onlyInitializer {
-        require(minter == address(0), ERROR_REGISTRY_ALREADY_SET);
-        minter = _minter;
-    }
-
-    /// @notice Sets Opium.Core address and allows to do it only once
     /// @param _core address Address of Opium.Core
-    function setCore(address _core) external onlyInitializer {
-        require(core == address(0), ERROR_REGISTRY_ALREADY_SET);
-        core = _core;
-    }
-
-    /// @notice Sets Opium.OracleAggregator address and allows to do it only once
     /// @param _oracleAggregator address Address of Opium.OracleAggregator
-    function setOracleAggregator(address _oracleAggregator) external onlyInitializer {
-        require(oracleAggregator == address(0), ERROR_REGISTRY_ALREADY_SET);
-        oracleAggregator = _oracleAggregator;
-    }
-
-    /// @notice Sets Opium.SyntheticAggregator address and allows to do it only once
     /// @param _syntheticAggregator address Address of Opium.SyntheticAggregator
-    function setSyntheticAggregator(address _syntheticAggregator) external onlyInitializer {
-        require(syntheticAggregator == address(0), ERROR_REGISTRY_ALREADY_SET);
-        syntheticAggregator = _syntheticAggregator;
-    }
-
-    /// @notice Sets Opium commission receiver and allows to do it only once
-    /// @param _opiumAddress address Address of Opium commission receiver
-    function setOpiumAddress(address _opiumAddress) external onlyInitializer {
-        require(opiumAddress == address(0), ERROR_REGISTRY_ALREADY_SET);
-        opiumAddress = _opiumAddress;
-    }
-
-    /// @notice Sets Opium.TokenSpender address and allows to do it only once
     /// @param _tokenSpender address Address of Opium.TokenSpender
-    function setTokenSpender(address _tokenSpender) external onlyInitializer {
-        require(tokenSpender == address(0), ERROR_REGISTRY_ALREADY_SET);
+    /// @param _opiumAddress address Address of Opium commission receiver
+    function init(
+        address _minter,
+        address _core,
+        address _oracleAggregator,
+        address _syntheticAggregator,
+        address _tokenSpender,
+        address _opiumAddress
+    ) external onlyInitializer {
+        require(
+            minter == address(0) &&
+            core == address(0) &&
+            oracleAggregator == address(0) &&
+            syntheticAggregator == address(0) &&
+            tokenSpender == address(0) &&
+            opiumAddress == address(0),
+            ERROR_REGISTRY_ALREADY_SET
+        );
+
+        require(
+            _minter != address(0) &&
+            _core != address(0) &&
+            _oracleAggregator != address(0) &&
+            _syntheticAggregator != address(0) &&
+            _tokenSpender != address(0) &&
+            _opiumAddress != address(0),
+            ERROR_REGISTRY_CANT_BE_ZERO_ADDRESS
+        );
+
+        minter = _minter;
+        core = _core;
+        oracleAggregator = _oracleAggregator;
+        syntheticAggregator = _syntheticAggregator;
         tokenSpender = _tokenSpender;
+        opiumAddress = _opiumAddress;
     }
 
     /// @notice Allows opium commission receiver address to change itself
     /// @param _opiumAddress address New opium commission receiver address
     function changeOpiumAddress(address _opiumAddress) external {
         require(opiumAddress == msg.sender, ERROR_REGISTRY_ONLY_OPIUM_ADDRESS_ALLOWED);
-        require(_opiumAddress != address(0), "Can't set zero address");
+        require(_opiumAddress != address(0), ERROR_REGISTRY_CANT_BE_ZERO_ADDRESS);
         opiumAddress = _opiumAddress;
     }
 
     // GETTERS
 
-    /// @notice Returns address of Opium.Core
-    /// @param result address Address of Opium.Core
-    function getCore() external view returns (address result) {
-        return core;
-    }
-
     /// @notice Returns address of Opium.TokenMinter
     /// @param result address Address of Opium.TokenMinter
     function getMinter() external view returns (address result) {
         return minter;
+    }
+
+    /// @notice Returns address of Opium.Core
+    /// @param result address Address of Opium.Core
+    function getCore() external view returns (address result) {
+        return core;
     }
 
     /// @notice Returns address of Opium.OracleAggregator
@@ -115,15 +116,15 @@ contract Registry is RegistryErrors {
         return syntheticAggregator;
     }
 
-    /// @notice Returns address of Opium commission receiver
-    /// @param result address Address of Opium commission receiver
-    function getOpiumAddress() external view returns (address result) {
-        return opiumAddress;
-    }
-
     /// @notice Returns address of Opium.TokenSpender
     /// @param result address Address of Opium.TokenSpender
     function getTokenSpender() external view returns (address result) {
         return tokenSpender;
+    }
+
+    /// @notice Returns address of Opium commission receiver
+    /// @param result address Address of Opium commission receiver
+    function getOpiumAddress() external view returns (address result) {
+        return opiumAddress;
     }
 }
