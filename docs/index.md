@@ -868,7 +868,7 @@ Calling this function governor could commit previously proposed new timelock if 
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 
-### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (internal)
+### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (public)
 
 Hashes the order
 
@@ -1181,7 +1181,7 @@ This function receives left and right orders, and performs swap of Token + Margi
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 
-### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (internal)
+### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (public)
 
 Hashes the order
 
