@@ -198,8 +198,8 @@ contract MatchCreate is MatchLogic, LibDerivative {
         // Update filled
         // If initial takerTokenAmount was 0, set filled to 100%
         // Otherwise calculate new filled percetage -> (alreadyFilled + fill) / initial * 100%
-        filled[_leftOrderHash] = leftInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled.add(fillPositions), leftInitial).add(1);
-        filled[_rightOrderHash] = rightInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled.add(fillPositions), rightInitial).add(1);
+        filled[_leftOrderHash] = leftInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled.add(fillPositions), leftInitial);
+        filled[_rightOrderHash] = rightInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled.add(fillPositions), rightInitial);
     }
 
     /// @notice This function distributes premiums, takes margin and approves it to Core

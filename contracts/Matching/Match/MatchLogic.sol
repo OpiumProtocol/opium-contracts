@@ -192,7 +192,12 @@ contract MatchLogic is MatchingErrors, LibOrder, UsingRegistry, ReentrancyGuard 
     /// @param _denominator uint256 Denominator of division
     /// @return divisionPercentage uint256 Percentage of division
     function getDivisionPercentage(uint256 _numerator, uint256 _denominator) internal pure returns (uint256 divisionPercentage) {
-        divisionPercentage = _numerator.mul(PERCENTAGE_BASE).div(_denominator);
+        divisionPercentage = _numerator.mul(PERCENTAGE_BASE).div(_denominator).add(1);
+
+        // In case of numerator > denominator consider as 100%
+        if (divisionPercentage > PERCENTAGE_BASE) {
+            divisionPercentage = PERCENTAGE_BASE;
+        }
     }
 
     /// @notice Helper to recover numerator from percentage of division in base of PERCENTAGE_BASE

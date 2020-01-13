@@ -569,11 +569,27 @@ contract('Match and MatchCreate', accounts => {
         }
     })
 
-    it('should partially fill right (maker) order by 1, and have 2 left (taker)', async () => {
+    it('should partially fill right (maker) order by 1, and have 2 left', async () => {
         await testToken.transfer(buyer, dai(9), { from: owner })
 
-        // Seller balance: 600
-        // Buyer balance: 9
+        // Buyer balance: 9 DAI + 0 LONG position + 0 SHORT position
+        // Seller balance: 600 DAI + 0 LONG position + 0 SHORT position
+
+        const buyerBalanceBefore = await testToken.balanceOf(buyer)
+        const buyerLongPositionBalanceBefore = await tokenMinter.balanceOf(buyer, longTokenId)
+        const buyerShortPositionBalanceBefore = await tokenMinter.balanceOf(buyer, shortTokenId)
+        const sellerBalanceBefore = await testToken.balanceOf(seller)
+        const sellerLongPositionBalanceBefore = await tokenMinter.balanceOf(seller, longTokenId)
+        const sellerShortPositionBalanceBefore = await tokenMinter.balanceOf(seller, shortTokenId)
+
+        assert.equal(buyerBalanceBefore, dai(9), 'Wrong buyer balance before')
+        assert.equal(buyerLongPositionBalanceBefore, 0, 'Wrong buyer LONG position balance before')
+        assert.equal(buyerShortPositionBalanceBefore, 0, 'Wrong buyer SHORT position balance before')
+
+        assert.equal(sellerBalanceBefore, dai(600), 'Wrong seller balance before')
+        assert.equal(sellerLongPositionBalanceBefore, 0, 'Wrong seller LONG position balance before')
+        assert.equal(sellerShortPositionBalanceBefore, 0, 'Wrong seller SHORT position balance before')
+
 
         const leftOrder = await orderFactory({
             makerMarginAmount: dai(5),
@@ -603,20 +619,34 @@ contract('Match and MatchCreate', accounts => {
         console.log('Gas used during matching creation =', gas)
         await match.create(leftOrder, rightOrder, derivative, false, { from: relayer })
 
-        const buyerBalanceAfter = await testToken.balanceOf(buyer)
-        const buyerPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
-        const sellerBalanceAfter = await testToken.balanceOf(seller)
-        const sellerPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+        // Premium by Seller == 4 DAI per contract
+        // Buyer -> ( 4 DAI ) -> Seller Premium
+        // Seller -> ( 200 DAI ) -> Option Margin
 
-        // Buyer spent his 8 on premium
+        // Buyer balance: 5 DAI + 1 LONG position + 0 SHORT position
+        // Seller balance: 404 DAI + 0 LONG position + 1 SHORT position
+
+        const buyerBalanceAfter = await testToken.balanceOf(buyer)
+        const buyerLongPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
+        const buyerShortPositionBalanceAfter = await tokenMinter.balanceOf(buyer, shortTokenId)
+        const sellerBalanceAfter = await testToken.balanceOf(seller)
+        const sellerLongPositionBalanceAfter = await tokenMinter.balanceOf(seller, longTokenId)
+        const sellerShortPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+
+        // Buyer spent his 4 DAI on premium
         assert.equal(buyerBalanceAfter, dai(5), 'Wrong buyer balance after')
-        assert.equal(buyerPositionBalanceAfter, 1, 'Wrong buyer position balance after')
-        // Seller received 8 as premium and spent 400 as margin for 2 contracts
+        assert.equal(buyerLongPositionBalanceAfter, 1, 'Wrong buyer LONG position balance after')
+        assert.equal(buyerShortPositionBalanceAfter, 0, 'Wrong buyer SHORT position balance after')
+        // Seller received 4 DAI as premium and spent 200 as margin for 1 contract
         assert.equal(sellerBalanceAfter, dai(404), 'Wrong seller balance after')
-        assert.equal(sellerPositionBalanceAfter, 1, 'Wrong seller position balance after')
+        assert.equal(sellerLongPositionBalanceAfter, 0, 'Wrong seller LONG position balance after')
+        assert.equal(sellerShortPositionBalanceAfter, 1, 'Wrong seller SHORT position balance after')
     })
 
     it('should partially fill right (taker) order by 1, and have 1 left (maker)', async () => {
+        // Buyer balance: 5 DAI + 1 LONG position + 0 SHORT position
+        // Seller balance: 404 DAI + 0 LONG position + 1 SHORT position
+
         const leftOrder = await orderFactory({
             makerMarginAmount: dai(5),
             takerTokenId: longTokenId,
@@ -645,17 +675,28 @@ contract('Match and MatchCreate', accounts => {
         console.log('Gas used during matching creation =', gas)
         await match.create(leftOrder, rightOrder, derivative, true, { from: relayer })
 
-        const buyerBalanceAfter = await testToken.balanceOf(buyer)
-        const buyerPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
-        const sellerBalanceAfter = await testToken.balanceOf(seller)
-        const sellerPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+        // Premium by Buyer == 5 DAI per contract
+        // Buyer -> ( 5 DAI ) -> Seller Premium
+        // Seller -> ( 200 DAI ) -> Option Margin
 
-        // Buyer spent his 8 on premium
-        assert.equal(buyerBalanceAfter, 0, 'Wrong buyer balance after')
-        assert.equal(buyerPositionBalanceAfter, 2, 'Wrong buyer position balance after')
-        // Seller received 8 as premium and spent 400 as margin for 2 contracts
+        // Buyer balance: 0 DAI + 2 LONG position + 0 SHORT position
+        // Seller balance: 209 DAI + 0 LONG position + 2 SHORT position
+
+        const buyerBalanceAfter = await testToken.balanceOf(buyer)
+        const buyerLongPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
+        const buyerShortPositionBalanceAfter = await tokenMinter.balanceOf(buyer, shortTokenId)
+        const sellerBalanceAfter = await testToken.balanceOf(seller)
+        const sellerLongPositionBalanceAfter = await tokenMinter.balanceOf(seller, longTokenId)
+        const sellerShortPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+
+        // Buyer spent his 5 DAI on premium
+        assert.equal(buyerBalanceAfter, dai(0), 'Wrong buyer balance after')
+        assert.equal(buyerLongPositionBalanceAfter, 2, 'Wrong buyer LONG position balance after')
+        assert.equal(buyerShortPositionBalanceAfter, 0, 'Wrong buyer SHORT position balance after')
+        // Seller received 5 DAI as premium and spent 200 as margin for 1 contract
         assert.equal(sellerBalanceAfter, dai(209), 'Wrong seller balance after')
-        assert.equal(sellerPositionBalanceAfter, 2, 'Wrong seller position balance after')
+        assert.equal(sellerLongPositionBalanceAfter, 0, 'Wrong seller LONG position balance after')
+        assert.equal(sellerShortPositionBalanceAfter, 2, 'Wrong seller SHORT position balance after')
     })
 
     it('should settle shared order (no senderAddress)', async () => {
@@ -664,6 +705,9 @@ contract('Match and MatchCreate', accounts => {
 
         await testToken.approve(tokenSpender.address, dai(4), { from: buyer })
         await testToken.approve(tokenSpender.address, dai(200), { from: seller })
+
+        // Buyer balance: 4 DAI + 2 LONG position + 0 SHORT position
+        // Seller balance: 409 DAI + 0 LONG position + 2 SHORT position
 
         const leftOrder = await sharedOrderFactory({
             makerMarginAmount: dai(4),
@@ -693,17 +737,28 @@ contract('Match and MatchCreate', accounts => {
         console.log('Gas used during matching shared creation =', gas)
         await match.create(leftOrder, rightOrder, derivative, false, { from: relayer })
 
-        const buyerBalanceAfter = await testToken.balanceOf(buyer)
-        const buyerPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
-        const sellerBalanceAfter = await testToken.balanceOf(seller)
-        const sellerPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+        // Premium by Seller == 4 DAI per contract
+        // Buyer -> ( 4 DAI ) -> Seller Premium
+        // Seller -> ( 200 DAI ) -> Option Margin
 
-        // Buyer spent his 4 on premium
-        assert.equal(buyerBalanceAfter, 0, 'Wrong buyer balance after')
-        assert.equal(buyerPositionBalanceAfter, 3, 'Wrong buyer position balance after')
-        // Seller received 4 as premium and spent 200 as margin for 1 contract
+        // Buyer balance: 0 DAI + 3 LONG position + 0 SHORT position
+        // Seller balance: 213 DAI + 0 LONG position + 3 SHORT position
+
+        const buyerBalanceAfter = await testToken.balanceOf(buyer)
+        const buyerLongPositionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
+        const buyerShortPositionBalanceAfter = await tokenMinter.balanceOf(buyer, shortTokenId)
+        const sellerBalanceAfter = await testToken.balanceOf(seller)
+        const sellerLongPositionBalanceAfter = await tokenMinter.balanceOf(seller, longTokenId)
+        const sellerShortPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+
+        // Buyer spent his 4 DAI on premium
+        assert.equal(buyerBalanceAfter, dai(0), 'Wrong buyer balance after')
+        assert.equal(buyerLongPositionBalanceAfter, 3, 'Wrong buyer LONG position balance after')
+        assert.equal(buyerShortPositionBalanceAfter, 0, 'Wrong buyer SHORT position balance after')
+        // Seller received 4 DAI as premium and spent 200 as margin for 1 contract
         assert.equal(sellerBalanceAfter, dai(213), 'Wrong seller balance after')
-        assert.equal(sellerPositionBalanceAfter, 3, 'Wrong seller position balance after')
+        assert.equal(sellerLongPositionBalanceAfter, 0, 'Wrong seller LONG position balance after')
+        assert.equal(sellerShortPositionBalanceAfter, 3, 'Wrong seller SHORT position balance after')
     })
 
     it('should revert already filled order', async () => {
@@ -741,8 +796,7 @@ contract('Match and MatchCreate', accounts => {
     })
 
     it('should fully fill right order by 1 buy reselling short position of left\'s', async () => {
-        // Create one position for test
-        // guyTwo would have 1 x shortTokenId
+        // Create one contract for test for guyOne and guyTwo
         await testToken.approve(tokenSpender.address, derivative.margin, { from: owner })
         await core.create(derivative, 1, [ guyOne, guyTwo ], { from: owner })
 
@@ -750,9 +804,25 @@ contract('Match and MatchCreate', accounts => {
         await testToken.approve(tokenSpender.address, dai(5), { from: guyTwo })
         await testToken.approve(tokenSpender.address, dai(200), { from: seller })
 
-        // GuyOne balance: 0 DAI + 1 LONG position
-        // GuyTwo balance: 5 DAI + 1 SHORT position
-        // Seller balance: 213 DAI + 3 SHORT positions
+        // GuyOne balance: 0 DAI + 1 LONG position + 0 SHORT positions
+        // GuyTwo balance: 5 DAI + 0 LONG positions + 1 SHORT position
+        // Seller balance: 213 DAI + 0 LONG position + 3 SHORT position
+
+        const guyOneBalanceBefore = await testToken.balanceOf(guyOne)
+        const guyOneLongPositionBalanceBefore = await tokenMinter.balanceOf(guyOne, longTokenId)
+        const guyOneShortPositionBalanceBefore = await tokenMinter.balanceOf(guyOne, shortTokenId)
+
+        const guyTwoBalanceBefore = await testToken.balanceOf(guyTwo)
+        const guyTwoLongPositionBalanceBefore = await tokenMinter.balanceOf(guyTwo, longTokenId)
+        const guyTwoShortPositionBalanceBefore = await tokenMinter.balanceOf(guyTwo, shortTokenId)
+        
+        assert.equal(guyOneBalanceBefore, dai(0), 'Wrong guyOne balance before')
+        assert.equal(guyOneLongPositionBalanceBefore, 1, 'Wrong guyOne LONG position balance before')
+        assert.equal(guyOneShortPositionBalanceBefore, 0, 'Wrong guyOne SHORT position balance before')
+        
+        assert.equal(guyTwoBalanceBefore, dai(5), 'Wrong guyTwo balance before')
+        assert.equal(guyTwoLongPositionBalanceBefore, 0, 'Wrong guyTwo LONG position balance before')
+        assert.equal(guyTwoShortPositionBalanceBefore, 1, 'Wrong guyTwo SHORT position balance before')
 
         const leftOrder = await orderFactory({
             makerTokenId: shortTokenId,
@@ -784,13 +854,27 @@ contract('Match and MatchCreate', accounts => {
         console.log('Gas used during matching swap =', gas)
         await match.swap(leftOrder, rightOrder, { from: relayer })
 
+        // Right takerMarginAmount was filled with 66.(6)% == 8 DAI, so only 4 DAI remaining
+
+        // Buyer -> ( 4 DAI, 1 SHORT ) -> Seller
+        // Seller -> ( 200 DAI ) -> Buyer
+
+        // GuyTwo balance: 201 DAI + 0 LONG positions + 0 SHORT position
+        // Seller balance: 17 DAI + 0 LONG position + 4 SHORT position
+
         const guyTwoBalanceAfter = await testToken.balanceOf(guyTwo)
+        const guyTwoLongPositionBalanceAfter = await tokenMinter.balanceOf(guyTwo, longTokenId)
+        const guyTwoShortPositionBalanceAfter = await tokenMinter.balanceOf(guyTwo, shortTokenId)
         const sellerBalanceAfter = await testToken.balanceOf(seller)
-        const sellerPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
+        const sellerLongPositionBalanceAfter = await tokenMinter.balanceOf(seller, longTokenId)
+        const sellerShortPositionBalanceAfter = await tokenMinter.balanceOf(seller, shortTokenId)
         
         assert.equal(guyTwoBalanceAfter, dai(201), 'Wrong guy two balance after')
+        assert.equal(guyTwoLongPositionBalanceAfter, 0, 'Wrong guy two LONG position balance after')
+        assert.equal(guyTwoShortPositionBalanceAfter, 0, 'Wrong guy two SHORT position balance after')
         assert.equal(sellerBalanceAfter, dai(17), 'Wrong seller balance after')
-        assert.equal(sellerPositionBalanceAfter, 4, 'Wrong seller position balance after')
+        assert.equal(sellerLongPositionBalanceAfter, 0, 'Wrong seller LONG position balance after')
+        assert.equal(sellerShortPositionBalanceAfter, 4, 'Wrong seller SHORT position balance after')
     })
 
     it('should revert non-fillable swaps', async () => {

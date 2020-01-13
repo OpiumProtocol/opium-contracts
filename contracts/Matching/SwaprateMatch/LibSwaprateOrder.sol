@@ -124,7 +124,7 @@ contract LibSwaprateOrder is LibEIP712 {
     /// @notice Hashes the order
     /// @param _order SwaprateOrder Order to hash
     /// @return hash bytes32 Order hash
-    function hashOrder(SwaprateOrder memory _order) internal pure returns (bytes32 hash) {
+    function hashOrder(SwaprateOrder memory _order) public pure returns (bytes32 hash) {
         hash = keccak256(
             abi.encodePacked(
                 abi.encodePacked(

@@ -134,13 +134,13 @@ contract MatchSwap is MatchLogic {
         leftFilledPercents[0] = leftInitial[0] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[0].add(rightFill[0]), leftInitial[0]);
         leftFilledPercents[1] = leftInitial[1] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[1].add(rightFill[1]), leftInitial[1]);
 
-        filled[_leftOrderHash] = min(leftFilledPercents[0], leftFilledPercents[1]).add(1);
+        filled[_leftOrderHash] = min(leftFilledPercents[0], leftFilledPercents[1]);
 
         uint256[2] memory rightFilledPercents;
         rightFilledPercents[0] = rightInitial[0] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled[0].add(leftFill[0]), rightInitial[0]);
         rightFilledPercents[1] = rightInitial[1] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled[1].add(leftFill[1]), rightInitial[1]);
 
-        filled[_rightOrderHash] = min(rightFilledPercents[0], rightFilledPercents[1]).add(1);
+        filled[_rightOrderHash] = min(rightFilledPercents[0], rightFilledPercents[1]);
     }
 
     /// @notice Validate order properties and distribute tokens and margins
