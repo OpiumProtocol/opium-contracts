@@ -1,4 +1,4 @@
-pragma solidity 0.5.7;
+pragma solidity 0.5.16;
 
 import "../Interface/IOracleId.sol";
 import "../Lib/UsingRegistry.sol";

@@ -1,4 +1,4 @@
-pragma solidity 0.5.7;
+pragma solidity 0.5.16;
 
 /// @title Opium.Lib.Whitelisted contract implements whitelist with modifier to restrict access to only whitelisted addresses
 contract Whitelisted {

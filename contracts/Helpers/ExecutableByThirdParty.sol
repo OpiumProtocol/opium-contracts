@@ -1,4 +1,4 @@
-pragma solidity 0.5.7;
+pragma solidity 0.5.16;
 
 /// @title Opium.Helpers.ExecutableByThirdParty contract helps to syntheticId development and responsible for getting and setting thirdparty execution settings
 contract ExecutableByThirdParty {
