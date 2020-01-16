@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Blockeys/opium-contracts-prep#readme",
   "dependencies": {
-    "erc721o": "git+https://github.com/OpiumProtocol/erc721o.git#e1dc484",
+    "erc721o": "git+https://github.com/OpiumProtocol/erc721o.git#60723b7",
     "eth-gas-reporter": "^0.2.12",
     "openzeppelin-solidity": "^2.4.0",
     "solidity-docgen": "^0.3.13",
