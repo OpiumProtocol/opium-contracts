@@ -1,11 +1,11 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 
 import "../Registry.sol";
 
-import "../Errors/usingRegistryErrors.sol";
+import "../Errors/UsingRegistryErrors.sol";
 
-/// @title Opium.Lib.usingRegistry contract should be inherited by contracts, that are going to use Opium.Registry
-contract usingRegistry is usingRegistryErrors {
+/// @title Opium.Lib.UsingRegistry contract should be inherited by contracts, that are going to use Opium.Registry
+contract UsingRegistry is UsingRegistryErrors {
     // Emitted when registry instance is set
     event RegistrySet(address registry);
 
@@ -22,5 +22,11 @@ contract usingRegistry is usingRegistryErrors {
     constructor(address _registry) public {
         registry = Registry(_registry);
         emit RegistrySet(_registry);
+    }
+
+    /// @notice Getter for registry variable
+    /// @return address Address of registry set in current contract
+    function getRegistry() external view returns (address) {
+        return address(registry);
     }
 }

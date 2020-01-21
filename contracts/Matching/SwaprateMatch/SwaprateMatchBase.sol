@@ -1,13 +1,14 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import "erc721o/contracts/Libs/LibPosition.sol";
 
-import "../../Lib/usingRegistry.sol";
+import "../../Lib/UsingRegistry.sol";
 
 import "../../Errors/MatchingErrors.sol";
 
@@ -18,9 +19,10 @@ import "../../Core.sol";
 import "../../SyntheticAggregator.sol";
 
 /// @title Opium.Matching.SwaprateMatchBase contract implements logic for order validation and cancelation
-contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, ReentrancyGuard {
+contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, UsingRegistry, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
+    using SafeERC20 for IERC20;
 
     // Emmitted when order was canceled
     event Canceled(bytes32 orderHash);
@@ -28,12 +30,12 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     // Canceled orders
     // This mapping holds hashes of canceled orders
     // canceled[orderHash] => canceled
-    mapping (bytes32 => bool) canceled;
+    mapping (bytes32 => bool) public canceled;
 
     // Verified orders
     // This mapping holds hashes of verified orders to verify only once
     // verified[orderHash] => verified
-    mapping (bytes32 => bool) verified;
+    mapping (bytes32 => bool) public verified;
     
     // Vaults for fees
     // This mapping holds balances of relayers and affiliates fees to withdraw
@@ -41,7 +43,7 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     mapping (address => mapping (address => uint256)) public balances;
 
     // Keeps whether fee was already taken
-    mapping (bytes32 => bool) feeTaken;
+    mapping (bytes32 => bool) public feeTaken;
 
     /// @notice Calling this function maker of the order could cancel it on-chain
     /// @param _order SwaprateOrder
@@ -59,12 +61,12 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
     function withdraw(IERC20 _token) public nonReentrant {
         uint256 balance = balances[msg.sender][address(_token)];
         balances[msg.sender][address(_token)] = 0;
-        IERC20(address(0)).transfer(msg.sender, balance);
+        _token.safeTransfer(msg.sender, balance);
     }
 
     /// @notice This function checks whether order was canceled
     /// @param _hash bytes32 Hash of the order
-    function validateCanceled(bytes32 _hash) internal view {
+    function validateNotCanceled(bytes32 _hash) internal view {
         require(!canceled[_hash], ERROR_MATCH_ORDER_WAS_CANCELED);
     }
 
@@ -129,23 +131,29 @@ contract SwaprateMatchBase is MatchingErrors, LibSwaprateOrder, usingRegistry, R
         // Create instance of fee token
         IERC20 feeToken = IERC20(_order.feeTokenAddress);
 
+        // Create instance of TokenSpender
+        TokenSpender tokenSpender = TokenSpender(registry.getTokenSpender());
+
         // Check if user has enough token approval to pay the fees
-        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
+        require(feeToken.allowance(_order.makerAddress, address(tokenSpender)) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
         // Transfer fee
-        TokenSpender(registry.getTokenSpender()).claimTokens(feeToken, _order.makerAddress, address(this), fees);
+        tokenSpender.claimTokens(feeToken, _order.makerAddress, address(this), fees);
+
+        // Get opium address
+        address opiumAddress = registry.getOpiumAddress();
 
         // Add commission to relayer balance, or to opium balance if relayer is not set
         if (_order.relayerAddress != address(0)) {
             balances[_order.relayerAddress][_order.feeTokenAddress] = balances[_order.relayerAddress][_order.feeTokenAddress].add(_order.relayerFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.relayerFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.relayerFee);
         }
 
         // Add commission to affiliate balance, or to opium balance if affiliate is not set
         if (_order.affiliateAddress != address(0)) {
             balances[_order.affiliateAddress][_order.feeTokenAddress] = balances[_order.affiliateAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.affiliateFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         }
 
         // Mark the fee of token as taken

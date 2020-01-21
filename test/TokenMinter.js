@@ -9,6 +9,7 @@ contract('TokenMinter', accounts => {
     const core = accounts[1]
     const buyer = accounts[2]
     const seller = accounts[3]
+    const randomAddress = accounts[3]
 
     let registry, tokenMinter
     let hashOne, hashTwo, hashThree
@@ -17,12 +18,18 @@ contract('TokenMinter', accounts => {
     let portfolioHashSellerOne, portfolioHashSellerTwo, portfolioHashSellerThree
 
     before(async () => {
-        registry = await Registry.new()
+        registry = await Registry.new({ from: owner })
         tokenMinter = await TokenMinter.new('https://explorer.opium.network/erc721o/', registry.address)
 
-        // Change core to simulate it's actions
-        registry.setCore(core, { from: owner })
-        registry.setMinter(tokenMinter.address, { from: owner })
+        await registry.init(
+            tokenMinter.address,
+            core,
+            randomAddress,
+            randomAddress,
+            randomAddress,
+            randomAddress,
+            { from: owner }
+        )
 
         hashOne = web3.utils.soliditySha3(10, 20, 30, 40, core, buyer, seller) // Random derivativeHash one
         hashTwo = web3.utils.soliditySha3(50, 60, 70, 80, seller, core, buyer) // Random derivativeHash two

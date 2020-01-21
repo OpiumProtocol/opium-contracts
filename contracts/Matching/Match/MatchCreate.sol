@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibDerivative.sol";
@@ -47,11 +47,11 @@ contract MatchCreate is MatchLogic, LibDerivative {
         // orderHashes[1] - sellOrderHash
         bytes32[2] memory orderHashes;
         orderHashes[0] = hashOrder(_buyOrder);
-        validateCanceled(orderHashes[0]);
+        validateNotCanceled(orderHashes[0]);
         validateSignature(orderHashes[0], _buyOrder);
 
         orderHashes[1] = hashOrder(_sellOrder);
-        validateCanceled(orderHashes[1]);
+        validateNotCanceled(orderHashes[1]);
         validateSignature(orderHashes[1], _sellOrder);
 
         // Validates counterparty tokens and margin
@@ -198,8 +198,8 @@ contract MatchCreate is MatchLogic, LibDerivative {
         // Update filled
         // If initial takerTokenAmount was 0, set filled to 100%
         // Otherwise calculate new filled percetage -> (alreadyFilled + fill) / initial * 100%
-        filled[_leftOrderHash] = leftInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled.add(fillPositions), leftInitial).add(1);
-        filled[_rightOrderHash] = rightInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled.add(fillPositions), rightInitial).add(1);
+        filled[_leftOrderHash] = leftInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled.add(fillPositions), leftInitial);
+        filled[_rightOrderHash] = rightInitial == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled.add(fillPositions), rightInitial);
     }
 
     /// @notice This function distributes premiums, takes margin and approves it to Core

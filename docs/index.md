@@ -42,23 +42,25 @@
 [OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_NOT_ENOUGH_ETHER-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_NOT_ENOUGH_ETHER-string
 [OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_QUERY_WAS_ALREADY_MADE-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_QUERY_WAS_ALREADY_MADE-string
 [OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_DATA_DOESNT_EXIST-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_DATA_DOESNT_EXIST-string
+[OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_DATA_ALREADY_EXIST-string]: #OracleAggregatorErrors-ERROR_ORACLE_AGGREGATOR_DATA_ALREADY_EXIST-string
 [RegistryErrors]: #RegistryErrors
 [RegistryErrors-ERROR_REGISTRY_ONLY_INITIALIZER-string]: #RegistryErrors-ERROR_REGISTRY_ONLY_INITIALIZER-string
 [RegistryErrors-ERROR_REGISTRY_ONLY_OPIUM_ADDRESS_ALLOWED-string]: #RegistryErrors-ERROR_REGISTRY_ONLY_OPIUM_ADDRESS_ALLOWED-string
+[RegistryErrors-ERROR_REGISTRY_CANT_BE_ZERO_ADDRESS-string]: #RegistryErrors-ERROR_REGISTRY_CANT_BE_ZERO_ADDRESS-string
 [RegistryErrors-ERROR_REGISTRY_ALREADY_SET-string]: #RegistryErrors-ERROR_REGISTRY_ALREADY_SET-string
 [SyntheticAggregatorErrors]: #SyntheticAggregatorErrors
 [SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_DERIVATIVE_HASH_NOT_MATCH-string]: #SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_DERIVATIVE_HASH_NOT_MATCH-string
 [SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_WRONG_MARGIN-string]: #SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_WRONG_MARGIN-string
 [SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string]: #SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string
-[usingRegistryErrors]: #usingRegistryErrors
-[usingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string]: #usingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string
+[UsingRegistryErrors]: #UsingRegistryErrors
+[UsingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string]: #UsingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string
 [ExecutableByThirdParty]: #ExecutableByThirdParty
 [ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-]: #ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-
 [ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]: #ExecutableByThirdParty-thirdpartyExecutionAllowed-address-
 [ExecutableByThirdParty-allowThirdpartyExecution-bool-]: #ExecutableByThirdParty-allowThirdpartyExecution-bool-
 [HasCommission]: #HasCommission
 [HasCommission-author-address]: #HasCommission-author-address
-[HasCommission-commission-uint256]: #HasCommission-commission-uint256
+[HasCommission-AUTHOR_COMMISSION-uint256]: #HasCommission-AUTHOR_COMMISSION-uint256
 [HasCommission-constructor--]: #HasCommission-constructor--
 [HasCommission-getAuthorAddress--]: #HasCommission-getAuthorAddress--
 [HasCommission-getAuthorCommission--]: #HasCommission-getAuthorCommission--
@@ -87,15 +89,20 @@
 [LibEIP712-EIP712DOMAIN_TYPEHASH-bytes32]: #LibEIP712-EIP712DOMAIN_TYPEHASH-bytes32
 [LibEIP712-DOMAIN_SEPARATOR-bytes32]: #LibEIP712-DOMAIN_SEPARATOR-bytes32
 [LibEIP712-hashEIP712Message-bytes32-]: #LibEIP712-hashEIP712Message-bytes32-
+[UsingRegistry]: #UsingRegistry
+[UsingRegistry-onlyCore--]: #UsingRegistry-onlyCore--
+[UsingRegistry-registry-contract-Registry]: #UsingRegistry-registry-contract-Registry
+[UsingRegistry-constructor-address-]: #UsingRegistry-constructor-address-
+[UsingRegistry-getRegistry--]: #UsingRegistry-getRegistry--
+[UsingRegistry-RegistrySet-address-]: #UsingRegistry-RegistrySet-address-
 [Whitelisted]: #Whitelisted
 [Whitelisted-onlyWhitelisted--]: #Whitelisted-onlyWhitelisted--
 [Whitelisted-whitelist-address--]: #Whitelisted-whitelist-address--
 [Whitelisted-getWhitelist--]: #Whitelisted-getWhitelist--
 [WhitelistedWithGovernance]: #WhitelistedWithGovernance
 [WhitelistedWithGovernance-onlyGovernor--]: #WhitelistedWithGovernance-onlyGovernor--
-[WhitelistedWithGovernance-TIME_LOCK_INTERVAL-uint256]: #WhitelistedWithGovernance-TIME_LOCK_INTERVAL-uint256
+[WhitelistedWithGovernance-timeLockInterval-uint256]: #WhitelistedWithGovernance-timeLockInterval-uint256
 [WhitelistedWithGovernance-governor-address]: #WhitelistedWithGovernance-governor-address
-[WhitelistedWithGovernance-initialized-bool]: #WhitelistedWithGovernance-initialized-bool
 [WhitelistedWithGovernance-proposalTime-uint256]: #WhitelistedWithGovernance-proposalTime-uint256
 [WhitelistedWithGovernance-proposedWhitelist-address--]: #WhitelistedWithGovernance-proposedWhitelist-address--
 [WhitelistedWithGovernance-constructor-uint256-address-]: #WhitelistedWithGovernance-constructor-uint256-address-
@@ -106,17 +113,12 @@
 [WhitelistedWithGovernance-Proposed-address---]: #WhitelistedWithGovernance-Proposed-address---
 [WhitelistedWithGovernance-Committed-address---]: #WhitelistedWithGovernance-Committed-address---
 [WhitelistedWithGovernanceAndChangableTimelock]: #WhitelistedWithGovernanceAndChangableTimelock
-[WhitelistedWithGovernanceAndChangableTimelock-timelockProposalTime-uint256]: #WhitelistedWithGovernanceAndChangableTimelock-timelockProposalTime-uint256
-[WhitelistedWithGovernanceAndChangableTimelock-proposedTimelock-uint256]: #WhitelistedWithGovernanceAndChangableTimelock-proposedTimelock-uint256
+[WhitelistedWithGovernanceAndChangableTimelock-timeLockProposalTime-uint256]: #WhitelistedWithGovernanceAndChangableTimelock-timeLockProposalTime-uint256
+[WhitelistedWithGovernanceAndChangableTimelock-proposedTimeLock-uint256]: #WhitelistedWithGovernanceAndChangableTimelock-proposedTimeLock-uint256
 [WhitelistedWithGovernanceAndChangableTimelock-proposeTimelock-uint256-]: #WhitelistedWithGovernanceAndChangableTimelock-proposeTimelock-uint256-
 [WhitelistedWithGovernanceAndChangableTimelock-commitTimelock--]: #WhitelistedWithGovernanceAndChangableTimelock-commitTimelock--
 [WhitelistedWithGovernanceAndChangableTimelock-Proposed-uint256-]: #WhitelistedWithGovernanceAndChangableTimelock-Proposed-uint256-
 [WhitelistedWithGovernanceAndChangableTimelock-Committed-uint256-]: #WhitelistedWithGovernanceAndChangableTimelock-Committed-uint256-
-[usingRegistry]: #usingRegistry
-[usingRegistry-onlyCore--]: #usingRegistry-onlyCore--
-[usingRegistry-registry-contract-Registry]: #usingRegistry-registry-contract-Registry
-[usingRegistry-constructor-address-]: #usingRegistry-constructor-address-
-[usingRegistry-RegistrySet-address-]: #usingRegistry-RegistrySet-address-
 [LibOrder]: #LibOrder
 [LibOrder-EIP712_ORDER_TYPEHASH-bytes32]: #LibOrder-EIP712_ORDER_TYPEHASH-bytes32
 [LibOrder-hashOrder-struct-LibOrder-Order-]: #LibOrder-hashOrder-struct-LibOrder-Order-
@@ -135,7 +137,7 @@
 [MatchLogic-feeTaken-mapping-bytes32----bool-]: #MatchLogic-feeTaken-mapping-bytes32----bool-
 [MatchLogic-cancel-struct-LibOrder-Order-]: #MatchLogic-cancel-struct-LibOrder-Order-
 [MatchLogic-withdraw-contract-IERC20-]: #MatchLogic-withdraw-contract-IERC20-
-[MatchLogic-validateCanceled-bytes32-]: #MatchLogic-validateCanceled-bytes32-
+[MatchLogic-validateNotCanceled-bytes32-]: #MatchLogic-validateNotCanceled-bytes32-
 [MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]: #MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-
 [MatchLogic-validateExpiration-struct-LibOrder-Order-]: #MatchLogic-validateExpiration-struct-LibOrder-Order-
 [MatchLogic-validateSenderAddress-struct-LibOrder-Order-]: #MatchLogic-validateSenderAddress-struct-LibOrder-Order-
@@ -166,7 +168,7 @@
 [SwaprateMatchBase-feeTaken-mapping-bytes32----bool-]: #SwaprateMatchBase-feeTaken-mapping-bytes32----bool-
 [SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-
 [SwaprateMatchBase-withdraw-contract-IERC20-]: #SwaprateMatchBase-withdraw-contract-IERC20-
-[SwaprateMatchBase-validateCanceled-bytes32-]: #SwaprateMatchBase-validateCanceled-bytes32-
+[SwaprateMatchBase-validateNotCanceled-bytes32-]: #SwaprateMatchBase-validateNotCanceled-bytes32-
 [SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-
 [SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-
 [SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]: #SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-
@@ -194,19 +196,14 @@
 [Registry-onlyInitializer--]: #Registry-onlyInitializer--
 [Registry-initializer-address]: #Registry-initializer-address
 [Registry-constructor--]: #Registry-constructor--
-[Registry-setMinter-address-]: #Registry-setMinter-address-
-[Registry-setCore-address-]: #Registry-setCore-address-
-[Registry-setOracleAggregator-address-]: #Registry-setOracleAggregator-address-
-[Registry-setSyntheticAggregator-address-]: #Registry-setSyntheticAggregator-address-
-[Registry-setOpiumAddress-address-]: #Registry-setOpiumAddress-address-
-[Registry-setTokenSpender-address-]: #Registry-setTokenSpender-address-
+[Registry-init-address-address-address-address-address-address-]: #Registry-init-address-address-address-address-address-address-
 [Registry-changeOpiumAddress-address-]: #Registry-changeOpiumAddress-address-
-[Registry-getCore--]: #Registry-getCore--
 [Registry-getMinter--]: #Registry-getMinter--
+[Registry-getCore--]: #Registry-getCore--
 [Registry-getOracleAggregator--]: #Registry-getOracleAggregator--
 [Registry-getSyntheticAggregator--]: #Registry-getSyntheticAggregator--
-[Registry-getOpiumAddress--]: #Registry-getOpiumAddress--
 [Registry-getTokenSpender--]: #Registry-getTokenSpender--
+[Registry-getOpiumAddress--]: #Registry-getOpiumAddress--
 [SyntheticAggregator]: #SyntheticAggregator
 [SyntheticAggregator-buyerMarginByHash-mapping-bytes32----uint256-]: #SyntheticAggregator-buyerMarginByHash-mapping-bytes32----uint256-
 [SyntheticAggregator-sellerMarginByHash-mapping-bytes32----uint256-]: #SyntheticAggregator-sellerMarginByHash-mapping-bytes32----uint256-
@@ -232,6 +229,11 @@
 [TokenSpender-constructor-address-]: #TokenSpender-constructor-address-
 [TokenSpender-claimTokens-contract-IERC20-address-address-uint256-]: #TokenSpender-claimTokens-contract-IERC20-address-address-uint256-
 [TokenSpender-claimPositions-contract-IERC721O-address-address-uint256-uint256-]: #TokenSpender-claimPositions-contract-IERC721O-address-address-uint256-uint256-
+[DummySyntheticIdMock]: #DummySyntheticIdMock
+[DummySyntheticIdMock-validateInput-struct-LibDerivative-Derivative-]: #DummySyntheticIdMock-validateInput-struct-LibDerivative-Derivative-
+[DummySyntheticIdMock-getMargin-struct-LibDerivative-Derivative-]: #DummySyntheticIdMock-getMargin-struct-LibDerivative-Derivative-
+[DummySyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-]: #DummySyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-
+[DummySyntheticIdMock-isPool--]: #DummySyntheticIdMock-isPool--
 [OptionCallSyntheticIdMock]: #OptionCallSyntheticIdMock
 [OptionCallSyntheticIdMock-BASE_PPT-uint256]: #OptionCallSyntheticIdMock-BASE_PPT-uint256
 [OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-]: #OptionCallSyntheticIdMock-validateInput-struct-LibDerivative-Derivative-
@@ -303,7 +305,7 @@
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`constructor(address _registry)`][Core-constructor-address-]
 - [`withdrawFee(address _tokenAddress)`][Core-withdrawFee-address-]
 - [`create(struct LibDerivative.Derivative _derivative, uint256 _quantity, address[2] _addresses)`][Core-create-struct-LibDerivative-Derivative-uint256-address-2--]
@@ -313,15 +315,16 @@
 - [`execute(address _tokenOwner, uint256[] _tokenIds, uint256[] _quantities, struct LibDerivative.Derivative[] _derivatives)`][Core-execute-address-uint256---uint256---struct-LibDerivative-Derivative---]
 - [`cancel(uint256 _tokenId, uint256 _quantity, struct LibDerivative.Derivative _derivative)`][Core-cancel-uint256-uint256-struct-LibDerivative-Derivative-]
 - [`cancel(uint256[] _tokenIds, uint256[] _quantities, struct LibDerivative.Derivative[] _derivatives)`][Core-cancel-uint256---uint256---struct-LibDerivative-Derivative---]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`Created(address buyer, address seller, bytes32 derivativeHash, uint256 quantity)`][Core-Created-address-address-bytes32-uint256-]
 - [`Executed(address tokenOwner, uint256 tokenId, uint256 quantity)`][Core-Executed-address-uint256-uint256-]
 - [`Canceled(bytes32 derivativeHash)`][Core-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="Core-constructor-address-"></span> `constructor(address _registry)` (public)
 
-Calls Core.Lib.usingRegistry constructor
+Calls Core.Lib.UsingRegistry constructor
 
 
 
@@ -446,7 +449,7 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 
 
-## <span id="usingRegistryErrors"></span> `usingRegistryErrors`
+## <span id="UsingRegistryErrors"></span> `UsingRegistryErrors`
 
 
 
@@ -676,6 +679,44 @@ Hashes EIP712Message
 
 
 
+## <span id="UsingRegistry"></span> `UsingRegistry`
+
+
+
+
+
+- [`onlyCore()`][UsingRegistry-onlyCore--]
+- [`constructor(address _registry)`][UsingRegistry-constructor-address-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
+
+### <span id="UsingRegistry-onlyCore--"></span> `onlyCore()`
+
+This modifier restricts access to functions, which could be called only by Opium.Core
+
+
+
+### <span id="UsingRegistry-constructor-address-"></span> `constructor(address _registry)` (public)
+
+Defines registry instance and emits appropriate event
+
+
+
+### <span id="UsingRegistry-getRegistry--"></span> `getRegistry() → address` (external)
+
+Getter for registry variable
+
+
+
+
+### <span id="UsingRegistry-RegistrySet-address-"></span> `RegistrySet(address registry)`
+
+
+
+
+
+
+
 ## <span id="Whitelisted"></span> `Whitelisted`
 
 
@@ -817,36 +858,6 @@ Calling this function governor could commit previously proposed new timelock if 
 
 
 
-## <span id="usingRegistry"></span> `usingRegistry`
-
-
-
-
-
-- [`onlyCore()`][usingRegistry-onlyCore--]
-- [`constructor(address _registry)`][usingRegistry-constructor-address-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
-
-### <span id="usingRegistry-onlyCore--"></span> `onlyCore()`
-
-This modifier restricts access to functions, which could be called only by Opium.Core
-
-
-
-### <span id="usingRegistry-constructor-address-"></span> `constructor(address _registry)` (public)
-
-Defines registry instance and emits appropriate event
-
-
-
-### <span id="usingRegistry-RegistrySet-address-"></span> `RegistrySet(address registry)`
-
-
-
-
-
-
-
 ## <span id="LibOrder"></span> `LibOrder`
 
 
@@ -857,7 +868,7 @@ Defines registry instance and emits appropriate event
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 
-### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (internal)
+### <span id="LibOrder-hashOrder-struct-LibOrder-Order-"></span> `hashOrder(struct LibOrder.Order _order) → bytes32 hash` (public)
 
 Hashes the order
 
@@ -880,14 +891,14 @@ Verifies order signature
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`constructor(address _registry)`][Match-constructor-address-]
 - [`swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
 - [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][MatchLogic-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
 - [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
@@ -896,13 +907,14 @@ Verifies order signature
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
 - [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
 - [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Swap(uint256 leftMakerTokenId, uint256 leftMakerTokenAmount, address leftMakerMarginAddress, uint256 leftMakerMarginAmount, uint256 rightMakerTokenId, uint256 rightMakerTokenAmount, address rightMakerMarginAddress, uint256 rightMakerMarginAmount)`][MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-]
 - [`Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled)`][MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-]
 - [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="Match-constructor-address-"></span> `constructor(address _registry)` (public)
 
@@ -920,12 +932,12 @@ Calls constructors of super-contracts
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)`][MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
 - [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][MatchLogic-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
 - [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
@@ -935,12 +947,13 @@ Calls constructors of super-contracts
 - [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
 - [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Create(bytes32 derivativeHash, address buyerPremiumAddress, uint256 buyerPremiumAmount, address sellerPremiumAddress, uint256 sellerPremiumAmount, uint256 filled)`][MatchCreate-Create-bytes32-address-uint256-address-uint256-uint256-]
 - [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="MatchCreate-create-struct-LibOrder-Order-struct-LibOrder-Order-struct-LibDerivative-Derivative-bool-"></span> `create(struct LibOrder.Order _buyOrder, struct LibOrder.Order _sellOrder, struct LibDerivative.Derivative _derivative, bool _buyerIsMaker)` (public)
 
@@ -964,10 +977,10 @@ This function receives buy and sell orders, derivative related to it and informa
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
 - [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][MatchLogic-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
 - [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
@@ -977,11 +990,12 @@ This function receives buy and sell orders, derivative related to it and informa
 - [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
 - [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="MatchLogic-cancel-struct-LibOrder-Order-"></span> `cancel(struct LibOrder.Order _order)` (public)
 
@@ -997,7 +1011,7 @@ Function to withdraw fees from orders for relayer and affiliates
 
 
 
-### <span id="MatchLogic-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
+### <span id="MatchLogic-validateNotCanceled-bytes32-"></span> `validateNotCanceled(bytes32 _hash)` (internal)
 
 This function checks whether order was canceled
 
@@ -1077,13 +1091,13 @@ numerator = devP * denominator / 100%
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`constructor(address _registry)`][MatchPool-constructor-address-]
 - [`create(struct LibOrder.Order _buyOrder, struct LibDerivative.Derivative _derivative)`][MatchPool-create-struct-LibOrder-Order-struct-LibDerivative-Derivative-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
 - [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][MatchLogic-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
 - [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
@@ -1092,11 +1106,12 @@ numerator = devP * denominator / 100%
 - [`min(uint256 _a, uint256 _b)`][MatchLogic-min-uint256-uint256-]
 - [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
 - [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="MatchPool-constructor-address-"></span> `constructor(address _registry)` (public)
 
@@ -1119,11 +1134,11 @@ numerator = devP * denominator / 100%
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`cancel(struct LibOrder.Order _order)`][MatchLogic-cancel-struct-LibOrder-Order-]
 - [`withdraw(contract IERC20 _token)`][MatchLogic-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][MatchLogic-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][MatchLogic-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)`][MatchLogic-validateTakerAddress-struct-LibOrder-Order-struct-LibOrder-Order-]
 - [`validateExpiration(struct LibOrder.Order _order)`][MatchLogic-validateExpiration-struct-LibOrder-Order-]
 - [`validateSenderAddress(struct LibOrder.Order _order)`][MatchLogic-validateSenderAddress-struct-LibOrder-Order-]
@@ -1133,12 +1148,13 @@ numerator = devP * denominator / 100%
 - [`getDivisionPercentage(uint256 _numerator, uint256 _denominator)`][MatchLogic-getDivisionPercentage-uint256-uint256-]
 - [`getInitialPercentageValue(uint256 _divisionPercentage, uint256 _denominator)`][MatchLogic-getInitialPercentageValue-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibOrder.Order _order)`][LibOrder-hashOrder-struct-LibOrder-Order-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Swap(uint256 leftMakerTokenId, uint256 leftMakerTokenAmount, address leftMakerMarginAddress, uint256 leftMakerMarginAmount, uint256 rightMakerTokenId, uint256 rightMakerTokenAmount, address rightMakerMarginAddress, uint256 rightMakerMarginAmount)`][MatchSwap-Swap-uint256-uint256-address-uint256-uint256-uint256-address-uint256-]
 - [`Canceled(bytes32 orderHash)`][MatchLogic-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="MatchSwap-swap-struct-LibOrder-Order-struct-LibOrder-Order-"></span> `swap(struct LibOrder.Order _leftOrder, struct LibOrder.Order _rightOrder)` (public)
 
@@ -1165,7 +1181,7 @@ This function receives left and right orders, and performs swap of Token + Margi
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 
-### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (internal)
+### <span id="LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-"></span> `hashOrder(struct LibSwaprateOrder.SwaprateOrder _order) → bytes32 hash` (public)
 
 Hashes the order
 
@@ -1188,23 +1204,24 @@ Verifies order signature
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`constructor(address _registry)`][SwaprateMatch-constructor-address-]
 - [`create(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder, struct LibDerivative.Derivative _derivative)`][SwaprateMatch-create-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-struct-LibDerivative-Derivative-]
 - [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
 - [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`withdraw(contract IERC20 _token)`][SwaprateMatchBase-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][SwaprateMatchBase-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`min(uint256 _a, uint256 _b)`][SwaprateMatchBase-min-uint256-uint256-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibSwaprateOrder.SwaprateOrder _order)`][LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Canceled(bytes32 orderHash)`][SwaprateMatchBase-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="SwaprateMatch-constructor-address-"></span> `constructor(address _registry)` (public)
 
@@ -1229,21 +1246,22 @@ This function receives left and right orders, derivative related to it
 
 
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`cancel(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`withdraw(contract IERC20 _token)`][SwaprateMatchBase-withdraw-contract-IERC20-]
-- [`validateCanceled(bytes32 _hash)`][SwaprateMatchBase-validateCanceled-bytes32-]
+- [`validateNotCanceled(bytes32 _hash)`][SwaprateMatchBase-validateNotCanceled-bytes32-]
 - [`validateTakerAddress(struct LibSwaprateOrder.SwaprateOrder _leftOrder, struct LibSwaprateOrder.SwaprateOrder _rightOrder)`][SwaprateMatchBase-validateTakerAddress-struct-LibSwaprateOrder-SwaprateOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSenderAddress(struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSenderAddress-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`validateSignature(bytes32 orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-validateSignature-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`takeFees(bytes32 _orderHash, struct LibSwaprateOrder.SwaprateOrder _order)`][SwaprateMatchBase-takeFees-bytes32-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`min(uint256 _a, uint256 _b)`][SwaprateMatchBase-min-uint256-uint256-]
 - [`constructor()`][ReentrancyGuard-constructor--]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`hashOrder(struct LibSwaprateOrder.SwaprateOrder _order)`][LibSwaprateOrder-hashOrder-struct-LibSwaprateOrder-SwaprateOrder-]
 - [`verifySignature(bytes32 _hash, bytes _signature, address _address)`][LibSwaprateOrder-verifySignature-bytes32-bytes-address-]
 - [`hashEIP712Message(bytes32 hashStruct)`][LibEIP712-hashEIP712Message-bytes32-]
 - [`Canceled(bytes32 orderHash)`][SwaprateMatchBase-Canceled-bytes32-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 
 ### <span id="SwaprateMatchBase-cancel-struct-LibSwaprateOrder-SwaprateOrder-"></span> `cancel(struct LibSwaprateOrder.SwaprateOrder _order)` (public)
 
@@ -1259,7 +1277,7 @@ Function to withdraw fees from orders for relayer and affiliates
 
 
 
-### <span id="SwaprateMatchBase-validateCanceled-bytes32-"></span> `validateCanceled(bytes32 _hash)` (internal)
+### <span id="SwaprateMatchBase-validateNotCanceled-bytes32-"></span> `validateNotCanceled(bytes32 _hash)` (internal)
 
 This function checks whether order was canceled
 
@@ -1414,19 +1432,14 @@ Getter for dataExist mapping
 
 - [`onlyInitializer()`][Registry-onlyInitializer--]
 - [`constructor()`][Registry-constructor--]
-- [`setMinter(address _minter)`][Registry-setMinter-address-]
-- [`setCore(address _core)`][Registry-setCore-address-]
-- [`setOracleAggregator(address _oracleAggregator)`][Registry-setOracleAggregator-address-]
-- [`setSyntheticAggregator(address _syntheticAggregator)`][Registry-setSyntheticAggregator-address-]
-- [`setOpiumAddress(address _opiumAddress)`][Registry-setOpiumAddress-address-]
-- [`setTokenSpender(address _tokenSpender)`][Registry-setTokenSpender-address-]
+- [`init(address _minter, address _core, address _oracleAggregator, address _syntheticAggregator, address _tokenSpender, address _opiumAddress)`][Registry-init-address-address-address-address-address-address-]
 - [`changeOpiumAddress(address _opiumAddress)`][Registry-changeOpiumAddress-address-]
-- [`getCore()`][Registry-getCore--]
 - [`getMinter()`][Registry-getMinter--]
+- [`getCore()`][Registry-getCore--]
 - [`getOracleAggregator()`][Registry-getOracleAggregator--]
 - [`getSyntheticAggregator()`][Registry-getSyntheticAggregator--]
-- [`getOpiumAddress()`][Registry-getOpiumAddress--]
 - [`getTokenSpender()`][Registry-getTokenSpender--]
+- [`getOpiumAddress()`][Registry-getOpiumAddress--]
 
 ### <span id="Registry-onlyInitializer--"></span> `onlyInitializer()`
 
@@ -1440,44 +1453,9 @@ Sets initializer
 
 
 
-### <span id="Registry-setMinter-address-"></span> `setMinter(address _minter)` (external)
+### <span id="Registry-init-address-address-address-address-address-address-"></span> `init(address _minter, address _core, address _oracleAggregator, address _syntheticAggregator, address _tokenSpender, address _opiumAddress)` (external)
 
-Sets Opium.TokenMinter address and allows to do it only once
-
-
-
-
-### <span id="Registry-setCore-address-"></span> `setCore(address _core)` (external)
-
-Sets Opium.Core address and allows to do it only once
-
-
-
-
-### <span id="Registry-setOracleAggregator-address-"></span> `setOracleAggregator(address _oracleAggregator)` (external)
-
-Sets Opium.OracleAggregator address and allows to do it only once
-
-
-
-
-### <span id="Registry-setSyntheticAggregator-address-"></span> `setSyntheticAggregator(address _syntheticAggregator)` (external)
-
-Sets Opium.SyntheticAggregator address and allows to do it only once
-
-
-
-
-### <span id="Registry-setOpiumAddress-address-"></span> `setOpiumAddress(address _opiumAddress)` (external)
-
-Sets Opium commission receiver and allows to do it only once
-
-
-
-
-### <span id="Registry-setTokenSpender-address-"></span> `setTokenSpender(address _tokenSpender)` (external)
-
-Sets Opium.TokenSpender address and allows to do it only once
+Sets Opium.TokenMinter, Opium.Core, Opium.OracleAggregator, Opium.SyntheticAggregator, Opium.TokenSpender, Opium commission receiver addresses and allows to do it only once
 
 
 
@@ -1489,16 +1467,16 @@ Allows opium commission receiver address to change itself
 
 
 
-### <span id="Registry-getCore--"></span> `getCore() → address result` (external)
-
-Returns address of Opium.Core
-
-
-
-
 ### <span id="Registry-getMinter--"></span> `getMinter() → address result` (external)
 
 Returns address of Opium.TokenMinter
+
+
+
+
+### <span id="Registry-getCore--"></span> `getCore() → address result` (external)
+
+Returns address of Opium.Core
 
 
 
@@ -1517,16 +1495,16 @@ Returns address of Opium.SyntheticAggregator
 
 
 
-### <span id="Registry-getOpiumAddress--"></span> `getOpiumAddress() → address result` (external)
-
-Returns address of Opium commission receiver
-
-
-
-
 ### <span id="Registry-getTokenSpender--"></span> `getTokenSpender() → address result` (external)
 
 Returns address of Opium.TokenSpender
+
+
+
+
+### <span id="Registry-getOpiumAddress--"></span> `getOpiumAddress() → address result` (external)
+
+Returns address of Opium commission receiver
 
 
 
@@ -1590,7 +1568,7 @@ Checks whether `syntheticId` implements pooled logic
 
 
 
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`nonReentrant()`][ReentrancyGuard-nonReentrant--]
 - [`isOperatorOrOwner(address _from)`][ERC721OBase-isOperatorOrOwner-address-]
 - [`constructor(string _baseTokenURI, address _registry)`][TokenMinter-constructor-string-address-]
@@ -1601,6 +1579,7 @@ Checks whether `syntheticId` implements pooled logic
 - [`symbol()`][TokenMinter-symbol--]
 - [`isApprovedOrOwner(address _spender, address _owner, uint256 _tokenId)`][TokenMinter-isApprovedOrOwner-address-address-uint256-]
 - [`isOpiumSpender(address _spender)`][TokenMinter-isOpiumSpender-address-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
 - [`implementsERC721()`][ERC721OBackwardCompatible-implementsERC721--]
 - [`ownerOf(uint256 _tokenId)`][ERC721OBackwardCompatible-ownerOf-uint256-]
 - [`balanceOf(address _owner)`][ERC721OBackwardCompatible-balanceOf-address-]
@@ -1637,13 +1616,14 @@ Checks whether `syntheticId` implements pooled logic
 - [`totalSupply()`][ERC721OBase-totalSupply--]
 - [`tokensOwned(address _owner)`][ERC721OBase-tokensOwned-address-]
 - [`setApprovalForAll(address _operator, bool _approved)`][ERC721OBase-setApprovalForAll-address-bool-]
+- [`permit(address _holder, address _spender, uint256 _nonce, uint256 _expiry, bool _allowed, bytes _signature)`][ERC721OBase-permit-address-address-uint256-uint256-bool-bytes-]
 - [`approve(address _to, uint256 _tokenId)`][ERC721OBase-approve-address-uint256-]
 - [`getApproved(uint256 _tokenId, address _tokenOwner)`][ERC721OBase-getApproved-uint256-address-]
 - [`isApprovedForAll(address _owner, address _operator)`][ERC721OBase-isApprovedForAll-address-address-]
 - [`_updateTokenBalance(address _from, uint256 _tokenId, uint256 _amount, enum ObjectLib.Operations op)`][ERC721OBase-_updateTokenBalance-address-uint256-uint256-enum-ObjectLib-Operations-]
 - [`supportsInterface(bytes4 interfaceId)`][ERC165-supportsInterface-bytes4-]
 - [`_registerInterface(bytes4 interfaceId)`][ERC165-_registerInterface-bytes4-]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 - [`Transfer(address from, address to, uint256 tokenId)`][IERC721-Transfer-address-address-uint256-]
 - [`Approval(address owner, address approved, uint256 tokenId)`][IERC721-Approval-address-address-uint256-]
 - [`ApprovalForAll(address owner, address operator, bool approved)`][IERC721-ApprovalForAll-address-address-bool-]
@@ -1756,6 +1736,50 @@ Using this function whitelisted contracts could call ERC721O transfers
 
 
 
+## <span id="DummySyntheticIdMock"></span> `DummySyntheticIdMock`
+
+
+
+
+
+- [`validateInput(struct LibDerivative.Derivative _derivative)`][DummySyntheticIdMock-validateInput-struct-LibDerivative-Derivative-]
+- [`getMargin(struct LibDerivative.Derivative _derivative)`][DummySyntheticIdMock-getMargin-struct-LibDerivative-Derivative-]
+- [`getExecutionPayout(struct LibDerivative.Derivative _derivative, uint256 _result)`][DummySyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-]
+- [`isPool()`][DummySyntheticIdMock-isPool--]
+- [`constructor()`][HasCommission-constructor--]
+- [`getAuthorAddress()`][HasCommission-getAuthorAddress--]
+- [`getAuthorCommission()`][HasCommission-getAuthorCommission--]
+- [`thirdpartyExecutionAllowed(address derivativeOwner)`][ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]
+- [`allowThirdpartyExecution(bool allow)`][ExecutableByThirdParty-allowThirdpartyExecution-bool-]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+- [`MetadataSet(string metadata)`][IDerivativeLogic-MetadataSet-string-]
+
+### <span id="DummySyntheticIdMock-validateInput-struct-LibDerivative-Derivative-"></span> `validateInput(struct LibDerivative.Derivative _derivative) → bool` (public)
+
+
+
+
+
+### <span id="DummySyntheticIdMock-getMargin-struct-LibDerivative-Derivative-"></span> `getMargin(struct LibDerivative.Derivative _derivative) → uint256 buyerMargin, uint256 sellerMargin` (public)
+
+
+
+
+
+### <span id="DummySyntheticIdMock-getExecutionPayout-struct-LibDerivative-Derivative-uint256-"></span> `getExecutionPayout(struct LibDerivative.Derivative _derivative, uint256 _result) → uint256 buyerPayout, uint256 sellerPayout` (public)
+
+
+
+
+
+### <span id="DummySyntheticIdMock-isPool--"></span> `isPool() → bool` (public)
+
+
+
+
+
+
+
 ## <span id="OptionCallSyntheticIdMock"></span> `OptionCallSyntheticIdMock`
 
 
@@ -1806,13 +1830,14 @@ Using this function whitelisted contracts could call ERC721O transfers
 
 
 
-- [`onlyCore()`][usingRegistry-onlyCore--]
+- [`onlyCore()`][UsingRegistry-onlyCore--]
 - [`constructor(uint256 _fetchPrice, address _registry)`][OracleIdMock-constructor-uint256-address-]
 - [`triggerCallback(uint256 timestamp, uint256 returnData)`][OracleIdMock-triggerCallback-uint256-uint256-]
 - [`fetchData(uint256 timestamp)`][OracleIdMock-fetchData-uint256-]
 - [`recursivelyFetchData(uint256 timestamp, uint256 period, uint256 times)`][OracleIdMock-recursivelyFetchData-uint256-uint256-uint256-]
 - [`calculateFetchPrice()`][OracleIdMock-calculateFetchPrice--]
-- [`RegistrySet(address registry)`][usingRegistry-RegistrySet-address-]
+- [`getRegistry()`][UsingRegistry-getRegistry--]
+- [`RegistrySet(address registry)`][UsingRegistry-RegistrySet-address-]
 - [`MetadataSet(string metadata)`][IOracleId-MetadataSet-string-]
 
 ### <span id="OracleIdMock-constructor-uint256-address-"></span> `constructor(uint256 _fetchPrice, address _registry)` (public)

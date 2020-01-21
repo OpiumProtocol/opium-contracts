@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibEIP712.sol";
@@ -103,7 +103,7 @@ contract LibOrder is LibEIP712 {
     /// @notice Hashes the order
     /// @param _order Order Order to hash
     /// @return hash bytes32 Order hash
-    function hashOrder(Order memory _order) internal pure returns (bytes32 hash) {
+    function hashOrder(Order memory _order) public pure returns (bytes32 hash) {
         hash = keccak256(
             abi.encodePacked(
                 abi.encodePacked(

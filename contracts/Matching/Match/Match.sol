@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "./MatchCreate.sol";
@@ -9,5 +9,5 @@ contract Match is MatchCreate, MatchSwap {
 
     /// @notice Calls constructors of super-contracts
     /// @param _registry address Address of Opium.registry
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
 }

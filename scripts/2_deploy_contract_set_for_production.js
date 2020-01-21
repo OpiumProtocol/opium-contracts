@@ -1,7 +1,7 @@
 /*
 ////////////////////////////////////
 ////                            ////
-////    MIGRATIONS FOR TESTS    ////
+//// MIGRATIONS FOR PRODUCTION  ////
 ////                            ////
 ////////////////////////////////////
 */
@@ -19,13 +19,8 @@ const Match = artifacts.require('Match')
 const MatchPool = artifacts.require('MatchPool')
 const SwaprateMatch = artifacts.require('SwaprateMatch')
 
-// Test helpers
-const OptionCallSyntheticIdMock = artifacts.require('OptionCallSyntheticIdMock')
-const DummySyntheticIdMock = artifacts.require('DummySyntheticIdMock')
-const TestToken = artifacts.require('TestToken')
-const WETH = artifacts.require('WETH')
-
 const baseTokenURI = 'https://explorer.opium.network/erc721o/'
+const governor = 'SET_GOVERNOR_ADDRESS_HERE'
 
 // Deployment functions
 const deployAndLinkLibPosition = async ({ deployer, opiumDeployerAddress }) => {
@@ -82,12 +77,15 @@ const deploySwaprateMatch = async ({ deployer, opiumDeployerAddress, registryIns
     return swaprateMatchInstance
 }
 
-const deployTokenSpender = async ({ deployer, opiumDeployerAddress, governor, whitelist }) => {
+const deployTokenSpender = async ({ deployer, opiumDeployerAddress }) => {
     const tokenSpenderInstance = await deployer.deploy(TokenSpender, governor, { from: opiumDeployerAddress })
     console.log('- TokenSpender was deployed at', tokenSpenderInstance.address)
 
-    await tokenSpenderInstance.proposeWhitelist(whitelist, { from: governor })
-    console.log('TokenSpender whitelist was set')
+    console.log('=====================================')
+    console.log('=====================================')
+    console.log('== !!!SET WHITELIST BY GOVERNOR!!! ==')
+    console.log('=====================================')
+    console.log('=====================================')
 
     return tokenSpenderInstance
 }
@@ -126,20 +124,6 @@ const initializeRegistry = async ({ opiumDeployerAddress, registryInstance, toke
     console.log('Registry was initialized')
 }
 
-const deployMocks = async ({ deployer, opiumDeployerAddress }) => {
-    const optionCallSyntheticIdMockInstance = await deployer.deploy(OptionCallSyntheticIdMock, { from: opiumDeployerAddress })
-    console.log('**** OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMockInstance.address)
-    
-    const dummySyntheticIdMockInstance = await deployer.deploy(DummySyntheticIdMock, { from: opiumDeployerAddress })
-    console.log('**** DummySyntheticIdMock was deployed at', dummySyntheticIdMockInstance.address)
-    
-    const daiInstance = await deployer.deploy(TestToken, 'Opium DAI Token', 'DAI', 18, { from: opiumDeployerAddress })
-    console.log('**** DAI was deployed at', daiInstance.address)
-
-    const wethInstance = await deployer.deploy(WETH, { from: opiumDeployerAddress })
-    console.log('**** WETH was deployed at', wethInstance.address)
-}
-
 module.exports = async function(deployer, network, accounts) {
     const opiumDeployerAddress = accounts[0]
 
@@ -149,21 +133,16 @@ module.exports = async function(deployer, network, accounts) {
         const registryInstance = await deployRegistry({ deployer, opiumDeployerAddress })
 
         const coreInstance = await deployCore({ deployer, opiumDeployerAddress, registryInstance })
-        const matchInstance = await deployMatch({ deployer, opiumDeployerAddress, registryInstance })
-        const matchPoolInstance = await deployMatchPool({ deployer, opiumDeployerAddress, registryInstance })
-        const swaprateMatchInstance = await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance })
+        await deployMatch({ deployer, opiumDeployerAddress, registryInstance })
+        await deployMatchPool({ deployer, opiumDeployerAddress, registryInstance })
+        await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance })
 
-        const governor = opiumDeployerAddress
-        const whitelist = [ coreInstance.address, matchInstance.address, matchPoolInstance.address, swaprateMatchInstance.address ]
-        const tokenSpenderInstance = await deployTokenSpender({ deployer, opiumDeployerAddress, governor, whitelist })
+        const tokenSpenderInstance = await deployTokenSpender({ deployer, opiumDeployerAddress })
 
         const tokenMinterInstance = await deployTokenMinter({ deployer, opiumDeployerAddress, registryInstance })
         const oracleAggregatorInstance = await deployOracleAggregator({ deployer, opiumDeployerAddress })
         const syntheticAggregatorInstance = await deploySyntheticAggregator({ deployer, opiumDeployerAddress })
 
         await initializeRegistry({ opiumDeployerAddress, registryInstance, tokenMinterInstance, coreInstance, oracleAggregatorInstance, syntheticAggregatorInstance, tokenSpenderInstance })
-        
-        // Contracts for testing purpose
-        await deployMocks({ deployer, opiumDeployerAddress })
     })
 }

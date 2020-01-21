@@ -1,13 +1,13 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 
 import "../Interface/IOracleId.sol";
-import "../Lib/usingRegistry.sol";
+import "../Lib/UsingRegistry.sol";
 import "../OracleAggregator.sol";
 
-contract OracleIdMock is IOracleId, usingRegistry {
+contract OracleIdMock is IOracleId, UsingRegistry {
     uint256 fetchPrice;
 
-    constructor(uint256 _fetchPrice, address _registry) public usingRegistry(_registry) {
+    constructor(uint256 _fetchPrice, address _registry) public UsingRegistry(_registry) {
         fetchPrice = _fetchPrice;
     }
 

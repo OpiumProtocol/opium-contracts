@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibDerivative.sol";
@@ -14,11 +14,11 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
     // Orders filled quantity
     // This mapping holds orders filled quantity
     // filled[orderHash] => filled
-    mapping (bytes32 => uint256) filled;
+    mapping (bytes32 => uint256) public filled;
 
     /// @notice Calls constructors of super-contracts
     /// @param _registry address Address of Opium.registry
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
     
     /// @notice This function receives left and right orders, derivative related to it
     /// @param _leftOrder Order
@@ -47,11 +47,11 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
         // orderHashes[1] - rightOrderHash
         bytes32[2] memory orderHashes;
         orderHashes[0] = hashOrder(_leftOrder);
-        validateCanceled(orderHashes[0]);
+        validateNotCanceled(orderHashes[0]);
         validateSignature(orderHashes[0], _leftOrder);
 
         orderHashes[1] = hashOrder(_rightOrder);
-        validateCanceled(orderHashes[1]);
+        validateNotCanceled(orderHashes[1]);
         validateSignature(orderHashes[1], _rightOrder);
 
         // Calculate derivative hash and get margin

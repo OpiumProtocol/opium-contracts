@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "../../Lib/LibDerivative.sol";
@@ -9,7 +9,7 @@ import "../../SyntheticAggregator.sol";
 import "./MatchLogic.sol";
 
 contract MatchPool is MatchLogic, LibDerivative {
-    constructor (address _registry) public usingRegistry(_registry) {}
+    constructor (address _registry) public UsingRegistry(_registry) {}
     
     function create(Order memory _buyOrder, Derivative memory _derivative) public nonReentrant {
         // PROBABLY TODO: Implement subtraction "Relayer" order and subtract before all
@@ -32,7 +32,7 @@ contract MatchPool is MatchLogic, LibDerivative {
         // Validate if was canceled
         bytes32 orderHash;
         orderHash = hashOrder(_buyOrder);
-        validateCanceled(orderHash);
+        validateNotCanceled(orderHash);
         validateSignature(orderHash, _buyOrder);
 
         uint256 margin = calculatePool(_buyOrder, _derivative);

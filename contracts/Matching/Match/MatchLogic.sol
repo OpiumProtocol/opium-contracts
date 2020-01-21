@@ -1,13 +1,14 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import "erc721o/contracts/Libs/LibPosition.sol";
 
-import "../../Lib/usingRegistry.sol";
+import "../../Lib/UsingRegistry.sol";
 
 import "../../Errors/MatchingErrors.sol";
 
@@ -18,9 +19,10 @@ import "../../Core.sol";
 import "../../SyntheticAggregator.sol";
 
 /// @title Opium.Matching.MatchLogic contract implements logic for order validation and cancelation
-contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard {
+contract MatchLogic is MatchingErrors, LibOrder, UsingRegistry, ReentrancyGuard {
     using SafeMath for uint256;
     using LibPosition for bytes32;
+    using SafeERC20 for IERC20;
 
     // Emmitted when order was canceled
     event Canceled(bytes32 orderHash);
@@ -67,12 +69,12 @@ contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard 
     function withdraw(IERC20 _token) public nonReentrant {
         uint256 balance = balances[msg.sender][address(_token)];
         balances[msg.sender][address(_token)] = 0;
-        _token.transfer(msg.sender, balance);
+        _token.safeTransfer(msg.sender, balance);
     }
 
     /// @notice This function checks whether order was canceled
     /// @param _hash bytes32 Hash of the order
-    function validateCanceled(bytes32 _hash) internal view {
+    function validateNotCanceled(bytes32 _hash) internal view {
         require(!canceled[_hash], ERROR_MATCH_ORDER_WAS_CANCELED);
     }
 
@@ -147,23 +149,29 @@ contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard 
         // Create instance of fee token
         IERC20 feeToken = IERC20(_order.feeTokenAddress);
 
+        // Create instance of TokenSpender
+        TokenSpender tokenSpender = TokenSpender(registry.getTokenSpender());
+
         // Check if user has enough token approval to pay the fees
-        require(feeToken.allowance(_order.makerAddress, registry.getTokenSpender()) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
+        require(feeToken.allowance(_order.makerAddress, address(tokenSpender)) >= fees, ERROR_MATCH_NOT_ENOUGH_ALLOWED_FEES);
         // Transfer fee
-        TokenSpender(registry.getTokenSpender()).claimTokens(feeToken, _order.makerAddress, address(this), fees);
+        tokenSpender.claimTokens(feeToken, _order.makerAddress, address(this), fees);
+
+        // Get opium address
+        address opiumAddress = registry.getOpiumAddress();
 
         // Add commission to relayer balance, or to opium balance if relayer is not set
         if (_order.relayerAddress != address(0)) {
             balances[_order.relayerAddress][_order.feeTokenAddress] = balances[_order.relayerAddress][_order.feeTokenAddress].add(_order.relayerFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.relayerFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.relayerFee);
         }
 
         // Add commission to affiliate balance, or to opium balance if affiliate is not set
         if (_order.affiliateAddress != address(0)) {
             balances[_order.affiliateAddress][_order.feeTokenAddress] = balances[_order.affiliateAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         } else {
-            balances[registry.getOpiumAddress()][_order.feeTokenAddress] = balances[registry.getOpiumAddress()][_order.feeTokenAddress].add(_order.affiliateFee);
+            balances[opiumAddress][_order.feeTokenAddress] = balances[opiumAddress][_order.feeTokenAddress].add(_order.affiliateFee);
         }
 
         // Mark the fee of token as taken
@@ -184,7 +192,12 @@ contract MatchLogic is MatchingErrors, LibOrder, usingRegistry, ReentrancyGuard 
     /// @param _denominator uint256 Denominator of division
     /// @return divisionPercentage uint256 Percentage of division
     function getDivisionPercentage(uint256 _numerator, uint256 _denominator) internal pure returns (uint256 divisionPercentage) {
-        divisionPercentage = _numerator.mul(PERCENTAGE_BASE).div(_denominator);
+        divisionPercentage = _numerator.mul(PERCENTAGE_BASE).div(_denominator).add(1);
+
+        // In case of numerator > denominator consider as 100%
+        if (divisionPercentage > PERCENTAGE_BASE) {
+            divisionPercentage = PERCENTAGE_BASE;
+        }
     }
 
     /// @notice Helper to recover numerator from percentage of division in base of PERCENTAGE_BASE

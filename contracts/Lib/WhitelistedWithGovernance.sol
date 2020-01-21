@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 
 import "./Whitelisted.sol";
 
@@ -13,16 +13,14 @@ contract WhitelistedWithGovernance is Whitelisted {
     event Committed(address[] whitelist);
 
     // Proposal life timelock interval
-    uint256 public TIME_LOCK_INTERVAL;
+    uint256 public timeLockInterval;
 
     // Governor address
     address public governor;
 
-    // Contract initialization flag
-    bool public initialized = false;
-
     // Timestamp of last proposal
-    uint256 public proposalTime = 0;
+    uint256 public proposalTime;
+
     // Proposed whitelist
     address[] public proposedWhitelist;
 
@@ -36,7 +34,7 @@ contract WhitelistedWithGovernance is Whitelisted {
     /// @param _timeLockInterval uint256 Initial value for timelock interval
     /// @param _governor address Initial value for governor
     constructor(uint256 _timeLockInterval, address _governor) public {
-        TIME_LOCK_INTERVAL = _timeLockInterval;
+        timeLockInterval = _timeLockInterval;
         governor = _governor;
         emit GovernorSet(governor);
     }
@@ -46,17 +44,17 @@ contract WhitelistedWithGovernance is Whitelisted {
         // Restrict empty proposals
         require(_whitelist.length != 0, "Can't be empty");
 
+        // Consider empty whitelist as not initialized, as proposing of empty whitelists is not allowed
         // If whitelist has never been initialized, we set whitelist right away without proposal
-        if (!initialized) {
-            initialized = true;
+        if (whitelist.length == 0) {
             whitelist = _whitelist;
-            emit Committed(whitelist);
+            emit Committed(_whitelist);
 
         // Otherwise save current time as timestamp of proposal, save proposed whitelist and emit event
         } else {
             proposalTime = now;
             proposedWhitelist = _whitelist;
-            emit Proposed(proposedWhitelist);
+            emit Proposed(_whitelist);
         }
     }
 
@@ -66,7 +64,7 @@ contract WhitelistedWithGovernance is Whitelisted {
         require(proposalTime != 0, "Didn't proposed yet");
 
         // Check if timelock interval was passed
-        require((proposalTime + TIME_LOCK_INTERVAL) < now, "Can't commit yet");
+        require((proposalTime + timeLockInterval) < now, "Can't commit yet");
         
         // Set new whitelist and emit event
         whitelist = proposedWhitelist;
@@ -79,6 +77,7 @@ contract WhitelistedWithGovernance is Whitelisted {
     /// @notice This function allows governor to transfer governance to a new governor and emits event
     /// @param _governor address Address of new governor
     function setGovernor(address _governor) public onlyGovernor {
+        require(_governor != address(0), "Can't set zero address");
         governor = _governor;
         emit GovernorSet(governor);
     }

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 
 /// @title Opium.Lib.Whitelisted contract implements whitelist with modifier to restrict access to only whitelisted addresses
 contract Whitelisted {
@@ -11,7 +11,8 @@ contract Whitelisted {
         bool allowed = false;
 
         // Going through whitelisted addresses array
-        for (uint256 i = 0; i < whitelist.length; i++) {
+        uint256 whitelistLength = whitelist.length;
+        for (uint256 i = 0; i < whitelistLength; i++) {
             // If `msg.sender` is met within whitelisted addresses, raise the flag and exit the loop
             if (whitelist[i] == msg.sender) {
                 allowed = true;

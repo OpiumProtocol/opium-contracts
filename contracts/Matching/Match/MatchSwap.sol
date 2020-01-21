@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity 0.5.16;
 pragma experimental ABIEncoderV2;
 
 import "./MatchLogic.sol";
@@ -38,11 +38,11 @@ contract MatchSwap is MatchLogic {
         // orderHashes[1] - rightOrderHash
         bytes32[2] memory orderHashes;
         orderHashes[0] = hashOrder(_leftOrder);
-        validateCanceled(orderHashes[0]);
+        validateNotCanceled(orderHashes[0]);
         validateSignature(orderHashes[0], _leftOrder);
 
         orderHashes[1] = hashOrder(_rightOrder);
-        validateCanceled(orderHashes[1]);
+        validateNotCanceled(orderHashes[1]);
         validateSignature(orderHashes[1], _rightOrder);
 
         // Validate if values are correct
@@ -134,13 +134,13 @@ contract MatchSwap is MatchLogic {
         leftFilledPercents[0] = leftInitial[0] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[0].add(rightFill[0]), leftInitial[0]);
         leftFilledPercents[1] = leftInitial[1] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(leftAlreadyFilled[1].add(rightFill[1]), leftInitial[1]);
 
-        filled[_leftOrderHash] = min(leftFilledPercents[0], leftFilledPercents[1]).add(1);
+        filled[_leftOrderHash] = min(leftFilledPercents[0], leftFilledPercents[1]);
 
         uint256[2] memory rightFilledPercents;
         rightFilledPercents[0] = rightInitial[0] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled[0].add(leftFill[0]), rightInitial[0]);
         rightFilledPercents[1] = rightInitial[1] == 0 ? PERCENTAGE_BASE : getDivisionPercentage(rightAlreadyFilled[1].add(leftFill[1]), rightInitial[1]);
 
-        filled[_rightOrderHash] = min(rightFilledPercents[0], rightFilledPercents[1]).add(1);
+        filled[_rightOrderHash] = min(rightFilledPercents[0], rightFilledPercents[1]);
     }
 
     /// @notice Validate order properties and distribute tokens and margins
