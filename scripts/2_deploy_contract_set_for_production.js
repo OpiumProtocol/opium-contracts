@@ -20,7 +20,7 @@ const MatchPool = artifacts.require('MatchPool')
 const SwaprateMatch = artifacts.require('SwaprateMatch')
 
 const baseTokenURI = 'https://explorer.opium.network/erc721o/'
-const governor = 'SET_GOVERNOR_ADDRESS_HERE'
+let governor = '0xF80D12E55F6cdA587a26a05f2e6477054e8255e5'
 
 // Deployment functions
 const deployAndLinkLibPosition = async ({ deployer, opiumDeployerAddress }) => {
@@ -87,6 +87,12 @@ const deployTokenSpender = async ({ deployer, opiumDeployerAddress }) => {
     console.log('=====================================')
     console.log('=====================================')
 
+    console.log('=====================================')
+    console.log('=====================================')
+    console.log('===== !!!SET LONGER TIMELOCK!!! =====')
+    console.log('=====================================')
+    console.log('=====================================')
+
     return tokenSpenderInstance
 }
 
@@ -118,13 +124,18 @@ const initializeRegistry = async ({ opiumDeployerAddress, registryInstance, toke
         oracleAggregatorInstance.address,
         syntheticAggregatorInstance.address,
         tokenSpenderInstance.address,
-        opiumDeployerAddress,
+        governor,
         { from: opiumDeployerAddress }
     )
     console.log('Registry was initialized')
+    console.log('Opium Commission Address = ', governor)
 }
 
 module.exports = async function(deployer, network, accounts) {
+    if (network.indexOf('rinkeby') === 0) {
+        governor = '0x2083fC00Ad9a17B9073b10B520Dcf936a14eaA05'
+    }
+
     const opiumDeployerAddress = accounts[0]
 
     deployer.then(async () => {
