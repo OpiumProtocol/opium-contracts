@@ -1,0 +1,44 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SyntheticAggregator
+    network: mainnet
+    source:
+      address: "0x3a943C50Bcde3E357916ce6E109626213Fd36105"
+      abi: SyntheticAggregator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: SyntheticAggregator
+          file: ./abis/SyntheticAggregator.json
+        - name: LibPosition
+          file: ./abis/LibPosition.json
+      eventHandlers:
+        - event: Create((uint256,uint256,uint256[],address,address,address),bytes32)
+          handler: handleCreate
+      file: ./src/mappingSyntheticAggregator.ts
+  - kind: ethereum/contract
+    name: TokenMinter
+    network: mainnet
+    source:
+      address: "0x9Dd91d61A7aa58537fCdbf16fD21bE25731341B3"
+      abi: TokenMinter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: TokenMinter
+          file: ./abis/TokenMinter.json
+      eventHandlers:
+        - event: TransferWithQuantity(indexed address,indexed address,indexed uint256,uint256)
+          handler: handleTransferWithQuantity
+      file: ./src/mappingTokenMinter.ts

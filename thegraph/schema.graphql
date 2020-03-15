@@ -1,0 +1,41 @@
+type Ticker @entity {
+  """Ticker hash"""
+  id: ID!
+
+  margin: BigInt!
+  endTime: BigInt!
+  params: [BigInt!]!
+  oracleId: String!
+  token: String!
+  syntheticId: String!
+
+  longTokenId: TokenId!
+  shortTokenId: TokenId!
+
+  tokenIds: [TokenId!]! @derivedFrom(field: "ticker")
+}
+
+type TokenId @entity {
+  """Token ID"""
+  id: ID!
+
+  ticker: Ticker!
+
+  positions: [Position!]! @derivedFrom(field: "tokenId")
+}
+
+type Position @entity {
+  """User address + tokenId """
+  id: ID!
+
+  user: User!
+  tokenId: TokenId!
+  amount: BigInt!
+}
+
+type User @entity {
+  """User address"""
+  id: ID!
+
+  positions: [Position!]! @derivedFrom(field: "user")
+}
