@@ -69,58 +69,31 @@ export class Ticker extends Entity {
     this.set("params", Value.fromBigIntArray(value));
   }
 
-  get oracleId(): string {
+  get oracleId(): Bytes {
     let value = this.get("oracleId");
-    return value.toString();
+    return value.toBytes();
   }
 
-  set oracleId(value: string) {
-    this.set("oracleId", Value.fromString(value));
+  set oracleId(value: Bytes) {
+    this.set("oracleId", Value.fromBytes(value));
   }
 
-  get token(): string {
+  get token(): Bytes {
     let value = this.get("token");
-    return value.toString();
+    return value.toBytes();
   }
 
-  set token(value: string) {
-    this.set("token", Value.fromString(value));
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
   }
 
-  get syntheticId(): string {
+  get syntheticId(): Bytes {
     let value = this.get("syntheticId");
-    return value.toString();
+    return value.toBytes();
   }
 
-  set syntheticId(value: string) {
-    this.set("syntheticId", Value.fromString(value));
-  }
-
-  get longTokenId(): string {
-    let value = this.get("longTokenId");
-    return value.toString();
-  }
-
-  set longTokenId(value: string) {
-    this.set("longTokenId", Value.fromString(value));
-  }
-
-  get shortTokenId(): string {
-    let value = this.get("shortTokenId");
-    return value.toString();
-  }
-
-  set shortTokenId(value: string) {
-    this.set("shortTokenId", Value.fromString(value));
-  }
-
-  get tokenIds(): Array<string> {
-    let value = this.get("tokenIds");
-    return value.toStringArray();
-  }
-
-  set tokenIds(value: Array<string>) {
-    this.set("tokenIds", Value.fromStringArray(value));
+  set syntheticId(value: Bytes) {
+    this.set("syntheticId", Value.fromBytes(value));
   }
 }
 
@@ -152,15 +125,6 @@ export class TokenId extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get ticker(): string {
-    let value = this.get("ticker");
-    return value.toString();
-  }
-
-  set ticker(value: string) {
-    this.set("ticker", Value.fromString(value));
   }
 
   get positions(): Array<string> {

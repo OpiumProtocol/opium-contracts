@@ -5,21 +5,21 @@ type Ticker @entity {
   margin: BigInt!
   endTime: BigInt!
   params: [BigInt!]!
-  oracleId: String!
-  token: String!
-  syntheticId: String!
+  oracleId: Bytes!
+  token: Bytes!
+  syntheticId: Bytes!
 
-  longTokenId: TokenId!
-  shortTokenId: TokenId!
+  # longTokenId: TokenId!
+  # shortTokenId: TokenId!
 
-  tokenIds: [TokenId!]! @derivedFrom(field: "ticker")
+  # tokenIds: [TokenId!]! @derivedFrom(field: "ticker")
 }
 
 type TokenId @entity {
   """Token ID"""
   id: ID!
 
-  ticker: Ticker!
+  # ticker: Ticker!
 
   positions: [Position!]! @derivedFrom(field: "tokenId")
 }
