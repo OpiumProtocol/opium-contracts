@@ -1,4 +1,4 @@
-import { Address, log } from "@graphprotocol/graph-ts"
+import { Address } from "@graphprotocol/graph-ts"
 
 import { LibPosition } from "../generated/SyntheticAggregator/LibPosition"
 import { Create } from "../generated/SyntheticAggregator/SyntheticAggregator"
@@ -22,16 +22,20 @@ export function handleCreate(event: Create): void {
   ticker.token = event.params.derivative.token
   ticker.syntheticId = event.params.derivative.syntheticId
 
-  // let longTokenIdBigInt = libPosition.getLongTokenId(event.params.derivativeHash)
-  // let longTokenId = getTokenId(longTokenIdBigInt)
-  // ticker.longTokenId = longTokenId.id
+  let longTokenIdBigInt = libPosition.getLongTokenId(event.params.derivativeHash)
 
-  // let shortTokenIdBigInt = libPosition.getShortTokenId(event.params.derivativeHash)
-  // let shortTokenId = getTokenId(shortTokenIdBigInt)
-  // ticker.shortTokenId = shortTokenId.id
+  let longTokenId = getTokenId(longTokenIdBigInt)
+  longTokenId.ticker = ticker.id
+  longTokenId.save()
+  ticker.longTokenId = longTokenId.id
 
-  // log.error('Long token id = {}', [longTokenIdBigInt.toString()])
-  // log.error('Short token id = {}', [shortTokenIdBigInt.toString()])
+  let shortTokenIdBigInt = libPosition.getShortTokenId(event.params.derivativeHash)
+
+  let shortTokenId = getTokenId(shortTokenIdBigInt)
+  shortTokenId.ticker = ticker.id
+  shortTokenId.save()
+
+  ticker.shortTokenId = shortTokenId.id
 
   ticker.save()
 }

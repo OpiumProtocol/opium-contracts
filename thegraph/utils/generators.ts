@@ -26,6 +26,22 @@ export const getUser = (address: Address): User => {
   return user as User
 }
 
+export const getTokenId = (id: BigInt): TokenId => {
+  let tokenIdString = id.toString()
+
+  let tokenId = TokenId.load(tokenIdString)
+
+  if (tokenId === null) {
+    tokenId = new TokenId(tokenIdString)
+
+    tokenId.ticker = ''
+
+    tokenId.save()
+  }
+
+  return tokenId as TokenId
+}
+
 export const getTicker = (hash: Bytes): Ticker => {
   let tickerId = hash.toHex()
 
@@ -39,23 +55,13 @@ export const getTicker = (hash: Bytes): Ticker => {
     ticker.oracleId = zeroAddress()
     ticker.token = zeroAddress()
     ticker.syntheticId = zeroAddress()
+
+    ticker.longTokenId = ''
+    ticker.shortTokenId = ''
     ticker.save()
   }
 
   return ticker as Ticker
-}
-
-export const getTokenId = (id: BigInt): TokenId => {
-  let tokenIdString = id.toString()
-
-  let tokenId = TokenId.load(tokenIdString)
-
-  if (tokenId === null) {
-    tokenId = new TokenId(tokenIdString)
-    tokenId.save()
-  }
-
-  return tokenId as TokenId
 }
 
 export const getPosition = (userAddress: Address, tokenId: BigInt): Position => {

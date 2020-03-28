@@ -95,6 +95,33 @@ export class Ticker extends Entity {
   set syntheticId(value: Bytes) {
     this.set("syntheticId", Value.fromBytes(value));
   }
+
+  get longTokenId(): string {
+    let value = this.get("longTokenId");
+    return value.toString();
+  }
+
+  set longTokenId(value: string) {
+    this.set("longTokenId", Value.fromString(value));
+  }
+
+  get shortTokenId(): string {
+    let value = this.get("shortTokenId");
+    return value.toString();
+  }
+
+  set shortTokenId(value: string) {
+    this.set("shortTokenId", Value.fromString(value));
+  }
+
+  get tokenIds(): Array<string> {
+    let value = this.get("tokenIds");
+    return value.toStringArray();
+  }
+
+  set tokenIds(value: Array<string>) {
+    this.set("tokenIds", Value.fromStringArray(value));
+  }
 }
 
 export class TokenId extends Entity {
@@ -125,6 +152,15 @@ export class TokenId extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get ticker(): string {
+    let value = this.get("ticker");
+    return value.toString();
+  }
+
+  set ticker(value: string) {
+    this.set("ticker", Value.fromString(value));
   }
 
   get positions(): Array<string> {
