@@ -5,12 +5,14 @@ import { Create } from "../generated/SyntheticAggregator/SyntheticAggregator"
 
 import {
   getTokenId,
-  getTicker
+  getTicker,
+  getTx
 } from "../utils/generators"
 
 const LibPositionAddress = '0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20'
 
 export function handleCreate(event: Create): void {
+  // Ticker
   let libPosition = LibPosition.bind(Address.fromString(LibPositionAddress))
 
   let ticker = getTicker(event.params.derivativeHash)
@@ -38,4 +40,11 @@ export function handleCreate(event: Create): void {
   ticker.shortTokenId = shortTokenId.id
 
   ticker.save()
+
+  // Tx
+  let txHash = event.transaction.hash
+
+  let tx = getTx(txHash)
+  tx.ticker = ticker.id
+  tx.save()
 }

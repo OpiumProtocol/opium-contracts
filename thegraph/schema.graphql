@@ -1,3 +1,13 @@
+## General
+type Tx @entity {
+  """tx hash"""
+  id: ID!
+
+  """Ticker created at this tx"""
+  ticker: Ticker!
+}
+
+## Opium
 type Ticker @entity {
   """Ticker hash"""
   id: ID!
@@ -38,4 +48,18 @@ type User @entity {
   id: ID!
 
   positions: [Position!]! @derivedFrom(field: "user")
+
+  fixedRateCompoundDeposits: [FixedRateCompoundDeposit!]! @derivedFrom(field: "user")
+}
+
+## FixedRate
+type FixedRateCompoundDeposit @entity {
+  """User address + depositId"""
+  id: ID!
+
+  depositId: BigInt!
+  user: User!
+  cToken: Bytes!
+  cTokenAmount: BigInt!
+  tx: Tx!
 }

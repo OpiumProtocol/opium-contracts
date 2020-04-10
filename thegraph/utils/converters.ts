@@ -7,3 +7,7 @@ export function zeroBI(): BigInt {
 export function zeroAddress(): Bytes {
   return Bytes.fromHexString('0x0000000000000000000000000000000000000000') as Bytes;
 }
+
+export function zeroHash(): Bytes {
+  return Bytes.fromI32(0) as Bytes;
+}

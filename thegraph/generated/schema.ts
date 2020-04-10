@@ -12,6 +12,46 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
+export class Tx extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Tx entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Tx entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Tx", id.toString(), this);
+  }
+
+  static load(id: string): Tx | null {
+    return store.get("Tx", id) as Tx | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get ticker(): string {
+    let value = this.get("ticker");
+    return value.toString();
+  }
+
+  set ticker(value: string) {
+    this.set("ticker", Value.fromString(value));
+  }
+}
+
 export class Ticker extends Entity {
   constructor(id: string) {
     super();
@@ -268,5 +308,96 @@ export class User extends Entity {
 
   set positions(value: Array<string>) {
     this.set("positions", Value.fromStringArray(value));
+  }
+
+  get fixedRateCompoundDeposits(): Array<string> {
+    let value = this.get("fixedRateCompoundDeposits");
+    return value.toStringArray();
+  }
+
+  set fixedRateCompoundDeposits(value: Array<string>) {
+    this.set("fixedRateCompoundDeposits", Value.fromStringArray(value));
+  }
+}
+
+export class FixedRateCompoundDeposit extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id !== null,
+      "Cannot save FixedRateCompoundDeposit entity without an ID"
+    );
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save FixedRateCompoundDeposit entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("FixedRateCompoundDeposit", id.toString(), this);
+  }
+
+  static load(id: string): FixedRateCompoundDeposit | null {
+    return store.get(
+      "FixedRateCompoundDeposit",
+      id
+    ) as FixedRateCompoundDeposit | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get depositId(): BigInt {
+    let value = this.get("depositId");
+    return value.toBigInt();
+  }
+
+  set depositId(value: BigInt) {
+    this.set("depositId", Value.fromBigInt(value));
+  }
+
+  get user(): string {
+    let value = this.get("user");
+    return value.toString();
+  }
+
+  set user(value: string) {
+    this.set("user", Value.fromString(value));
+  }
+
+  get cToken(): Bytes {
+    let value = this.get("cToken");
+    return value.toBytes();
+  }
+
+  set cToken(value: Bytes) {
+    this.set("cToken", Value.fromBytes(value));
+  }
+
+  get cTokenAmount(): BigInt {
+    let value = this.get("cTokenAmount");
+    return value.toBigInt();
+  }
+
+  set cTokenAmount(value: BigInt) {
+    this.set("cTokenAmount", Value.fromBigInt(value));
+  }
+
+  get tx(): string {
+    let value = this.get("tx");
+    return value.toString();
+  }
+
+  set tx(value: string) {
+    this.set("tx", Value.fromString(value));
   }
 }

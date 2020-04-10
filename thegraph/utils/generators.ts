@@ -4,13 +4,35 @@ import {
   Position,
   User,
   Ticker,
-  TokenId
+  TokenId,
+  FixedRateCompoundDeposit,
+  Tx
 } from "../generated/schema"
 
 import { zeroAddress, zeroBI } from './converters'
 
 function getPositionId(address: Address, tokenId: BigInt): string {
   return address.toHex() + tokenId.toString()
+}
+
+function getFixedRateCompoundDepositId(address: Address, depositId: BigInt): string {
+  return address.toHex() + depositId.toString()
+}
+
+export const getTx = (txHash: Bytes): Tx => {
+  let txId = txHash.toHex()
+
+  let tx = Tx.load(txId)
+
+  if (tx === null) {
+    tx = new Tx(txId)
+
+    tx.ticker = ''
+    
+    tx.save()
+  }
+
+  return tx as Tx
 }
 
 export const getUser = (address: Address): User => {
@@ -84,4 +106,26 @@ export const getPosition = (userAddress: Address, tokenId: BigInt): Position => 
   }
 
   return position as Position
+}
+
+export const getFixedRateCompoundDeposit = (userAddress: Address, depositId: BigInt): FixedRateCompoundDeposit => {
+  let fixedRateCompoundDepositId = getFixedRateCompoundDepositId(userAddress, depositId)
+
+  let fixedRateCompoundDeposit = FixedRateCompoundDeposit.load(fixedRateCompoundDepositId)
+
+  if (fixedRateCompoundDeposit === null) {
+    fixedRateCompoundDeposit = new FixedRateCompoundDeposit(fixedRateCompoundDepositId)
+
+    let user = getUser(userAddress)
+    fixedRateCompoundDeposit.user = user.id
+
+    fixedRateCompoundDeposit.depositId = depositId
+    fixedRateCompoundDeposit.cToken = zeroAddress()
+    fixedRateCompoundDeposit.cTokenAmount = zeroBI()
+    fixedRateCompoundDeposit.tx = ''
+
+    fixedRateCompoundDeposit.save()
+  }
+
+  return fixedRateCompoundDeposit as FixedRateCompoundDeposit
 }

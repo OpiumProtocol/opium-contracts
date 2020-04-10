@@ -1,5 +1,3 @@
-import { Address } from "@graphprotocol/graph-ts"
-
 import { TransferWithQuantity } from "../generated/TokenMinter/TokenMinter"
 
 import { getPosition } from "../utils/generators"
