@@ -1,0 +1,9 @@
+{
+  "network": "rinkeby",
+  "syntheticAggregatorAddress": "0x8Fb660ab5542D752047312443742f209C88E2170",
+  "syntheticAggregatorStartBlock": 5842495,
+  "tokenMinterAddress": "0xDEe1031c5D64788976E78d78c63C2fd6b411c4ee",
+  "tokenMinterStartBlock": 5842493,
+  "compoundSupplyAggregatorAddress": "0xF8D7CdBE0a309DF02cad1e7Afb145A488E79668A",
+  "compoundSupplyAggregatorStartBlock": 5867530
+}
