@@ -19,8 +19,10 @@ export function handleDeposit(event: Deposit): void {
   
   let tx = getTx(txHash)
   fixedRateCompoundDeposit.tx = tx.id
+  tx.fixedRateCompoundDeposit = fixedRateCompoundDeposit.id
 
   fixedRateCompoundDeposit.save()
+  tx.save()
 }
 
 export function handleWithdraw(event: Withdraw): void {

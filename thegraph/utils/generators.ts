@@ -80,6 +80,8 @@ export const getTicker = (hash: Bytes): Ticker => {
 
     ticker.longTokenId = ''
     ticker.shortTokenId = ''
+
+    ticker.tx = ''
     ticker.save()
   }
 

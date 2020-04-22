@@ -36,10 +36,7 @@ export function handleCreate(event: Create): void {
   let shortTokenId = getTokenId(shortTokenIdBigInt)
   shortTokenId.ticker = ticker.id
   shortTokenId.save()
-
   ticker.shortTokenId = shortTokenId.id
-
-  ticker.save()
 
   // Tx
   let txHash = event.transaction.hash
@@ -47,4 +44,8 @@ export function handleCreate(event: Create): void {
   let tx = getTx(txHash)
   tx.ticker = ticker.id
   tx.save()
+
+  ticker.tx = tx.id
+
+  ticker.save()
 }

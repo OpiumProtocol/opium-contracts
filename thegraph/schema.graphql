@@ -5,6 +5,9 @@ type Tx @entity {
 
   """Ticker created at this tx"""
   ticker: Ticker!
+
+  """FixedRate Compound deposit made at this tx, if exist"""
+  fixedRateCompoundDeposit: FixedRateCompoundDeposit
 }
 
 ## Opium
@@ -23,6 +26,9 @@ type Ticker @entity {
   shortTokenId: TokenId!
 
   tokenIds: [TokenId!]! @derivedFrom(field: "ticker")
+
+  """Transaction of ticker creation"""
+  tx: Tx!
 }
 
 type TokenId @entity {

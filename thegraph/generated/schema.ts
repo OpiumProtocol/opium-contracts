@@ -50,6 +50,23 @@ export class Tx extends Entity {
   set ticker(value: string) {
     this.set("ticker", Value.fromString(value));
   }
+
+  get fixedRateCompoundDeposit(): string | null {
+    let value = this.get("fixedRateCompoundDeposit");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fixedRateCompoundDeposit(value: string | null) {
+    if (value === null) {
+      this.unset("fixedRateCompoundDeposit");
+    } else {
+      this.set("fixedRateCompoundDeposit", Value.fromString(value as string));
+    }
+  }
 }
 
 export class Ticker extends Entity {
@@ -161,6 +178,15 @@ export class Ticker extends Entity {
 
   set tokenIds(value: Array<string>) {
     this.set("tokenIds", Value.fromStringArray(value));
+  }
+
+  get tx(): string {
+    let value = this.get("tx");
+    return value.toString();
+  }
+
+  set tx(value: string) {
+    this.set("tx", Value.fromString(value));
   }
 }
 
