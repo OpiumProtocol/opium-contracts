@@ -37,6 +37,8 @@ type TokenId @entity {
 
   ticker: Ticker!
 
+  type: String!
+
   positions: [Position!]! @derivedFrom(field: "tokenId")
 }
 

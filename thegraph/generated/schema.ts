@@ -229,6 +229,15 @@ export class TokenId extends Entity {
     this.set("ticker", Value.fromString(value));
   }
 
+  get type(): string {
+    let value = this.get("type");
+    return value.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
   get positions(): Array<string> {
     let value = this.get("positions");
     return value.toStringArray();

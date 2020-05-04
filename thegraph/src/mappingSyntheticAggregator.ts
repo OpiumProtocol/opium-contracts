@@ -30,6 +30,7 @@ export function handleCreate(event: Create): void {
 
   let longTokenId = getTokenId(longTokenIdBigInt)
   longTokenId.ticker = ticker.id
+  longTokenId.type = 'LONG'
   longTokenId.save()
   ticker.longTokenId = longTokenId.id
 
@@ -37,6 +38,7 @@ export function handleCreate(event: Create): void {
 
   let shortTokenId = getTokenId(shortTokenIdBigInt)
   shortTokenId.ticker = ticker.id
+  shortTokenId.type = 'SHORT'
   shortTokenId.save()
   ticker.shortTokenId = shortTokenId.id
 

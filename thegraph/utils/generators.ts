@@ -58,6 +58,8 @@ export const getTokenId = (id: BigInt): TokenId => {
 
     tokenId.ticker = ''
 
+    tokenId.type = ''
+
     tokenId.save()
   }
 
