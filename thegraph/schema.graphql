@@ -35,7 +35,8 @@ type TokenId @entity {
   """Token ID"""
   id: ID!
 
-  ticker: Ticker!
+  """Ticker related to TokenId. null in case of Portfolios"""
+  ticker: Ticker
 
   type: String!
 

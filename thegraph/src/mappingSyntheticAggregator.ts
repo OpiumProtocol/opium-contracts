@@ -9,6 +9,8 @@ import {
   getTx
 } from "../utils/generators"
 
+import { TokenIdLONG, TokenIdSHORT } from '../utils/types'
+
 let LibPositionAddressBySyntheticAggregatorAddress = new Map<Address,Address>()
 LibPositionAddressBySyntheticAggregatorAddress.set(Address.fromString('0x3a943c50bcde3e357916ce6e109626213fd36105'), Address.fromString('0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20'))
 LibPositionAddressBySyntheticAggregatorAddress.set(Address.fromString('0x8fb660ab5542d752047312443742f209c88e2170'), Address.fromString('0xecfb28f107de2bFB325E339293dE3A01C1CfFA74'))
@@ -30,7 +32,7 @@ export function handleCreate(event: Create): void {
 
   let longTokenId = getTokenId(longTokenIdBigInt)
   longTokenId.ticker = ticker.id
-  longTokenId.type = 'LONG'
+  longTokenId.type = TokenIdLONG
   longTokenId.save()
   ticker.longTokenId = longTokenId.id
 
@@ -38,7 +40,7 @@ export function handleCreate(event: Create): void {
 
   let shortTokenId = getTokenId(shortTokenIdBigInt)
   shortTokenId.ticker = ticker.id
-  shortTokenId.type = 'SHORT'
+  shortTokenId.type = TokenIdSHORT
   shortTokenId.save()
   ticker.shortTokenId = shortTokenId.id
 

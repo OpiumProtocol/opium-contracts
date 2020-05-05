@@ -10,6 +10,7 @@ import {
 } from "../generated/schema"
 
 import { zeroAddress, zeroBI } from './converters'
+import { TokenIdPORTFOLIO } from './types'
 
 function getPositionId(address: Address, tokenId: BigInt): string {
   return address.toHex() + tokenId.toString()
@@ -56,9 +57,9 @@ export const getTokenId = (id: BigInt): TokenId => {
   if (tokenId === null) {
     tokenId = new TokenId(tokenIdString)
 
-    tokenId.ticker = ''
+    tokenId.ticker = null
 
-    tokenId.type = ''
+    tokenId.type = TokenIdPORTFOLIO
 
     tokenId.save()
   }

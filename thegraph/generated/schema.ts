@@ -220,13 +220,21 @@ export class TokenId extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get ticker(): string {
+  get ticker(): string | null {
     let value = this.get("ticker");
-    return value.toString();
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set ticker(value: string) {
-    this.set("ticker", Value.fromString(value));
+  set ticker(value: string | null) {
+    if (value === null) {
+      this.unset("ticker");
+    } else {
+      this.set("ticker", Value.fromString(value as string));
+    }
   }
 
   get type(): string {
