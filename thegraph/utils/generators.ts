@@ -6,7 +6,8 @@ import {
   Ticker,
   TokenId,
   FixedRateCompoundDeposit,
-  Tx
+  Tx,
+  Summary
 } from "../generated/schema"
 
 import { zeroAddress, zeroBI } from './converters'
@@ -19,6 +20,22 @@ function getPositionId(address: Address, tokenId: BigInt): string {
 function getFixedRateCompoundDepositId(address: Address, depositId: BigInt): string {
   return address.toHex() + depositId.toString()
 }
+
+export const getSummary = (): Summary => {
+  let summary = Summary.load("1")
+
+  if (summary === null) {
+    summary = new Summary("1")
+
+    summary.totalTickers = zeroBI()
+    summary.totalUsers = zeroBI()
+
+    summary.save()
+  }
+
+  return summary as Summary
+}
+
 
 export const getTx = (txHash: Bytes): Tx => {
   let txId = txHash.toHex()
@@ -44,6 +61,11 @@ export const getUser = (address: Address): User => {
   if (user === null) {
     user = new User(userId)
     user.save()
+
+    // // Update summary on users
+    // let summary = getSummary()
+    // summary.totalUsers = summary.totalUsers + BigInt.fromI32(1)
+    // summary.save()
   }
 
   return user as User

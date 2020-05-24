@@ -1,4 +1,4 @@
-import { Address } from "@graphprotocol/graph-ts"
+import { Address, BigInt } from "@graphprotocol/graph-ts"
 
 import { LibPosition } from "../generated/SyntheticAggregator/LibPosition"
 import { Create } from "../generated/SyntheticAggregator/SyntheticAggregator"
@@ -6,7 +6,8 @@ import { Create } from "../generated/SyntheticAggregator/SyntheticAggregator"
 import {
   getTokenId,
   getTicker,
-  getTx
+  getTx,
+  getSummary
 } from "../utils/generators"
 
 import { TokenIdLONG, TokenIdSHORT } from '../utils/types'
@@ -43,6 +44,12 @@ export function handleCreate(event: Create): void {
   shortTokenId.type = TokenIdSHORT
   shortTokenId.save()
   ticker.shortTokenId = shortTokenId.id
+
+  // Update summary on tickers
+  let summary = getSummary()
+  let totalTickers = summary.totalTickers
+  summary.totalTickers = totalTickers.plus(BigInt.fromI32(1))
+  summary.save()
 
   // Tx
   let txHash = event.transaction.hash

@@ -363,6 +363,55 @@ export class User extends Entity {
   }
 }
 
+export class Summary extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Summary entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Summary entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Summary", id.toString(), this);
+  }
+
+  static load(id: string): Summary | null {
+    return store.get("Summary", id) as Summary | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalTickers(): BigInt {
+    let value = this.get("totalTickers");
+    return value.toBigInt();
+  }
+
+  set totalTickers(value: BigInt) {
+    this.set("totalTickers", Value.fromBigInt(value));
+  }
+
+  get totalUsers(): BigInt {
+    let value = this.get("totalUsers");
+    return value.toBigInt();
+  }
+
+  set totalUsers(value: BigInt) {
+    this.set("totalUsers", Value.fromBigInt(value));
+  }
+}
+
 export class FixedRateCompoundDeposit extends Entity {
   constructor(id: string) {
     super();

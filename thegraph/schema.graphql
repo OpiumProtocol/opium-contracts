@@ -61,6 +61,15 @@ type User @entity {
   fixedRateCompoundDeposits: [FixedRateCompoundDeposit!]! @derivedFrom(field: "user")
 }
 
+## Summary
+type Summary @entity {
+  """Static string  "1" """
+  id: ID!
+
+  totalTickers: BigInt!
+  totalUsers: BigInt!
+}
+
 ## FixedRate
 type FixedRateCompoundDeposit @entity {
   """User address + depositId"""
