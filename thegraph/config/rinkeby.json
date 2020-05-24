@@ -5,5 +5,7 @@
   "tokenMinterAddress": "0xDEe1031c5D64788976E78d78c63C2fd6b411c4ee",
   "tokenMinterStartBlock": 5842493,
   "compoundSupplyAggregatorAddress": "0xF8D7CdBE0a309DF02cad1e7Afb145A488E79668A",
-  "compoundSupplyAggregatorStartBlock": 5867530
+  "compoundSupplyAggregatorStartBlock": 5867530,
+  "coreAddress": "0xE995d8E9E0a01c938e6ae5B05720Af245953dC57",
+  "coreStartBlock": 5842488
 }

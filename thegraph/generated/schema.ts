@@ -190,6 +190,73 @@ export class Ticker extends Entity {
   }
 }
 
+export class BalanceHistory extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save BalanceHistory entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save BalanceHistory entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("BalanceHistory", id.toString(), this);
+  }
+
+  static load(id: string): BalanceHistory | null {
+    return store.get("BalanceHistory", id) as BalanceHistory | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get DAI(): BigInt {
+    let value = this.get("DAI");
+    return value.toBigInt();
+  }
+
+  set DAI(value: BigInt) {
+    this.set("DAI", Value.fromBigInt(value));
+  }
+
+  get USDC(): BigInt {
+    let value = this.get("USDC");
+    return value.toBigInt();
+  }
+
+  set USDC(value: BigInt) {
+    this.set("USDC", Value.fromBigInt(value));
+  }
+
+  get WETH(): BigInt {
+    let value = this.get("WETH");
+    return value.toBigInt();
+  }
+
+  set WETH(value: BigInt) {
+    this.set("WETH", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
 export class TokenId extends Entity {
   constructor(id: string) {
     super();

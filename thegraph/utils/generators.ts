@@ -6,7 +6,8 @@ import {
   Ticker,
   TokenId,
   FixedRateCompoundDeposit,
-  Tx
+  Tx,
+  BalanceHistory
 } from "../generated/schema"
 
 import { zeroAddress, zeroBI } from './converters'
@@ -89,6 +90,23 @@ export const getTicker = (hash: Bytes): Ticker => {
   }
 
   return ticker as Ticker
+}
+
+export const getBalanceHistory = (hash: Bytes, logIndex: BigInt): BalanceHistory => {
+  let balanceHistoryId = hash.toHex() + logIndex.toHex()
+
+  let balanceHistory = BalanceHistory.load(balanceHistoryId)
+
+  if (balanceHistory === null) {
+    balanceHistory = new BalanceHistory(balanceHistoryId)
+    balanceHistory.DAI = zeroBI()
+    balanceHistory.USDC = zeroBI()
+    balanceHistory.WETH = zeroBI()
+    balanceHistory.timestamp = zeroBI()
+    balanceHistory.save()
+  }
+
+  return balanceHistory as BalanceHistory
 }
 
 export const getPosition = (userAddress: Address, tokenId: BigInt): Position => {

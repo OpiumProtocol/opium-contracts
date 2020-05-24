@@ -27,6 +27,32 @@ dataSources:
           handler: handleCreate
       file: ./src/mappingSyntheticAggregator.ts
   - kind: ethereum/contract
+    name: CoreBalance
+    network: {{network}}
+    source:
+      address: '{{coreAddress}}'
+      abi: Core
+      startBlock: {{coreStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: Core
+          file: ./abis/Core.json
+        - name: IERC20
+          file: ./abis/IERC20.json
+      eventHandlers:
+        - event: Created(address,address,bytes32,uint256)
+          handler: handleCreate
+        - event: Executed(address,uint256,uint256)
+          handler: handleExecute
+        - event: Canceled(bytes32)
+          handler: handleCanceled
+      file: ./src/mappingCore.ts
+  - kind: ethereum/contract
     name: TokenMinter
     network: {{network}}
     source:

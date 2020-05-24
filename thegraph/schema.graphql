@@ -31,6 +31,17 @@ type Ticker @entity {
   tx: Tx!
 }
 
+type BalanceHistory @entity {
+  """tx hash + event.logIndex"""
+  id: ID!
+
+  DAI: BigInt!
+  USDC: BigInt!
+  WETH: BigInt!
+
+  timestamp: BigInt!
+}
+
 type TokenId @entity {
   """Token ID"""
   id: ID!
