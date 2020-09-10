@@ -20,6 +20,10 @@ const MatchPool = artifacts.require('MatchPool')
 const SwaprateMatch = artifacts.require('SwaprateMatch')
 
 // Test helpers
+const BalanceHelper = artifacts.require('BalanceHelper')
+const PayoutHelper = artifacts.require('PayoutHelper')
+
+// Test mocks
 const OptionCallSyntheticIdMock = artifacts.require('OptionCallSyntheticIdMock')
 const DummySyntheticIdMock = artifacts.require('DummySyntheticIdMock')
 const TestToken = artifacts.require('TestToken')
@@ -129,15 +133,23 @@ const initializeRegistry = async ({ opiumDeployerAddress, registryInstance, toke
 const deployMocks = async ({ deployer, opiumDeployerAddress }) => {
     const optionCallSyntheticIdMockInstance = await deployer.deploy(OptionCallSyntheticIdMock, { from: opiumDeployerAddress })
     console.log('**** OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMockInstance.address)
-    
+
     const dummySyntheticIdMockInstance = await deployer.deploy(DummySyntheticIdMock, { from: opiumDeployerAddress })
     console.log('**** DummySyntheticIdMock was deployed at', dummySyntheticIdMockInstance.address)
-    
+
     const daiInstance = await deployer.deploy(TestToken, 'Opium DAI Token', 'DAI', 18, { from: opiumDeployerAddress })
     console.log('**** DAI was deployed at', daiInstance.address)
 
     const wethInstance = await deployer.deploy(WETH, { from: opiumDeployerAddress })
     console.log('**** WETH was deployed at', wethInstance.address)
+}
+
+const deployHelpers = async ({ deployer, opiumDeployerAddress }) => {
+    const balanceHelperInstance = await deployer.deploy(BalanceHelper, { from: opiumDeployerAddress })
+    console.log('**** BalanceHelper was deployed at', balanceHelperInstance.address)
+
+    const payoutHelperInstance = await deployer.deploy(PayoutHelper, { from: opiumDeployerAddress })
+    console.log('**** PayoutHelper was deployed at', payoutHelperInstance.address)
 }
 
 module.exports = async function(deployer, network, accounts) {
@@ -162,8 +174,10 @@ module.exports = async function(deployer, network, accounts) {
         const syntheticAggregatorInstance = await deploySyntheticAggregator({ deployer, opiumDeployerAddress })
 
         await initializeRegistry({ opiumDeployerAddress, registryInstance, tokenMinterInstance, coreInstance, oracleAggregatorInstance, syntheticAggregatorInstance, tokenSpenderInstance })
-        
+
         // Contracts for testing purpose
         await deployMocks({ deployer, opiumDeployerAddress })
+
+        await deployHelpers({ deployer, opiumDeployerAddress })
     })
 }
