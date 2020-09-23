@@ -26,6 +26,7 @@ const PayoutHelper = artifacts.require('PayoutHelper')
 // Test mocks
 const OptionCallSyntheticIdMock = artifacts.require('OptionCallSyntheticIdMock')
 const DummySyntheticIdMock = artifacts.require('DummySyntheticIdMock')
+const OracleIdMock = artifacts.require('OracleIdMock')
 const TestToken = artifacts.require('TestToken')
 const WETH = artifacts.require('WETH')
 
@@ -130,12 +131,15 @@ const initializeRegistry = async ({ opiumDeployerAddress, registryInstance, toke
     console.log('Registry was initialized')
 }
 
-const deployMocks = async ({ deployer, opiumDeployerAddress }) => {
+const deployMocks = async ({ deployer, opiumDeployerAddress, registryInstanceAddress }) => {
     const optionCallSyntheticIdMockInstance = await deployer.deploy(OptionCallSyntheticIdMock, { from: opiumDeployerAddress })
     console.log('**** OptionCallSyntheticIdMock was deployed at', optionCallSyntheticIdMockInstance.address)
 
     const dummySyntheticIdMockInstance = await deployer.deploy(DummySyntheticIdMock, { from: opiumDeployerAddress })
     console.log('**** DummySyntheticIdMock was deployed at', dummySyntheticIdMockInstance.address)
+
+    const oracleIdMockInstance = await deployer.deploy(OracleIdMock, 0, registryInstanceAddress, { from: opiumDeployerAddress })
+    console.log('**** OracleIdMock was deployed at', oracleIdMockInstance.address)
 
     const daiInstance = await deployer.deploy(TestToken, 'Opium DAI Token', 'DAI', 18, { from: opiumDeployerAddress })
     console.log('**** DAI was deployed at', daiInstance.address)
@@ -159,6 +163,7 @@ module.exports = async function(deployer, network, accounts) {
         await deployAndLinkLibPosition({ deployer, opiumDeployerAddress })
 
         const registryInstance = await deployRegistry({ deployer, opiumDeployerAddress })
+        const registryInstanceAddress = registryInstance.address
 
         const coreInstance = await deployCore({ deployer, opiumDeployerAddress, registryInstance })
         const matchInstance = await deployMatch({ deployer, opiumDeployerAddress, registryInstance })
@@ -176,7 +181,7 @@ module.exports = async function(deployer, network, accounts) {
         await initializeRegistry({ opiumDeployerAddress, registryInstance, tokenMinterInstance, coreInstance, oracleAggregatorInstance, syntheticAggregatorInstance, tokenSpenderInstance })
 
         // Contracts for testing purpose
-        await deployMocks({ deployer, opiumDeployerAddress })
+        await deployMocks({ deployer, opiumDeployerAddress, registryInstanceAddress })
 
         await deployHelpers({ deployer, opiumDeployerAddress })
     })
