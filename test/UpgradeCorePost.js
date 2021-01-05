@@ -1,6 +1,7 @@
 const Core = artifacts.require('Core')
 const TestToken = artifacts.require('TestToken')
 const TokenSpender = artifacts.require('TokenSpender')
+const TokenMinter = artifacts.require('TokenMinter')
 
 const OnchainSubIdsOracleId = artifacts.require('OnchainSubIdsOracleId')
 const EthDaiChainlinkOracleSubId = artifacts.require('EthDaiChainlinkOracleSubId')
@@ -22,6 +23,7 @@ const syntheticId = '0x108AAD9e03D2Ccdfc22a0F082e3Bb4653F4fcF62'
 const toE18 = amount => web3.utils.toWei(amount.toString())
 
 const executeOneWithAddress = 'execute(address,uint256,uint256,(uint256,uint256,uint256[],address,address,address))'
+const batchTransferFromFour = 'batchTransferFrom(address,address,uint256[],uint256[])'
 
 contract('UpgradeCorePost', accounts => {
 
@@ -29,7 +31,7 @@ contract('UpgradeCorePost', accounts => {
     const buyer = accounts[1]
     const seller = accounts[2]
 
-    let dai, core, tokenSpender, oracleId, subid
+    let dai, core, tokenSpender, oracleId, subid, tokenMinter
 
     const SECONDS_1_HOUR = 3600
     const SECONDS_2_HOURS = 7200
@@ -52,6 +54,7 @@ contract('UpgradeCorePost', accounts => {
 
     before(async () => {
         core = await Core.deployed()
+        tokenMinter = await TokenMinter.deployed()
         dai = await TestToken.at(DAI)
         tokenSpender = await TokenSpender.at(tokenSpenderAddress)
         oracleId = await OnchainSubIdsOracleId.at(oracleIdAddress)
@@ -104,6 +107,14 @@ contract('UpgradeCorePost', accounts => {
         await oracleId._callback(endTime, { from: owner })
         const result = await subid.getResult()
         console.log('Oracle Result', result.toString())
+
+        // Test issue
+        const positionBalanceBefore = await tokenMinter.balanceOf(buyer, longTokenId)
+        await tokenMinter.methods[batchTransferFromFour](buyer, buyer, [longTokenId], [1], { from: buyer })
+        const positionBalanceAfter = await tokenMinter.balanceOf(buyer, longTokenId)
+
+        console.log('Position balance BEFORE', positionBalanceBefore.toString())
+        console.log('Position balance AFTER', positionBalanceAfter.toString())
 
         // Execute
         await core.methods[executeOneWithAddress](buyer, longTokenId, 1, optionCall, { from: buyer })
