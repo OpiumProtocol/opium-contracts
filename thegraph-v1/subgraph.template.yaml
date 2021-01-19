@@ -1,0 +1,72 @@
+specVersion: 0.0.2
+description: Opium Protocol subgraph
+repository: https://github.com/OpiumProtocol/opium-contracts
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SyntheticAggregator
+    network: {{network}}
+    source:
+      address: '{{syntheticAggregatorAddress}}'
+      abi: SyntheticAggregator
+      startBlock: {{syntheticAggregatorStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: SyntheticAggregator
+          file: ./abis/SyntheticAggregator.json
+        - name: LibPosition
+          file: ./abis/LibPosition.json
+      eventHandlers:
+        - event: Create((uint256,uint256,uint256[],address,address,address),bytes32)
+          handler: handleCreate
+      file: ./src/mappingSyntheticAggregator.ts
+  - kind: ethereum/contract
+    name: TokenMinter
+    network: {{network}}
+    source:
+      address: '{{tokenMinterAddress}}'
+      abi: TokenMinter
+      startBlock: {{tokenMinterStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: TokenMinter
+          file: ./abis/TokenMinter.json
+      eventHandlers:
+        - event: TransferWithQuantity(indexed address,indexed address,indexed uint256,uint256)
+          handler: handleTransferWithQuantity
+      file: ./src/mappingTokenMinter.ts
+  - kind: ethereum/contract
+    name: CompoundSupplyAggregator
+    network: {{network}}
+    source:
+      address: '{{compoundSupplyAggregatorAddress}}'
+      abi: CompoundSupplyAggregator
+      startBlock: {{compoundSupplyAggregatorStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Ticker
+      abis:
+        - name: CompoundSupplyAggregator
+          file: ./abis/CompoundSupplyAggregator.json
+      eventHandlers:
+        - event: Deposit(uint256,address,address,uint256)
+          handler: handleDeposit
+        - event: EmergencyWithdraw(uint256,address,address,uint256)
+          handler: handleEmergencyWithdraw
+        - event: Withdraw(uint256,address,address,uint256)
+          handler: handleWithdraw
+      file: ./src/mappingCompoundSupplyAggregator.ts
