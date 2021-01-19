@@ -1,0 +1,299 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "derivative",
+        "type": "tuple"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "derivativeHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "Create",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "COMMISSION_BASE",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "OPIUM_COMMISSION_BASE",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "OPIUM_COMMISSION_PART",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "authorAddressByHash",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "buyerMarginByHash",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "commissionByHash",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "_derivative",
+        "type": "tuple"
+      }
+    ],
+    "name": "getDerivativeHash",
+    "outputs": [
+      { "internalType": "bytes32", "name": "derivativeHash", "type": "bytes32" }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "sellerMarginByHash",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "name": "typeByHash",
+    "outputs": [
+      {
+        "internalType": "enum SyntheticAggregator.SyntheticTypes",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_derivativeHash",
+        "type": "bytes32"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "_derivative",
+        "type": "tuple"
+      }
+    ],
+    "name": "getAuthorCommission",
+    "outputs": [
+      { "internalType": "uint256", "name": "commission", "type": "uint256" }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_derivativeHash",
+        "type": "bytes32"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "_derivative",
+        "type": "tuple"
+      }
+    ],
+    "name": "getAuthorAddress",
+    "outputs": [
+      { "internalType": "address", "name": "authorAddress", "type": "address" }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_derivativeHash",
+        "type": "bytes32"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "_derivative",
+        "type": "tuple"
+      }
+    ],
+    "name": "getMargin",
+    "outputs": [
+      { "internalType": "uint256", "name": "buyerMargin", "type": "uint256" },
+      { "internalType": "uint256", "name": "sellerMargin", "type": "uint256" }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_derivativeHash",
+        "type": "bytes32"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "margin", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256[]",
+            "name": "params",
+            "type": "uint256[]"
+          },
+          { "internalType": "address", "name": "oracleId", "type": "address" },
+          { "internalType": "address", "name": "token", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "syntheticId",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibDerivative.Derivative",
+        "name": "_derivative",
+        "type": "tuple"
+      }
+    ],
+    "name": "isPool",
+    "outputs": [{ "internalType": "bool", "name": "result", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

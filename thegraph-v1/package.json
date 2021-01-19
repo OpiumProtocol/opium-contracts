@@ -1,0 +1,23 @@
+{
+  "name": "opium-network-v1",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prepare": "cat ./config/${NETWORK:-mainnet}.json | mustache  - subgraph.template.yaml > subgraph.yaml",
+    "codegen": "npm run prepare && graph codegen",
+    "build": "graph build",
+    "deploy-remote": "npm run prepare && graph deploy opiumprotocol/${NAME:-opium-network-v1} --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
+    "deploy-mainnet": "NETWORK=mainnet NAME=opium-network-v1 npm run deploy-remote",
+    "deploy-rinkeby": "NETWORK=rinkeby NAME=opium-network-rinkeby npm run deploy-remote",
+
+    "create-local": "graph create --node http://localhost:8020/ opiumprotocol/opium-network-v1",
+    "remove-local": "graph remove --node http://localhost:8020/ opiumprotocol/opium-network-v1",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 opiumprotocol/opium-network-v1"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.17.1",
+    "@graphprotocol/graph-ts": "0.17.0"
+  },
+  "devDependencies": {
+    "mustache": "^4.0.1"
+  }
+}
