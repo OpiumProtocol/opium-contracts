@@ -15,6 +15,8 @@ const governor = '0xF80D12E55F6cdA587a26a05f2e6477054e8255e5'
 
 const DAI = '0x6b175474e89094c44da98b954eedeac495271d0f'
 const tokenSpenderAddress = '0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af'
+const coreAddress = '0xbe457663218c3527a82d4021b1dce5802997063b'
+const tokenMinterAddress = '0x419aa1B768D1476305574a3cb61B7acBF6bD4308'
 
 const oracleIdAddress = '0x54657c50c7c9f04812be0e3144af7003c6978f90'
 const oracleSubIdAddress = '0x7f19bd488fd7a9192cb065c70491d586e8088035'
@@ -53,8 +55,8 @@ contract('UpgradeCorePost', accounts => {
     const quantity = 1
 
     before(async () => {
-        core = await Core.deployed()
-        tokenMinter = await TokenMinter.deployed()
+        core = await Core.at(coreAddress)
+        tokenMinter = await TokenMinter.at(tokenMinterAddress)
         dai = await TestToken.at(DAI)
         tokenSpender = await TokenSpender.at(tokenSpenderAddress)
         oracleId = await OnchainSubIdsOracleId.at(oracleIdAddress)
@@ -66,9 +68,9 @@ contract('UpgradeCorePost', accounts => {
             to: governor,
             value: toE18(1),
         })
-        await tokenSpender.proposeWhitelist([ core.address ], { from: governor })
-        await timeTravel(SECONDS_1_HOUR + 60)
-        await tokenSpender.commitWhitelist({ from: governor })
+        // await tokenSpender.proposeWhitelist([ core.address ], { from: governor })
+        // await timeTravel(SECONDS_1_HOUR + 60)
+        // await tokenSpender.commitWhitelist({ from: governor })
 
         // Approve dai from millionare
         await web3.eth.sendTransaction({
@@ -83,6 +85,11 @@ contract('UpgradeCorePost', accounts => {
     })
 
     it('should create', async () => {
+        const buyerBalanceBefore = await dai.balanceOf(buyer)
+        console.log('Buyer balance BEFORE', buyerBalanceBefore.toString())
+        const sellerBalanceBefore = await dai.balanceOf(seller)
+        console.log('Seller balance BEFORE', sellerBalanceBefore.toString())
+
         // Create
         await core.create(
             optionCall,

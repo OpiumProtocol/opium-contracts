@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Blockeys/opium-contracts-prep#readme",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.0.29",
+    "@truffle/hdwallet-provider": "^1.2.1",
     "erc721o": "git+git@github.com:Blockeys/erc721o-temporary.git",
     "eth-gas-reporter": "^0.2.20",
     "ganache-cli": "^6.12.1",
