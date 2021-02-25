@@ -10,19 +10,21 @@ Generated documentation for code can be found [here](./docs/index.md)
 
 ## Audit
 
-Protocol was audited by [SmartDec](https://smartdec.net/) and report can be found [here](./docs/audit/OpiumSmartDecSmartContractAudit.pdf)
+Protocol was audited by:
+ - [SmartDec](https://smartdec.net/) and report can be found [here](./docs/audit/OpiumSmartDecSmartContractAudit.pdf)
+ - [MixBytes](https://mixbytes.io/) and report can be found [here](./docs/audit/OpiumNetworkProtocolAuditMixBytes.pdf)
 
 ## Opium protocol is deployed on following addresses
 
 ### Mainnet
 - LibPosition was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://etherscan.io/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
-- Registry was deployed at [0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E](https://etherscan.io/address/0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E)
-- Core was deployed at [0xafDA317cB15967C2fD379885dE227CA236E59Cd3](https://etherscan.io/address/0xafDA317cB15967C2fD379885dE227CA236E59Cd3)
-- Match was deployed at [0x6f4b04634A5b334CBCCE569Fa6b5ad597a7a70ea](https://etherscan.io/address/0x6f4b04634A5b334CBCCE569Fa6b5ad597a7a70ea)
-- MatchPool was deployed at [0xECc45D06fD4C23F9958a74F254507016b1dfC329](https://etherscan.io/address/0xECc45D06fD4C23F9958a74F254507016b1dfC329)
-- SwaprateMatch was deployed at [0x30dc4e9E26F24ACEfA8067e71E1Cd4363a05001E](https://etherscan.io/address/0x30dc4e9E26F24ACEfA8067e71E1Cd4363a05001E)
+- Registry was deployed at [0x1cad268f540aa7e5c606b203e8443562332a3a35](https://etherscan.io/address/0x1cad268f540aa7e5c606b203e8443562332a3a35)
+- Core was deployed at [0xbe457663218c3527a82d4021b1dce5802997063b](https://etherscan.io/address/0xbe457663218c3527a82d4021b1dce5802997063b)
+- Match was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
+<!-- - MatchPool was deployed at [0xECc45D06fD4C23F9958a74F254507016b1dfC329](https://etherscan.io/address/0xECc45D06fD4C23F9958a74F254507016b1dfC329) -->
+- SwaprateMatch was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
 - TokenSpender was deployed at [0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af](https://etherscan.io/address/0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af)
-- TokenMinter was deployed at [0x9Dd91d61A7aa58537fCdbf16fD21bE25731341B3](https://etherscan.io/address/0x9Dd91d61A7aa58537fCdbf16fD21bE25731341B3)
+- TokenMinter was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
 - OracleAggregator was deployed at [0xB69890912E40A7849fCA058bb118Cfe7d70932c4](https://etherscan.io/address/0xB69890912E40A7849fCA058bb118Cfe7d70932c4)
 - SyntheticAggregator was deployed at [0x3a943C50Bcde3E357916ce6E109626213Fd36105](https://etherscan.io/address/0x3a943C50Bcde3E357916ce6E109626213Fd36105)
 
