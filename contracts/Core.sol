@@ -362,7 +362,7 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
             }
 
             uint256[2] memory margins;
-            // Get cached margin required according to logic from Opium.SyntheticAggregator
+            // Get margin required according to logic from Opium.SyntheticAggregator (if pooled derivative, the margin is not cached)
             // margins[0] - buyerMargin
             // margins[1] - sellerMargin
             (margins[0], margins[1]) = vars.syntheticAggregator.getMargin(derivativeHash, _derivatives[i]);
@@ -371,12 +371,24 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
             // Check if `_tokenId` is an ID of LONG position
             if (derivativeHash.getLongTokenId() == _tokenIds[i]) {
                 // Set payout to buyerPayout
-                payout = margins[0];
+                payout = margins[0].mul(_quantities[i]);
 
+                // Check if it's a pooled position
+                if (vars.syntheticAggregator.isPool(derivativeHash, _derivatives[i])) {
+                    // Check sufficiency of syntheticId balance in poolVaults
+                    require(
+                        poolVaults[_derivatives[i].syntheticId][_derivatives[i].token] >= payout
+                        ,
+                        ERROR_CORE_INSUFFICIENT_POOL_BALANCE
+                    );
+
+                    // Subtract paid out margin from poolVault
+                    poolVaults[_derivatives[i].syntheticId][_derivatives[i].token] = poolVaults[_derivatives[i].syntheticId][_derivatives[i].token].sub(payout);
+                }
             // Check if `_tokenId` is an ID of SHORT position
             } else if (derivativeHash.getShortTokenId() == _tokenIds[i]) {
                 // Set payout to sellerPayout
-                payout = margins[1];
+                payout = margins[1].mul(_quantities[i]);
             } else {
                 // Either portfolioId, hack or bug
                 revert(ERROR_CORE_UNKNOWN_POSITION_TYPE);
@@ -384,7 +396,7 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
             
             // Transfer payout * _quantities[i]
             if (payout > 0) {
-                IERC20(_derivatives[i].token).safeTransfer(msg.sender, payout.mul(_quantities[i]));
+                IERC20(_derivatives[i].token).safeTransfer(msg.sender, payout);
             }
 
             // Burn canceled position tokens
