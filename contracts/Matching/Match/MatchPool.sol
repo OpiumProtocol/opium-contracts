@@ -20,9 +20,6 @@ contract MatchPool is MatchLogic, LibDerivative {
             "MATCH:NOT_CREATION"
         );
 
-        // Check if it's really pool
-        require(IDerivativeLogic(_derivative.syntheticId).isPool(), "MATCH:NOT_POOL");
-
         // Validate sender if set
         validateSenderAddress(_buyOrder);
 
@@ -62,6 +59,9 @@ contract MatchPool is MatchLogic, LibDerivative {
         // Calculate derivative related data for validation
         bytes32 derivativeHash = getDerivativeHash(_derivative);
         uint256 longTokenId = derivativeHash.getLongTokenId();
+
+        // Check if it's really pool
+        require(SyntheticAggregator(registry.getSyntheticAggregator()).isPool(derivativeHash, _derivative), "MATCH:NOT_POOL");
 
         // New deals must request opposite position tokens
         require(

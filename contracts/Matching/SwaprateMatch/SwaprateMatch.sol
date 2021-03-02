@@ -31,9 +31,6 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
             "MATCH:NOT_CREATION"
         );
 
-        // Check if it's not pool
-        require(!IDerivativeLogic(_derivative.syntheticId).isPool(), "MATCH:CANT_BE_POOL");
-
         // Validate taker if set
         validateTakerAddress(_leftOrder, _rightOrder);
         validateTakerAddress(_rightOrder, _leftOrder);
@@ -90,6 +87,9 @@ contract SwaprateMatch is SwaprateMatchBase, LibDerivative {
         // margins[0] - leftMargin
         // margins[1] - rightMargin
         (margins[0], margins[1]) = SyntheticAggregator(registry.getSyntheticAggregator()).getMargin(derivativeHash, _derivative);
+
+        // Check if it's not pool
+        require(!SyntheticAggregator(registry.getSyntheticAggregator()).isPool(derivativeHash, _derivative), "MATCH:CANT_BE_POOL");
     }
 
     /// @notice Calculate and validate availabilities of orders and fill them
