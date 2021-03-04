@@ -25,5 +25,27 @@ const blockTravel = async blocks => {
     }
 }
 
+/**
+ *  Takes a snapshot and returns the ID of the snapshot for restoring later.
+ * @returns {string} id
+ */
+const takeSnapshot = async () => {
+    const { result } = await send('evm_snapshot', [])
+    await blockTravel(1)
+
+    return result
+}
+
+/**
+ *  Restores a snapshot that was previously taken with takeSnapshot
+ *  @param {string} id The ID that was returned when takeSnapshot was called.
+ */
+const restoreSnapshot = async (id) => {
+    await send('evm_revert', [id])
+    await blockTravel(1)
+}
+
 module.exports.timeTravel = timeTravel
 module.exports.blockTravel = blockTravel
+module.exports.takeSnapshot = takeSnapshot
+module.exports.restoreSnapshot = restoreSnapshot
