@@ -53,7 +53,7 @@ export class Tx extends Entity {
 
   get fixedRateCompoundDeposit(): string | null {
     let value = this.get("fixedRateCompoundDeposit");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -222,7 +222,7 @@ export class TokenId extends Entity {
 
   get ticker(): string | null {
     let value = this.get("ticker");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();

@@ -1,14 +1,16 @@
 specVersion: 0.0.2
+description: Opium Protocol subgraph
+repository: https://github.com/OpiumProtocol/opium-contracts
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: SyntheticAggregator
-    network: mainnet
+    network: {{network}}
     source:
-      address: "0x3a943C50Bcde3E357916ce6E109626213Fd36105"
+      address: '{{syntheticAggregatorAddress}}'
       abi: SyntheticAggregator
-      startBlock: 9327568
+      startBlock: {{syntheticAggregatorStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -26,11 +28,11 @@ dataSources:
       file: ./src/mappingSyntheticAggregator.ts
   - kind: ethereum/contract
     name: TokenMinter
-    network: mainnet
+    network: {{network}}
     source:
-      address: "0x9Dd91d61A7aa58537fCdbf16fD21bE25731341B3"
+      address: '{{tokenMinterAddress}}'
       abi: TokenMinter
-      startBlock: 9327565
+      startBlock: {{tokenMinterStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -46,11 +48,11 @@ dataSources:
       file: ./src/mappingTokenMinter.ts
   - kind: ethereum/contract
     name: CompoundSupplyAggregator
-    network: mainnet
+    network: {{network}}
     source:
-      address: "0xE1f05686606088C2F6E3456C1dd1E4c39FC817E3"
+      address: '{{compoundSupplyAggregatorAddress}}'
       abi: CompoundSupplyAggregator
-      startBlock: 9370814
+      startBlock: {{compoundSupplyAggregatorStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3

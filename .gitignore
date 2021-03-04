@@ -6,3 +6,8 @@ build/
 
 # MacOS
 .DS_Store
+
+# TheGraph
+thegraph/subgraph.yaml
+
+thegraph-v1/subgraph.yaml

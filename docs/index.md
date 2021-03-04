@@ -54,6 +54,8 @@
 [SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string]: #SyntheticAggregatorErrors-ERROR_SYNTHETIC_AGGREGATOR_COMMISSION_TOO_BIG-string
 [UsingRegistryErrors]: #UsingRegistryErrors
 [UsingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string]: #UsingRegistryErrors-ERROR_USING_REGISTRY_ONLY_CORE_ALLOWED-string
+[BalanceHelper]: #BalanceHelper
+[BalanceHelper-balancesOf-address-contract-IERC20---address-]: #BalanceHelper-balancesOf-address-contract-IERC20---address-
 [ExecutableByThirdParty]: #ExecutableByThirdParty
 [ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-]: #ExecutableByThirdParty-thirdpartyExecutionAllowance-mapping-address----bool-
 [ExecutableByThirdParty-thirdpartyExecutionAllowed-address-]: #ExecutableByThirdParty-thirdpartyExecutionAllowed-address-
@@ -64,6 +66,8 @@
 [HasCommission-constructor--]: #HasCommission-constructor--
 [HasCommission-getAuthorAddress--]: #HasCommission-getAuthorAddress--
 [HasCommission-getAuthorCommission--]: #HasCommission-getAuthorCommission--
+[PayoutHelper]: #PayoutHelper
+[PayoutHelper-getExecutionPayouts-struct-LibDerivative-Derivative-uint256---]: #PayoutHelper-getExecutionPayouts-struct-LibDerivative-Derivative-uint256---
 [IDerivativeLogic]: #IDerivativeLogic
 [IDerivativeLogic-validateInput-struct-LibDerivative-Derivative-]: #IDerivativeLogic-validateInput-struct-LibDerivative-Derivative-
 [IDerivativeLogic-getMargin-struct-LibDerivative-Derivative-]: #IDerivativeLogic-getMargin-struct-LibDerivative-Derivative-
@@ -458,6 +462,22 @@ Cancels tickers, burns positions and returns margins to positions owners in case
 
 
 
+## <span id="BalanceHelper"></span> `BalanceHelper`
+
+
+
+
+
+- [`balancesOf(address _user, contract IERC20[] _tokens, address _tokenSpender)`][BalanceHelper-balancesOf-address-contract-IERC20---address-]
+
+### <span id="BalanceHelper-balancesOf-address-contract-IERC20---address-"></span> `balancesOf(address _user, contract IERC20[] _tokens, address _tokenSpender) → uint256 ethBalance, struct BalanceHelper.TokenBalance[] tokensBalances` (public)
+
+
+
+
+
+
+
 ## <span id="ExecutableByThirdParty"></span> `ExecutableByThirdParty`
 
 
@@ -509,6 +529,23 @@ Getter for syntheticId author address
 ### <span id="HasCommission-getAuthorCommission--"></span> `getAuthorCommission() → uint256` (public)
 
 Getter for syntheticId author commission
+
+
+
+
+
+
+## <span id="PayoutHelper"></span> `PayoutHelper`
+
+
+
+
+
+- [`getExecutionPayouts(struct LibDerivative.Derivative _derivative, uint256[] _results)`][PayoutHelper-getExecutionPayouts-struct-LibDerivative-Derivative-uint256---]
+- [`getDerivativeHash(struct LibDerivative.Derivative _derivative)`][LibDerivative-getDerivativeHash-struct-LibDerivative-Derivative-]
+
+### <span id="PayoutHelper-getExecutionPayouts-struct-LibDerivative-Derivative-uint256---"></span> `getExecutionPayouts(struct LibDerivative.Derivative _derivative, uint256[] _results) → struct PayoutHelper.ExecutionPayout[] executionPayouts` (public)
+
 
 
 

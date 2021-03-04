@@ -26,9 +26,6 @@ contract MatchCreate is MatchLogic, LibDerivative {
             "MATCH:NOT_CREATION"
         );
 
-        // Check if it's not pooled positions
-        require(!IDerivativeLogic(_derivative.syntheticId).isPool(), "MATCH:CANT_BE_POOL");
-
         // Validate taker if set
         validateTakerAddress(_buyOrder, _sellOrder);
         validateTakerAddress(_sellOrder, _buyOrder);
@@ -105,6 +102,9 @@ contract MatchCreate is MatchLogic, LibDerivative {
         derivativeHash = getDerivativeHash(_derivative);
         uint256 longTokenId = derivativeHash.getLongTokenId();
         uint256 shortTokenId = derivativeHash.getShortTokenId();
+
+        // Check if it's not pooled positions
+        require(!SyntheticAggregator(registry.getSyntheticAggregator()).isPool(derivativeHash, _derivative), "MATCH:CANT_BE_POOL");
 
         // New deals must request opposite position tokens
         require(

@@ -1,0 +1,9 @@
+{
+  "network": "mainnet",
+  "syntheticAggregatorAddress": "0x3a943C50Bcde3E357916ce6E109626213Fd36105",
+  "syntheticAggregatorStartBlock": 9327568,
+  "tokenMinterAddress": "0x9Dd91d61A7aa58537fCdbf16fD21bE25731341B3",
+  "tokenMinterStartBlock": 9327565,
+  "compoundSupplyAggregatorAddress": "0xE1f05686606088C2F6E3456C1dd1E4c39FC817E3",
+  "compoundSupplyAggregatorStartBlock": 9370814
+}
