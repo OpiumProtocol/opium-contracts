@@ -24,11 +24,11 @@ const syntheticAggregatorAddress = '0x3a943C50Bcde3E357916ce6E109626213Fd36105'
 const tokenSpenderAddress = '0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af'
 
 // DEPLOYED
-const registryAddress = '0x1cad268f540aa7e5c606b203e8443562332a3a35'
-const coreAddress = '0xbe457663218c3527a82d4021b1dce5802997063b'
-const tokenMinterAddress = '0x419aa1B768D1476305574a3cb61B7acBF6bD4308'
-const matchingAddress = '0xee7391c8a24e256ef73108caaf8d806d501e649c'
-const swaprateMatchingAddress = '0xf5d690c9d61092112660feaf62e542a670fa886d'
+const registryAddress = '0x0800c19ecec5712040a77e19f27d1c44c47ee174'
+const coreAddress = '0xa809d9d82a59166a61b86b7b89feb9c47739a3e1'
+const tokenMinterAddress = '0x212fe617ba1641cc84302687a4fbc83f13584a8b'
+// const matchingAddress = ''
+// const swaprateMatchingAddress = ''
 
 // Deployment functions
 const deployAndLinkLibPosition = async ({ deployer }) => {
@@ -83,12 +83,12 @@ const deployAndLinkLibPosition = async ({ deployer }) => {
 //     return matchInstance
 // }
 
-const deploySwaprateMatch = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
-    const swaprateMatchInstance = await deployer.deploy(SwaprateMatch, registryInstance.address, { from: opiumDeployerAddress })
-    console.log('- SwaprateMatch was deployed at', swaprateMatchInstance.address)
+// const deploySwaprateMatch = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
+//     const swaprateMatchInstance = await deployer.deploy(SwaprateMatch, registryInstance.address, { from: opiumDeployerAddress })
+//     console.log('- SwaprateMatch was deployed at', swaprateMatchInstance.address)
 
-    return swaprateMatchInstance
-}
+//     return swaprateMatchInstance
+// }
 
 // const deployTokenMinter = async ({ deployer, opiumDeployerAddress, registryInstance }) => {
 //     const tokenMinterInstance = await deployer.deploy(TokenMinter, baseTokenURI, registryInstance.address, { from: opiumDeployerAddress })
@@ -130,13 +130,13 @@ module.exports = async function(deployer, network, accounts) {
         // await deployMatch({ deployer, opiumDeployerAddress, registryInstance })
         // await deployMatch({ deployer, opiumDeployerAddress, registryInstance: { address: registryAddress } })
         // await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance })
-        await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance: { address: registryAddress } })
+        // await deploySwaprateMatch({ deployer, opiumDeployerAddress, registryInstance: { address: registryAddress } })
 
         // const tokenMinterInstance = await deployTokenMinter({ deployer, opiumDeployerAddress, registryInstance })
         // const tokenMinterInstance = await deployTokenMinter({ deployer, opiumDeployerAddress, registryInstance: { address: registryAddress } })
 
-        // await initializeRegistry({ opiumDeployerAddress, registryInstance, tokenMinterInstance, coreInstance })
-        // await initializeRegistry({ opiumDeployerAddress, tokenMinterInstance, coreInstance: { address: coreAddress } })
+        // await initializeRegistry({ opiumDeployerAddress, tokenMinterInstance, coreInstance })
+        // await initializeRegistry({ opiumDeployerAddress, tokenMinterInstance: { address: tokenMinterAddress }, coreInstance: { address: coreAddress } })
 
 
         console.log('=====================================')
