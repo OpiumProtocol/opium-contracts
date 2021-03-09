@@ -11,3 +11,5 @@ build/
 thegraph/subgraph.yaml
 
 thegraph-v1/subgraph.yaml
+
+thegraph-v1.1/subgraph.yaml

@@ -8,7 +8,6 @@
     "deploy-remote": "npm run prepare && graph deploy opiumprotocol/${NAME:-opium-network} --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
     "deploy-mainnet": "NETWORK=mainnet NAME=opium-network npm run deploy-remote",
     "deploy-rinkeby": "NETWORK=rinkeby NAME=opium-network-rinkeby npm run deploy-remote",
-
     "create-local": "graph create --node http://localhost:8020/ opiumprotocol/opium-network",
     "remove-local": "graph remove --node http://localhost:8020/ opiumprotocol/opium-network",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 opiumprotocol/opium-network"
