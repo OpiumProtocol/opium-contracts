@@ -27,7 +27,7 @@ const tokenSpenderAddress = '0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af'
 const registryAddress = '0x0800c19ecec5712040a77e19f27d1c44c47ee174'
 const coreAddress = '0xa809d9d82a59166a61b86b7b89feb9c47739a3e1'
 const tokenMinterAddress = '0x212fe617ba1641cc84302687a4fbc83f13584a8b'
-// const matchingAddress = ''
+const matchingAddress = '0x5209772c60a51425b304d74fe4551184044d5dfa'
 const swaprateMatchingAddress = '0x2124e2f1460422c247f195cabe6909304c4e6230'
 
 // Deployment functions
