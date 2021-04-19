@@ -34,7 +34,7 @@ Protocol was audited by:
 - Registry was deployed at [0xE665EA43121674964bcd330F65D512e718b7A50b](https://rinkeby.etherscan.io/address/0xE665EA43121674964bcd330F65D512e718b7A50b)
 - Core was deployed at [0xE995d8E9E0a01c938e6ae5B05720Af245953dC57](https://rinkeby.etherscan.io/address/0xE995d8E9E0a01c938e6ae5B05720Af245953dC57)
 - Match was deployed at [0x00bC68b57dbEdcffe3007890f581f1BE0a2CddaE](https://rinkeby.etherscan.io/address/0x00bC68b57dbEdcffe3007890f581f1BE0a2CddaE)
-- MatchPool was deployed at [0x30426CcfAcD4Ac7d552Cd0EAAaE1c0A80056aaa4](https://rinkeby.etherscan.io/address/0x30426CcfAcD4Ac7d552Cd0EAAaE1c0A80056aaa4)
+<!-- - MatchPool was deployed at [0x30426CcfAcD4Ac7d552Cd0EAAaE1c0A80056aaa4](https://rinkeby.etherscan.io/address/0x30426CcfAcD4Ac7d552Cd0EAAaE1c0A80056aaa4) -->
 - SwaprateMatch was deployed at [0xC80B660E445d764B7741b59A33818d6526A830B2](https://rinkeby.etherscan.io/address/0xC80B660E445d764B7741b59A33818d6526A830B2)
 - TokenSpender was deployed at [0xE39b9D5dC766102181D4C5Cd7df1691565B52032](https://rinkeby.etherscan.io/address/0xE39b9D5dC766102181D4C5Cd7df1691565B52032)
 - TokenMinter was deployed at [0xDEe1031c5D64788976E78d78c63C2fd6b411c4ee](https://rinkeby.etherscan.io/address/0xDEe1031c5D64788976E78d78c63C2fd6b411c4ee)
@@ -43,12 +43,24 @@ Protocol was audited by:
 
 ### Polygon (Matic)
 
+#### Mainnet
+- LibPosition was deployed at [0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7](https://explorer-mumbai.maticvigil.com/address/0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7)
+- Registry was deployed at [0x69CB108385E82c24d34DA4da83706a7D09F69256](https://explorer-mumbai.maticvigil.com/address/0x69CB108385E82c24d34DA4da83706a7D09F69256)
+- Core was deployed at [0x461e820956223cf008051Ce8506f01583A09e006](https://explorer-mumbai.maticvigil.com/address/0x461e820956223cf008051Ce8506f01583A09e006)
+- Match was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://explorer-mumbai.maticvigil.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc)
+<!-- - MatchPool was deployed at [0xAb87BcB35bd0871f8278786AD75b06990d6373B3](https://explorer-mumbai.maticvigil.com/address/0xAb87BcB35bd0871f8278786AD75b06990d6373B3) -->
+- SwaprateMatch was deployed at [0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5](https://explorer-mumbai.maticvigil.com/address/0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5)
+- TokenSpender was deployed at [0xC7b068B897507312c2DACEd5E537eB658c49608D](https://explorer-mumbai.maticvigil.com/address/0xC7b068B897507312c2DACEd5E537eB658c49608D)
+- TokenMinter was deployed at [0x50680ea9B104ab8c70Ae80c46F4715a7531b3765](https://explorer-mumbai.maticvigil.com/address/0x50680ea9B104ab8c70Ae80c46F4715a7531b3765)
+- OracleAggregator was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://explorer-mumbai.maticvigil.com/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
+- SyntheticAggregator was deployed at [0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E](https://explorer-mumbai.maticvigil.com/address/0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E)
+
 #### Mumbai
 - LibPosition was deployed at [0x0cE1f283ca59C4F7fE7581DDb94e08eBff17869E](https://explorer-mumbai.maticvigil.com/address/0x0cE1f283ca59C4F7fE7581DDb94e08eBff17869E)
 - Registry was deployed at [0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1](https://explorer-mumbai.maticvigil.com/address/0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1)
 - Core was deployed at [0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221](https://explorer-mumbai.maticvigil.com/address/0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221)
 - Match was deployed at [0x17f47E461DFdC7c6ee320044B730588407d841f3](https://explorer-mumbai.maticvigil.com/address/0x17f47E461DFdC7c6ee320044B730588407d841f3)
-- MatchPool was deployed at [0x57de08522BD414563E3E75068aF715FCb37089b4](https://explorer-mumbai.maticvigil.com/address/0x57de08522BD414563E3E75068aF715FCb37089b4)
+<!-- - MatchPool was deployed at [0x57de08522BD414563E3E75068aF715FCb37089b4](https://explorer-mumbai.maticvigil.com/address/0x57de08522BD414563E3E75068aF715FCb37089b4) -->
 - SwaprateMatch was deployed at [0xdEa52ff7B21adc17FdbA46B6052aF9B1c0399565](https://explorer-mumbai.maticvigil.com/address/0xdEa52ff7B21adc17FdbA46B6052aF9B1c0399565)
 - TokenSpender was deployed at [0x3F1fF59Ba18C8b540Be9d5Affe63a536e08dF36A](https://explorer-mumbai.maticvigil.com/address/0x3F1fF59Ba18C8b540Be9d5Affe63a536e08dF36A)
 - TokenMinter was deployed at [0x6137B159970e8c9C26f12235Fb6609CfBC6EE357](https://explorer-mumbai.maticvigil.com/address/0x6137B159970e8c9C26f12235Fb6609CfBC6EE357)
