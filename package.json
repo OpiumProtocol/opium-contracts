@@ -20,12 +20,14 @@
   "homepage": "https://github.com/Blockeys/opium-contracts-prep#readme",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.2.1",
+    "axios": "^0.21.1",
     "erc721o": "git+https://github.com/OpiumProtocol/erc721o.git#97a3c1d",
     "eth-gas-reporter": "^0.2.20",
     "ganache-cli": "^6.12.1",
     "openzeppelin-solidity": "^2.4.0",
     "solc-0.5.16": "npm:solc@^0.5.17",
     "solidity-docgen": "^0.3.13",
-    "truffle": "^5.1.60"
+    "truffle": "^5.1.60",
+    "web3": "^1.3.4"
   }
 }

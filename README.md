@@ -16,7 +16,8 @@ Protocol was audited by:
 
 ## Opium protocol is deployed on following addresses
 
-### Mainnet
+### Ethereum
+#### Mainnet
 - LibPosition was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://etherscan.io/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
 - Registry was deployed at [0x1cad268f540aa7e5c606b203e8443562332a3a35](https://etherscan.io/address/0x1cad268f540aa7e5c606b203e8443562332a3a35)
 - Core was deployed at [0xbe457663218c3527a82d4021b1dce5802997063b](https://etherscan.io/address/0xbe457663218c3527a82d4021b1dce5802997063b)
@@ -28,7 +29,7 @@ Protocol was audited by:
 - OracleAggregator was deployed at [0xB69890912E40A7849fCA058bb118Cfe7d70932c4](https://etherscan.io/address/0xB69890912E40A7849fCA058bb118Cfe7d70932c4)
 - SyntheticAggregator was deployed at [0x3a943C50Bcde3E357916ce6E109626213Fd36105](https://etherscan.io/address/0x3a943C50Bcde3E357916ce6E109626213Fd36105)
 
-### Rinkeby
+#### Rinkeby
 - LibPosition was deployed at [0xecfb28f107de2bFB325E339293dE3A01C1CfFA74](https://rinkeby.etherscan.io/address/0xecfb28f107de2bFB325E339293dE3A01C1CfFA74)
 - Registry was deployed at [0xE665EA43121674964bcd330F65D512e718b7A50b](https://rinkeby.etherscan.io/address/0xE665EA43121674964bcd330F65D512e718b7A50b)
 - Core was deployed at [0xE995d8E9E0a01c938e6ae5B05720Af245953dC57](https://rinkeby.etherscan.io/address/0xE995d8E9E0a01c938e6ae5B05720Af245953dC57)
@@ -40,6 +41,19 @@ Protocol was audited by:
 - OracleAggregator was deployed at [0xe1Fd20231512611a5025Dec275464208070B985f](https://rinkeby.etherscan.io/address/0xe1Fd20231512611a5025Dec275464208070B985f)
 - SyntheticAggregator was deployed at [0x8Fb660ab5542D752047312443742f209C88E2170](https://rinkeby.etherscan.io/address/0x8Fb660ab5542D752047312443742f209C88E2170)
 
+### Polygon (Matic)
+
+#### Mumbai
+- LibPosition was deployed at [0x0cE1f283ca59C4F7fE7581DDb94e08eBff17869E](https://explorer-mumbai.maticvigil.com/address/0x0cE1f283ca59C4F7fE7581DDb94e08eBff17869E)
+- Registry was deployed at [0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1](https://explorer-mumbai.maticvigil.com/address/0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1)
+- Core was deployed at [0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221](https://explorer-mumbai.maticvigil.com/address/0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221)
+- Match was deployed at [0x17f47E461DFdC7c6ee320044B730588407d841f3](https://explorer-mumbai.maticvigil.com/address/0x17f47E461DFdC7c6ee320044B730588407d841f3)
+- MatchPool was deployed at [0x57de08522BD414563E3E75068aF715FCb37089b4](https://explorer-mumbai.maticvigil.com/address/0x57de08522BD414563E3E75068aF715FCb37089b4)
+- SwaprateMatch was deployed at [0xdEa52ff7B21adc17FdbA46B6052aF9B1c0399565](https://explorer-mumbai.maticvigil.com/address/0xdEa52ff7B21adc17FdbA46B6052aF9B1c0399565)
+- TokenSpender was deployed at [0x3F1fF59Ba18C8b540Be9d5Affe63a536e08dF36A](https://explorer-mumbai.maticvigil.com/address/0x3F1fF59Ba18C8b540Be9d5Affe63a536e08dF36A)
+- TokenMinter was deployed at [0x6137B159970e8c9C26f12235Fb6609CfBC6EE357](https://explorer-mumbai.maticvigil.com/address/0x6137B159970e8c9C26f12235Fb6609CfBC6EE357)
+- OracleAggregator was deployed at [0xa46e8eD10B0CD1FD75DC23210a5e351A1C9dE9dd](https://explorer-mumbai.maticvigil.com/address/0xa46e8eD10B0CD1FD75DC23210a5e351A1C9dE9dd)
+- SyntheticAggregator was deployed at [0x411b868dF2Ca9C6dc889d48019B08779747a7b8f](https://explorer-mumbai.maticvigil.com/address/0x411b868dF2Ca9C6dc889d48019B08779747a7b8f)
 ## High-level flow description of user behavior
 
 1. Users `approve` their ERC20 tokens to `TokenSpender`
