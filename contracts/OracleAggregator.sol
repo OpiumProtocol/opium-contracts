@@ -120,4 +120,13 @@ contract OracleAggregator is OracleAggregatorErrors, ReentrancyGuard {
     function hasData(address oracleId, uint256 timestamp) public view returns(bool result) {
         return dataExist[oracleId][timestamp];
     }
+    
+    
+    /// @notice Getter for dataRequested mapping
+    /// @param oracleId address Address of the `oracleId` smart contract
+    /// @param timestamp uint256 Timestamp at which data were requested
+    /// @param result bool Returns whether data has been requested
+    function requestedData(address oracleId, uint256 timestamp) public view returns(bool result) {
+        return dataRequested[oracleId][timestamp];
+    }
 }
