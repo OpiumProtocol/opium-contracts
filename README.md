@@ -66,6 +66,21 @@ Protocol was audited by:
 - TokenMinter was deployed at [0x6137B159970e8c9C26f12235Fb6609CfBC6EE357](https://explorer-mumbai.maticvigil.com/address/0x6137B159970e8c9C26f12235Fb6609CfBC6EE357)
 - OracleAggregator was deployed at [0xa46e8eD10B0CD1FD75DC23210a5e351A1C9dE9dd](https://explorer-mumbai.maticvigil.com/address/0xa46e8eD10B0CD1FD75DC23210a5e351A1C9dE9dd)
 - SyntheticAggregator was deployed at [0x411b868dF2Ca9C6dc889d48019B08779747a7b8f](https://explorer-mumbai.maticvigil.com/address/0x411b868dF2Ca9C6dc889d48019B08779747a7b8f)
+
+### BSC
+
+#### Testnet
+- LibPosition was deployed at [0x9857f4030a76c0e2F08811DdA016eF157b0A738E](https://testnet.bscscan.com/address/0x9857f4030a76c0e2F08811DdA016eF157b0A738E)
+- Registry was deployed at [0xc19397ccCB7EDdFb83533cfdE6d21EfC2EB860ef](https://testnet.bscscan.com/address/0xc19397ccCB7EDdFb83533cfdE6d21EfC2EB860ef)
+- Core was deployed at [0x05D3b4cb841F1A05736010aa1fd59389bC88770B](https://testnet.bscscan.com/address/0x05D3b4cb841F1A05736010aa1fd59389bC88770B)
+- Match was deployed at [0x12d0E89911130698150C5c13F964AAc468a2B076](https://testnet.bscscan.com/address/0x12d0E89911130698150C5c13F964AAc468a2B076)
+<!-- - MatchPool was deployed at [0xf78249b2D762C86C9699ff9BA74C5dbf9b4c168a](https://testnet.bscscan.com/address/0xf78249b2D762C86C9699ff9BA74C5dbf9b4c168a) -->
+- SwaprateMatch was deployed at [0x2B289C6271d259515fA9cca8978ca4BAb4ff1e7F](https://testnet.bscscan.com/address/0x2B289C6271d259515fA9cca8978ca4BAb4ff1e7F)
+- TokenSpender was deployed at [0xF343EE410b7a313511845e964a9f6E4adBDF0398](https://testnet.bscscan.com/address/0xF343EE410b7a313511845e964a9f6E4adBDF0398)
+- TokenMinter was deployed at [0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1](https://testnet.bscscan.com/address/0xF228cA0a9c1A62C3b69454C6dB35d77f359D7ee1)
+- OracleAggregator was deployed at [0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221](https://testnet.bscscan.com/address/0x2c8c1bf1d072dfec1cBd39512aA02DF2F0943221)
+- SyntheticAggregator was deployed at [0x17f47E461DFdC7c6ee320044B730588407d841f3](https://testnet.bscscan.com/address/0x17f47E461DFdC7c6ee320044B730588407d841f3)
+
 ## High-level flow description of user behavior
 
 1. Users `approve` their ERC20 tokens to `TokenSpender`
