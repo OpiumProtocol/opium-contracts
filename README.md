@@ -69,6 +69,18 @@ Protocol was audited by:
 
 ### BSC
 
+#### Mainnet
+- LibPosition was deployed at [0x780F4b0E786bD703F21E4D22F48Ced4A877845De](https://bscscan.com/address/0x780F4b0E786bD703F21E4D22F48Ced4A877845De)
+- Registry was deployed at [0x0736e07Af2566c9bf8af10518B4a3490E9cA264F](https://bscscan.com/address/0x0736e07Af2566c9bf8af10518B4a3490E9cA264F)
+- Core was deployed at [0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7](https://bscscan.com/address/0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7)
+- Match was deployed at [0x69CB108385E82c24d34DA4da83706a7D09F69256](https://bscscan.com/address/0x69CB108385E82c24d34DA4da83706a7D09F69256)
+<!-- - MatchPool was deployed at [0x461e820956223cf008051Ce8506f01583A09e006](https://bscscan.com/address/0x461e820956223cf008051Ce8506f01583A09e006) -->
+- SwaprateMatch was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://bscscan.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc)
+- TokenSpender was deployed at [0xAb87BcB35bd0871f8278786AD75b06990d6373B3](https://bscscan.com/address/0xAb87BcB35bd0871f8278786AD75b06990d6373B3)
+- TokenMinter was deployed at [0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5](https://bscscan.com/address/0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5)
+- OracleAggregator was deployed at [0xC7b068B897507312c2DACEd5E537eB658c49608D](https://bscscan.com/address/0xC7b068B897507312c2DACEd5E537eB658c49608D)
+- SyntheticAggregator was deployed at [0x50680ea9B104ab8c70Ae80c46F4715a7531b3765](https://bscscan.com/address/0x50680ea9B104ab8c70Ae80c46F4715a7531b3765)
+
 #### Testnet
 - LibPosition was deployed at [0x9857f4030a76c0e2F08811DdA016eF157b0A738E](https://testnet.bscscan.com/address/0x9857f4030a76c0e2F08811DdA016eF157b0A738E)
 - Registry was deployed at [0xc19397ccCB7EDdFb83533cfdE6d21EfC2EB860ef](https://testnet.bscscan.com/address/0xc19397ccCB7EDdFb83533cfdE6d21EfC2EB860ef)
