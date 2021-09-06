@@ -19,13 +19,13 @@ Protocol was audited by:
 ### Ethereum
 #### Mainnet
 - LibPosition was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://etherscan.io/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
-- Registry was deployed at [0x1cad268f540aa7e5c606b203e8443562332a3a35](https://etherscan.io/address/0x1cad268f540aa7e5c606b203e8443562332a3a35)
-- Core was deployed at [0xbe457663218c3527a82d4021b1dce5802997063b](https://etherscan.io/address/0xbe457663218c3527a82d4021b1dce5802997063b)
-- Match was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
+- Registry was deployed at [0x0800c19ecec5712040a77e19f27d1c44c47ee174](https://etherscan.io/address/0x0800c19ecec5712040a77e19f27d1c44c47ee174)
+- Core was deployed at [0xa809d9d82a59166a61b86b7b89feb9c47739a3e1](https://etherscan.io/address/0xa809d9d82a59166a61b86b7b89feb9c47739a3e1)
+- Match was deployed at [0x5209772c60a51425b304d74fe4551184044d5dfa](https://etherscan.io/address/0x5209772c60a51425b304d74fe4551184044d5dfa)
 <!-- - MatchPool was deployed at [0xECc45D06fD4C23F9958a74F254507016b1dfC329](https://etherscan.io/address/0xECc45D06fD4C23F9958a74F254507016b1dfC329) -->
-- SwaprateMatch was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
+- SwaprateMatch was deployed at [0x2124e2f1460422c247f195cabe6909304c4e6230](https://etherscan.io/address/0x2124e2f1460422c247f195cabe6909304c4e6230)
 - TokenSpender was deployed at [0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af](https://etherscan.io/address/0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af)
-- TokenMinter was deployed at [0x419aa1B768D1476305574a3cb61B7acBF6bD4308](https://etherscan.io/address/0x419aa1B768D1476305574a3cb61B7acBF6bD4308)
+- TokenMinter was deployed at [0x212fe617ba1641cc84302687a4fbc83f13584a8b](https://etherscan.io/address/0x212fe617ba1641cc84302687a4fbc83f13584a8b)
 - OracleAggregator was deployed at [0xB69890912E40A7849fCA058bb118Cfe7d70932c4](https://etherscan.io/address/0xB69890912E40A7849fCA058bb118Cfe7d70932c4)
 - SyntheticAggregator was deployed at [0x3a943C50Bcde3E357916ce6E109626213Fd36105](https://etherscan.io/address/0x3a943C50Bcde3E357916ce6E109626213Fd36105)
 
