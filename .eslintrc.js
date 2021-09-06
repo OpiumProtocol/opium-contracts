@@ -8,6 +8,7 @@ module.exports = {
         "artifacts": true,
         "contract": true,
         "context": true,
+        "after": true,
         "before": true,
         "beforeEach": true,
         "it": true,

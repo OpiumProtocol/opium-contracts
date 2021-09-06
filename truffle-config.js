@@ -11,6 +11,13 @@ module.exports = {
             port: 8545,
             network_id: '*',
         },
+
+        ganacheMainnet: {
+            host: '127.0.0.1',
+            port: 8545,
+            network_id: '*',
+            gasPrice: 50e9
+        },
     },
 
     mocha: {
