@@ -27,7 +27,7 @@ const toE18 = amount => web3.utils.toWei(amount.toString())
 const executeOneWithAddress = 'execute(address,uint256,uint256,(uint256,uint256,uint256[],address,address,address))'
 const batchTransferFromFour = 'batchTransferFrom(address,address,uint256[],uint256[])'
 
-contract('UpgradeCorePost', accounts => {
+contract.skip('UpgradeCorePost', accounts => {
 
     const owner = accounts[0]
     const buyer = accounts[1]
