@@ -6,12 +6,17 @@ import "../Interface/IDerivativeLogic.sol";
 import "../Helpers/ExecutableByThirdParty.sol";
 
 contract EvilSynthetic is IDerivativeLogic, ExecutableByThirdParty {
+    uint margin = 0;
+
+    uint256 buyerPayout;
+    uint256 sellerPayout = 0;
+
     function validateInput(Derivative memory) public view returns (bool) {
         return true;
     }
     
     function isPool() public view returns (bool) {
-        return true;
+        return false;
     }
     
     function getMargin(Derivative memory) public view returns (uint, uint) {
@@ -19,7 +24,7 @@ contract EvilSynthetic is IDerivativeLogic, ExecutableByThirdParty {
     }
     
     function getExecutionPayout(Derivative memory, uint) public view returns (uint, uint) {
-        return (0, 1);
+        return (buyerPayout, sellerPayout);
     }
     
     function getAuthorAddress() public view returns (address) {
@@ -30,9 +35,15 @@ contract EvilSynthetic is IDerivativeLogic, ExecutableByThirdParty {
         return 0;
     }
     
-    uint margin = 0;
     
     function setMargin(uint margin_) public {
         margin = margin_;
+        buyerPayout = margin * 2;
+    }
+
+
+    function overrideBuyerExecutionPayout() external {
+        buyerPayout = 0;
+        sellerPayout = margin * 2;
     }
 }
