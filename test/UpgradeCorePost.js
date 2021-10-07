@@ -11,12 +11,10 @@ const { timeTravel } = require('./utils/timeTravel')
 const { calculateLongTokenId, calculateShortTokenId } = require('./utils/positions')
 
 const millionaire = '0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503'
-const governor = '0xF80D12E55F6cdA587a26a05f2e6477054e8255e5'
+const governor = '0xdbc2f7f3bccccf54f1bda43c57e8ab526e379df1'
 
 const DAI = '0x6b175474e89094c44da98b954eedeac495271d0f'
 const tokenSpenderAddress = '0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af'
-const coreAddress = '0xa809d9d82a59166a61b86b7b89feb9c47739a3e1'
-const tokenMinterAddress = '0x212fe617ba1641cc84302687a4fbc83f13584a8b'
 
 const oracleIdAddress = '0x54657c50c7c9f04812be0e3144af7003c6978f90'
 const oracleSubIdAddress = '0x7f19bd488fd7a9192cb065c70491d586e8088035'
@@ -55,20 +53,20 @@ contract.skip('UpgradeCorePost', accounts => {
     const quantity = 1
 
     before(async () => {
-        core = await Core.at(coreAddress)
-        tokenMinter = await TokenMinter.at(tokenMinterAddress)
+        core = await Core.deployed()
+        tokenMinter = await TokenMinter.deployed()
         dai = await TestToken.at(DAI)
         tokenSpender = await TokenSpender.at(tokenSpenderAddress)
         oracleId = await OnchainSubIdsOracleId.at(oracleIdAddress)
         subid = await EthDaiChainlinkOracleSubId.at(oracleSubIdAddress)
 
         // Set new whitelist
-        // await web3.eth.sendTransaction({
-        //     from: owner,
-        //     to: governor,
-        //     value: toE18(1),
-        // })
-        // await tokenSpender.proposeWhitelist([ core.address ], { from: governor })
+        await web3.eth.sendTransaction({
+            from: owner,
+            to: governor,
+            value: toE18(1),
+        })
+        await tokenSpender.proposeWhitelist([ core.address ], { from: governor })
         await timeTravel(SECONDS_1_HOUR + 60)
         await tokenSpender.commitWhitelist({ from: governor })
 
