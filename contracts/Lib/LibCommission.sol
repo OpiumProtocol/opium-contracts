@@ -9,5 +9,5 @@ contract LibCommission {
     uint256 constant public OPIUM_COMMISSION_BASE = 10;
 
     // Represents which part of `syntheticId` author commissions goes to opium
-    uint256 constant public OPIUM_COMMISSION_PART = 1;
+    uint256 constant public OPIUM_COMMISSION_PART = 0;
 }
