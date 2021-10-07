@@ -1,4 +1,3 @@
-
 # Opium contracts
 
 [Opium Protocol](https://opium.network) consist of Opium Main Smart Contracts set introduced in this repository alongside with [Opium token standard](https://github.com/OpiumProtocol/erc721o) smart contracts

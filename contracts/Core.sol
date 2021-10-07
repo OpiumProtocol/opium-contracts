@@ -43,7 +43,13 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
     // poolVaults[syntheticAddress][tokenAddress] => availableBalance
     mapping (address => mapping(address => uint256)) public poolVaults;
 
-    mapping(bytes32 => mapping(address => uint256)) public p2pVault;
+    // Vaults for p2p derivatives
+    // This mapping holds balances of p2p positions
+    // p2pVaults[derivativeHash] => availableBalance
+    mapping(bytes32 => uint256) public p2pVaults;
+
+    // Derivative payouts cache
+    // Once paid out (executed), the payout ratio is stored in cache
     mapping(bytes32 => uint256[2]) public derivativePayouts;
 
     // Vaults for fees
@@ -269,7 +275,11 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
     	// Take ERC20 tokens from msg.sender, should never revert in correct ERC20 implementation
         vars.tokenSpender.claimTokens(vars.marginToken, msg.sender, address(this), margins[0].add(margins[1]).mul(_quantity));
 
-        p2pVault[derivativeHash][_derivative.token] = p2pVault[derivativeHash][_derivative.token].add(margins[0].add(margins[1]).mul(_quantity));
+        // Increment p2p positions balance by collected margin: vault += (margins[0] + margins[1]) * quantity
+        _increaseP2PVault(
+            derivativeHash,
+            margins[0].add(margins[1]).mul(_quantity)
+        );
 
         // Mint LONG and SHORT positions tokens
         vars.tokenMinter.mint(_addresses[0], _addresses[1], derivativeHash, _quantity);
@@ -389,13 +399,16 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
 
                     // Subtract paid out margin from poolVault
                     poolVaults[_derivatives[i].syntheticId][_derivatives[i].token] = poolVaults[_derivatives[i].syntheticId][_derivatives[i].token].sub(payout);
+                } else {
+                    // Subtract paid out margin from p2pVault
+                    _decreaseP2PVault(derivativeHash, payout);
                 }
-                 p2pVault[derivativeHash][_derivatives[i].token] = p2pVault[derivativeHash][_derivatives[i].token].sub(payout);
             // Check if `_tokenId` is an ID of SHORT position
             } else if (derivativeHash.getShortTokenId() == _tokenIds[i]) {
                 // Set payout to sellerPayout
                 payout = margins[1].mul(_quantities[i]);
-                p2pVault[derivativeHash][_derivatives[i].token] = p2pVault[derivativeHash][_derivatives[i].token].sub(payout);
+                // Subtract paid out margin from p2pVault
+                _decreaseP2PVault(derivativeHash, payout);
             } else {
                 // Either portfolioId, hack or bug
                 revert(ERROR_CORE_UNKNOWN_POSITION_TYPE);
@@ -431,7 +444,6 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
         // Get payout ratio from Derivative logic
         // payoutRatio[0] - buyerPayout
         // payoutRatio[1] - sellerPayout
-    
         (payoutRatio[0], payoutRatio[1]) = IDerivativeLogic(_derivative.syntheticId).getExecutionPayout(_derivative, data);
 
         // Generate hash for derivative
@@ -453,11 +465,12 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
         payouts[0] = margins[0].add(margins[1]).mul(payoutRatio[0]).div(payoutRatio[0].add(payoutRatio[1]));
         payouts[1] = margins[0].add(margins[1]).mul(payoutRatio[1]).div(payoutRatio[0].add(payoutRatio[1]));
 
-        if(derivativePayouts[derivativeHash][0] == 0 && derivativePayouts[derivativeHash][1] == 0) {
-            // buyer payout cache
+        // If cached buer and seller payouts are both zero, then cache is not initialized, because total zero margin is not allowed by SyntheticAggregator
+        // Initialize cache
+        if (derivativePayouts[derivativeHash][0] == 0 && derivativePayouts[derivativeHash][1] == 0) {
+            // Cache buyer payout
             derivativePayouts[derivativeHash][0] = payouts[0];
-            
-            // seller payout cache
+            // Cache seller payout
             derivativePayouts[derivativeHash][1] = payouts[1];
         }
         
@@ -481,17 +494,14 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
                 // Subtract paid out margin from poolVault
                 poolVaults[_derivative.syntheticId][_derivative.token] = poolVaults[_derivative.syntheticId][_derivative.token].sub(payout);
             } else {
-                // Set payout to buyerPayout
+                // Set payout to cached buyerPayout
                 payout = derivativePayouts[derivativeHash][0];
+
                 // Multiply payout by quantity
                 payout = payout.mul(_quantity);
-                require(
-                    p2pVault[derivativeHash][_derivative.token] >= payout
-                    ,
-                    "p2p insufficient balance"
-                );
-                p2pVault[derivativeHash][_derivative.token] = p2pVault[derivativeHash][_derivative.token].sub(payout);
 
+                // Subtract payout from p2pVault
+                _decreaseP2PVault(derivativeHash, payout);
             }
 
             // Take fees only from profit makers
@@ -503,28 +513,21 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
 
         // Check if `_tokenId` is an ID of SHORT position
         } else if (derivativeHash.getShortTokenId() == _tokenId) {
-            // Set payout to sellerPayout
+            // Set payout to cached sellerPayout
             payout = derivativePayouts[derivativeHash][1];
 
             // Multiply payout by quantity
             payout = payout.mul(_quantity);
 
-            // check w ali: under margin option would not work
-            require(
-                p2pVault[derivativeHash][_derivative.token] >= payout
-                    ,
-                "p2p insufficient balance"
-            );            
+            // Subtract payout from p2pVault
+            _decreaseP2PVault(derivativeHash, payout);
 
-            p2pVault[derivativeHash][_derivative.token] = p2pVault[derivativeHash][_derivative.token].sub(payout);
             // Take fees only from profit makers
             // Check: payout > sellerMargin * quantity
             if (payout > margins[1].mul(_quantity)) {
                 // Get Opium fees and subtract it from payout
                 payout = payout.sub(_getFees(_vars.syntheticAggregator, derivativeHash, _derivative, payout - margins[1].mul(_quantity)));
             }
-            
-
         } else {
             // Either portfolioId, hack or bug
             revert(ERROR_CORE_UNKNOWN_POSITION_TYPE);
@@ -570,5 +573,17 @@ contract Core is LibDerivative, LibCommission, UsingRegistry, CoreErrors, Reentr
         // Update feeVault for `syntheticId` author
         // feeVault[author][token] += authorFee
         feesVaults[authorAddress][_derivative.token] = feesVaults[authorAddress][_derivative.token].add(authorFee);
+    }
+
+    function _increaseP2PVault(bytes32 _derivativeHash, uint256 _amount) private {
+        p2pVaults[_derivativeHash] = p2pVaults[_derivativeHash].add(_amount);
+    }
+
+    function _decreaseP2PVault(bytes32 _derivativeHash, uint256 _amount) private {
+        require(
+            p2pVaults[_derivativeHash] >= _amount,
+            ERROR_CORE_INSUFFICIENT_P2P_BALANCE
+        );
+        p2pVaults[_derivativeHash] = p2pVaults[_derivativeHash].sub(_amount);
     }
 }
