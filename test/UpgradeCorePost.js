@@ -20,6 +20,9 @@ const oracleIdAddress = '0x54657c50c7c9f04812be0e3144af7003c6978f90'
 const oracleSubIdAddress = '0x7f19bd488fd7a9192cb065c70491d586e8088035'
 const syntheticId = '0x108AAD9e03D2Ccdfc22a0F082e3Bb4653F4fcF62'
 
+const coreAddress = '0xd60F0A53c7e97f78fe4AC9013F5749920C601494'
+const tokenMinterAddress = '0x35Aab5c69cEA76E643Fd3287aC9523bD670445b2'
+
 const toE18 = amount => web3.utils.toWei(amount.toString())
 
 const executeOneWithAddress = 'execute(address,uint256,uint256,(uint256,uint256,uint256[],address,address,address))'
@@ -53,8 +56,8 @@ contract.skip('UpgradeCorePost', accounts => {
     const quantity = 1
 
     before(async () => {
-        core = await Core.deployed()
-        tokenMinter = await TokenMinter.deployed()
+        core = await Core.at(coreAddress)
+        tokenMinter = await TokenMinter.at(tokenMinterAddress)
         dai = await TestToken.at(DAI)
         tokenSpender = await TokenSpender.at(tokenSpenderAddress)
         oracleId = await OnchainSubIdsOracleId.at(oracleIdAddress)
