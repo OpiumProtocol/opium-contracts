@@ -19,13 +19,13 @@ Protocol was audited by:
 ### Ethereum
 #### Mainnet
 - LibPosition was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://etherscan.io/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
-- Registry was deployed at [0x0800c19ecec5712040a77e19f27d1c44c47ee174](https://etherscan.io/address/0x0800c19ecec5712040a77e19f27d1c44c47ee174)
-- Core was deployed at [0xa809d9d82a59166a61b86b7b89feb9c47739a3e1](https://etherscan.io/address/0xa809d9d82a59166a61b86b7b89feb9c47739a3e1)
-- Match was deployed at [0x5209772c60a51425b304d74fe4551184044d5dfa](https://etherscan.io/address/0x5209772c60a51425b304d74fe4551184044d5dfa)
+- Registry was deployed at [0x7f5f4087006ba4f4985b32f9d1079ee2f8594af8](https://etherscan.io/address/0x7f5f4087006ba4f4985b32f9d1079ee2f8594af8)
+- Core was deployed at [0xd60F0A53c7e97f78fe4AC9013F5749920C601494](https://etherscan.io/address/0xd60F0A53c7e97f78fe4AC9013F5749920C601494)
+<!-- - Match was deployed at [0x5209772c60a51425b304d74fe4551184044d5dfa](https://etherscan.io/address/0x5209772c60a51425b304d74fe4551184044d5dfa) -->
 <!-- - MatchPool was deployed at [0xECc45D06fD4C23F9958a74F254507016b1dfC329](https://etherscan.io/address/0xECc45D06fD4C23F9958a74F254507016b1dfC329) -->
-- SwaprateMatch was deployed at [0x2124e2f1460422c247f195cabe6909304c4e6230](https://etherscan.io/address/0x2124e2f1460422c247f195cabe6909304c4e6230)
+- SwaprateMatch was deployed at [0x09a439c50465e447cb1a662da536f23a7e39374e](https://etherscan.io/address/0x09a439c50465e447cb1a662da536f23a7e39374e)
 - TokenSpender was deployed at [0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af](https://etherscan.io/address/0x8bd75f96EfA089aEcf6Ac4CD0B671e2428f4B2af)
-- TokenMinter was deployed at [0x212fe617ba1641cc84302687a4fbc83f13584a8b](https://etherscan.io/address/0x212fe617ba1641cc84302687a4fbc83f13584a8b)
+- TokenMinter was deployed at [0x35Aab5c69cEA76E643Fd3287aC9523bD670445b2](https://etherscan.io/address/0x35Aab5c69cEA76E643Fd3287aC9523bD670445b2)
 - OracleAggregator was deployed at [0xB69890912E40A7849fCA058bb118Cfe7d70932c4](https://etherscan.io/address/0xB69890912E40A7849fCA058bb118Cfe7d70932c4)
 - SyntheticAggregator was deployed at [0x3a943C50Bcde3E357916ce6E109626213Fd36105](https://etherscan.io/address/0x3a943C50Bcde3E357916ce6E109626213Fd36105)
 
@@ -45,13 +45,13 @@ Protocol was audited by:
 
 #### Mainnet
 - LibPosition was deployed at [0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7](https://explorer-mainnet.maticvigil.com/address/0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7)
-- Registry was deployed at [0x69CB108385E82c24d34DA4da83706a7D09F69256](https://explorer-mainnet.maticvigil.com/address/0x69CB108385E82c24d34DA4da83706a7D09F69256)
-- Core was deployed at [0x461e820956223cf008051Ce8506f01583A09e006](https://explorer-mainnet.maticvigil.com/address/0x461e820956223cf008051Ce8506f01583A09e006)
-- Match was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://explorer-mainnet.maticvigil.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc)
+- Registry was deployed at [0x1213b2951B48a39981801e059223827ce4182354](https://explorer-mainnet.maticvigil.com/address/0x1213b2951B48a39981801e059223827ce4182354)
+- Core was deployed at [0xB3F6281655276150E97e5029B607a6D4d2E21972](https://explorer-mainnet.maticvigil.com/address/0xB3F6281655276150E97e5029B607a6D4d2E21972)
+<!-- - Match was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://explorer-mainnet.maticvigil.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc) -->
 <!-- - MatchPool was deployed at [0xAb87BcB35bd0871f8278786AD75b06990d6373B3](https://explorer-mainnet.maticvigil.com/address/0xAb87BcB35bd0871f8278786AD75b06990d6373B3) -->
-- SwaprateMatch was deployed at [0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5](https://explorer-mainnet.maticvigil.com/address/0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5)
+<!-- - SwaprateMatch was deployed at [0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5](https://explorer-mainnet.maticvigil.com/address/0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5) -->
 - TokenSpender was deployed at [0xC7b068B897507312c2DACEd5E537eB658c49608D](https://explorer-mainnet.maticvigil.com/address/0xC7b068B897507312c2DACEd5E537eB658c49608D)
-- TokenMinter was deployed at [0x50680ea9B104ab8c70Ae80c46F4715a7531b3765](https://explorer-mainnet.maticvigil.com/address/0x50680ea9B104ab8c70Ae80c46F4715a7531b3765)
+- TokenMinter was deployed at [0x880e37B98f7c058b3563970F256614FF4a580637](https://explorer-mainnet.maticvigil.com/address/0x880e37B98f7c058b3563970F256614FF4a580637)
 - OracleAggregator was deployed at [0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20](https://explorer-mainnet.maticvigil.com/address/0x56c54b408c44B12f6c9219C9c73Fcda4E783FC20)
 - SyntheticAggregator was deployed at [0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E](https://explorer-mainnet.maticvigil.com/address/0xC955F3c0d5a87710996D13B1f9AA3A77552D7a7E)
 
