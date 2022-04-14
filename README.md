@@ -71,13 +71,13 @@ Protocol was audited by:
 
 #### Mainnet
 - LibPosition was deployed at [0x780F4b0E786bD703F21E4D22F48Ced4A877845De](https://bscscan.com/address/0x780F4b0E786bD703F21E4D22F48Ced4A877845De)
-- Registry was deployed at [0x0736e07Af2566c9bf8af10518B4a3490E9cA264F](https://bscscan.com/address/0x0736e07Af2566c9bf8af10518B4a3490E9cA264F)
-- Core was deployed at [0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7](https://bscscan.com/address/0xd85De2Eb815eF57c84531Bc2397407B18E62C9d7)
-- Match was deployed at [0x69CB108385E82c24d34DA4da83706a7D09F69256](https://bscscan.com/address/0x69CB108385E82c24d34DA4da83706a7D09F69256)
+- Registry was deployed at [0x2e9AC4D0882165dCE317F23925060Ca3551782a9](https://bscscan.com/address/0x2e9AC4D0882165dCE317F23925060Ca3551782a9)
+- Core was deployed at [0xC1e31C2db9f238809FE58089a7Fa7cE5aA7E52c6](https://bscscan.com/address/0xC1e31C2db9f238809FE58089a7Fa7cE5aA7E52c6)
+<!-- - Match was deployed at [0x69CB108385E82c24d34DA4da83706a7D09F69256](https://bscscan.com/address/0x69CB108385E82c24d34DA4da83706a7D09F69256) -->
 <!-- - MatchPool was deployed at [0x461e820956223cf008051Ce8506f01583A09e006](https://bscscan.com/address/0x461e820956223cf008051Ce8506f01583A09e006) -->
-- SwaprateMatch was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://bscscan.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc)
+<!-- - SwaprateMatch was deployed at [0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc](https://bscscan.com/address/0x43D3199E31196C3B71d2EDFcE5b7E333fb0F10Bc) -->
 - TokenSpender was deployed at [0xAb87BcB35bd0871f8278786AD75b06990d6373B3](https://bscscan.com/address/0xAb87BcB35bd0871f8278786AD75b06990d6373B3)
-- TokenMinter was deployed at [0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5](https://bscscan.com/address/0x81cE295D12b01Ad1f5960dcB8aBD76CbdbCfF9F5)
+- TokenMinter was deployed at [0x90716893C1012166F2F182b61f69f0391673dD88](https://bscscan.com/address/0x90716893C1012166F2F182b61f69f0391673dD88)
 - OracleAggregator was deployed at [0xC7b068B897507312c2DACEd5E537eB658c49608D](https://bscscan.com/address/0xC7b068B897507312c2DACEd5E537eB658c49608D)
 - SyntheticAggregator was deployed at [0x50680ea9B104ab8c70Ae80c46F4715a7531b3765](https://bscscan.com/address/0x50680ea9B104ab8c70Ae80c46F4715a7531b3765)
 
